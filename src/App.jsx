@@ -1,21 +1,59 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { FaBars, FaTimes, FaHtml5, FaCss3Alt, FaJsSquare, FaReact, FaGithub, FaLinkedin, FaArrowDown, FaCode, FaRocket, FaHeart, FaEye, FaDownload, FaGraduationCap, FaMobile, FaLaptopCode, FaGamepad, FaFilm, FaBook, FaPython, FaJava, FaLaravel, FaNodeJs } from "react-icons/fa";
-import { SiPython, SiSpringboot } from "react-icons/si";
+import { 
+  FaBars, FaTimes, FaHtml5, FaCss3Alt, FaJsSquare, FaReact, 
+  FaGithub, FaLinkedin, FaArrowDown, FaCode, FaRocket, 
+  FaHeart, FaEye, FaDownload, FaGraduationCap, FaMobile, 
+  FaLaptopCode, FaGamepad, FaFilm, FaBook, FaPython, 
+  FaJava, FaLaravel, FaNodeJs, FaDatabase, FaServer 
+} from "react-icons/fa";
+import { 
+  SiPython, SiSpringboot, SiDjango, SiFlask, SiExpress,
+  SiPostgresql, SiMongodb, SiMysql, SiFirebase, SiGraphql,
+  SiDocker, SiKubernetes, SiGooglecloud,
+  SiGit, SiJira, SiPostman, SiSwagger, SiRedux,
+  SiTypescript, SiNextdotjs, SiNestjs, SiFastapi, SiApollographql,
+  SiAwsamplify
+} from "react-icons/si";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import TSParticles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
+import { VscAzure } from "react-icons/vsc";
 
 // Composant Navbar amélioré avec animations Framer Motion
 const Navbar = () => {
   const [navOpen, setNavOpen] = useState(false);
   const [active, setActive] = useState("#home");
   const [scrolled, setScrolled] = useState(false);
+  const [isHome, setIsHome] = useState(true);
   const navRef = useRef(null);
+
+  const sections = ["#home", "#about", "#skills", "#projects", "#contact"];
 
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 50;
       setScrolled(isScrolled);
+      
+      const homeSection = document.getElementById('home');
+      if (homeSection) {
+        const homeRect = homeSection.getBoundingClientRect();
+        setIsHome(window.scrollY < homeRect.height - 100);
+      }
+
+      const scrollPosition = window.scrollY + 100;
+
+      for (const sectionId of sections) {
+        const section = document.querySelector(sectionId);
+        if (section) {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.offsetHeight;
+          
+          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            setActive(sectionId);
+            break;
+          }
+        }
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -46,13 +84,13 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.7, ease: "easeOut" }}
-      className={`fixed w-full z-50 transition-all duration-700 ${
+      className={`fixed w-full z-[99] transition-all duration-700 ${
         scrolled 
           ? "bg-white/90 backdrop-blur-xl shadow-2xl border-b border-purple-100/50" 
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16 ">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
         <motion.div 
           className="text-2xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent"
           animate={{ scale: [1, 1.05, 1] }}
@@ -72,7 +110,9 @@ const Navbar = () => {
               <a
                 href={link.href}
                 onClick={() => handleClick(link.href)}
-                className={`relative px-3 py-2 text-gray-700 hover:text-purple-600 transition-all duration-300 group ${
+                className={`relative px-3 py-2 ${
+                  !scrolled && isHome ? 'text-white' : 'text-gray-700'
+                } hover:text-purple-600 transition-all duration-300 group ${
                   active === link.href ? "text-purple-600 font-semibold" : ""
                 }`}
               >
@@ -98,7 +138,9 @@ const Navbar = () => {
         <div className="md:hidden">
           <button 
             onClick={() => setNavOpen(!navOpen)} 
-            className="text-gray-700 focus:outline-none p-2 rounded-lg hover:bg-purple-50 transition-all duration-300"
+            className={`focus:outline-none p-2 rounded-lg transition-all duration-300 ${
+              !scrolled && isHome ? 'text-white hover:bg-white/20' : 'text-gray-700 hover:bg-purple-50'
+            }`}
           >
             <motion.div 
               animate={{ rotate: navOpen ? 180 : 0 }}
@@ -130,7 +172,11 @@ const Navbar = () => {
                   <a
                     href={link.href}
                     onClick={() => handleClick(link.href)}
-                    className="text-gray-700 hover:text-purple-600 transition-all duration-300 px-6 py-3 rounded-full hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 transform hover:scale-105"
+                    className={`text-gray-700 px-6 py-3 rounded-full transition-all duration-300 ${
+                      active === link.href 
+                        ? "bg-gradient-to-r from-purple-100 to-pink-100 text-purple-600 font-semibold" 
+                        : "hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 hover:text-purple-600"
+                    }`}
                   >
                     {link.name}
                   </a>
@@ -144,7 +190,6 @@ const Navbar = () => {
   );
 };
 
-// Composant particules d'arrière-plan avec react-tsparticles
 const ParticleBackground = ({ density = 80 }) => {
   const particlesInit = useCallback(async (engine) => {
     await loadSlim(engine);
@@ -209,7 +254,6 @@ const ParticleBackground = ({ density = 80 }) => {
   return <TSParticles id="tsparticles" init={particlesInit} options={options} className="absolute inset-0 pointer-events-none" />;
 };
 
-// Composant d'image de profil avec animations Framer Motion
 const ProfileImage = () => {
   return (
     <motion.div 
@@ -250,7 +294,6 @@ const ProfileImage = () => {
   );
 };
 
-// Composant de texte animé avec Framer Motion
 const AnimatedText = ({ text, className, delay = 0 }) => {
   const letters = Array.from(text);
 
@@ -286,12 +329,14 @@ const AnimatedText = ({ text, className, delay = 0 }) => {
 function App() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [cursorVariant, setCursorVariant] = useState("default");
+  const cursorRef = useRef(null);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
       setMousePosition({
-        x: (e.clientX / window.innerWidth) * 100,
-        y: (e.clientY / window.innerHeight) * 100,
+        x: e.clientX,
+        y: e.clientY,
       });
     };
 
@@ -301,80 +346,113 @@ function App() {
       setScrollProgress(progress);
     };
 
+    const handleMouseEnter = (e) => {
+      if (e.target.classList.contains("cursor-pointer") || 
+          e.target.tagName === "A" || 
+          e.target.tagName === "BUTTON") {
+        setCursorVariant("hover");
+      } else {
+        setCursorVariant("default");
+      }
+    };
+
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('scroll', handleScroll);
+    document.addEventListener('mouseover', handleMouseEnter);
     
     return () => {  
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('mouseover', handleMouseEnter);
     };
   }, []);
 
-  // Données mises à jour depuis le CV
-  const skills = [
-    { 
-      name: "Python", 
-      level: 85,
-      icon: SiPython,
-      color: "text-blue-500",
-      bgColor: "from-blue-50 to-blue-100",
-      borderColor: "border-blue-200"
+  const cursorVariants = {
+    default: {
+      x: mousePosition.x - 10,
+      y: mousePosition.y - 10,
+      width: 20,
+      height: 20,
+      backgroundColor: "rgba(168, 85, 247, 0.3)",
+      mixBlendMode: "normal",
+      transition: {
+        type: "spring",
+        mass: 0.6,
+      },
     },
-    { 
-      name: "Java", 
-      level: 80,
-      icon: FaJava,
-      color: "text-red-500",
-      bgColor: "from-red-50 to-red-100",
-      borderColor: "border-red-200"
+    hover: {
+      x: mousePosition.x - 15,
+      y: mousePosition.y - 15,
+      width: 30,
+      height: 30,
+      backgroundColor: "rgba(168, 85, 247, 0.5)",
+      mixBlendMode: "normal",
     },
-    { 
-      name: "JavaScript", 
-      level: 88,
-      icon: FaJsSquare,
-      color: "text-yellow-500",
-      bgColor: "from-yellow-50 to-yellow-100",
-      borderColor: "border-yellow-200"
+  };
+
+  // Compétences organisées par catégorie
+  const skillsCategories = [
+    {
+      title: "Langages de programmation",
+      items: [
+        { name: "Python", icon: SiPython, color: "text-blue-500" },
+        { name: "Java", icon: FaJava, color: "text-red-500" },
+        { name: "JavaScript", icon: FaJsSquare, color: "text-yellow-500" },
+        { name: "TypeScript", icon: SiTypescript, color: "text-blue-600" },
+        { name: "HTML/CSS", icon: FaHtml5, color: "text-orange-500" },
+      ]
     },
-    { 
-      name: "React", 
-      level: 85,
-      icon: FaReact,
-      color: "text-blue-400",
-      bgColor: "from-blue-50 to-cyan-100",
-      borderColor: "border-blue-200"
+    {
+      title: "Frameworks Frontend",
+      items: [
+        { name: "React", icon: FaReact, color: "text-blue-400" },
+        { name: "Next.js", icon: SiNextdotjs, color: "text-gray-800" },
+        { name: "Redux", icon: SiRedux, color: "text-purple-500" },
+      ]
     },
-    { 
-      name: "Laravel", 
-      level: 80,
-      icon: FaLaravel,
-      color: "text-red-400",
-      bgColor: "from-red-50 to-pink-100",
-      borderColor: "border-red-200"
+    {
+      title: "Frameworks Backend",
+      items: [
+        { name: "Node.js", icon: FaNodeJs, color: "text-green-600" },
+        { name: "Express", icon: SiExpress, color: "text-gray-400" },
+        { name: "Spring Boot", icon: SiSpringboot, color: "text-green-500" },
+        { name: "Laravel", icon: FaLaravel, color: "text-red-400" },
+        { name: "Django", icon: SiDjango, color: "text-green-800" },
+        { name: "Flask", icon: SiFlask, color: "text-gray-300" },
+        { name: "NestJS", icon: SiNestjs, color: "text-red-600" },
+      ]
     },
-    { 
-      name: "Spring Boot", 
-      level: 75,
-      icon: SiSpringboot,
-      color: "text-green-500",
-      bgColor: "from-green-50 to-green-100",
-      borderColor: "border-green-200"
+    {
+      title: "API & Services Web",
+      items: [
+        { name: "REST API", icon: FaServer, color: "text-purple-400" },
+        { name: "GraphQL", icon: SiGraphql, color: "text-pink-600" },
+        { name: "Apollo", icon: SiApollographql, color: "text-indigo-600" },
+        { name: "FastAPI", icon: SiFastapi, color: "text-green-400" },
+      ]
     },
-    { 
-      name: "HTML/CSS", 
-      level: 90,
-      icon: FaHtml5,
-      color: "text-orange-500",
-      bgColor: "from-orange-50 to-orange-100",
-      borderColor: "border-orange-200"
+    {
+      title: "Bases de données",
+      items: [
+        { name: "PostgreSQL", icon: SiPostgresql, color: "text-blue-600" },
+        { name: "MongoDB", icon: SiMongodb, color: "text-green-500" },
+        { name: "MySQL", icon: SiMysql, color: "text-orange-600" },
+        { name: "Firebase", icon: SiFirebase, color: "text-yellow-500" },
+      ]
     },
-    { 
-      name: "Node.js", 
-      level: 70,
-      icon: FaNodeJs,
-      color: "text-green-600",
-      bgColor: "from-green-50 to-teal-100",
-      borderColor: "border-green-200"
+    {
+      title: "Outils & DevOps",
+      items: [
+        { name: "Git", icon: SiGit, color: "text-orange-600" },
+        { name: "Docker", icon: SiDocker, color: "text-blue-500" },
+        { name: "Kubernetes", icon: SiKubernetes, color: "text-blue-600" },
+        { name: "AWS", icon: SiAwsamplify, color: "text-yellow-600" },
+        { name: "Azure", icon: VscAzure, color: "text-blue-700" },
+        { name: "GCP", icon: SiGooglecloud, color: "text-red-500" },
+        { name: "Postman", icon: SiPostman, color: "text-orange-500" },
+        { name: "Swagger", icon: SiSwagger, color: "text-green-600" },
+        { name: "Jira", icon: SiJira, color: "text-blue-400" },
+      ]
     }
   ];
 
@@ -416,7 +494,7 @@ function App() {
       demo: "#"
     },
     {
-      title: "Application de gestion de santé",
+      title: "Application de santé et Bien-Etre",
       description: "Application santé et bien-être offrant conseils en articles, tests d'analyses avec recommandations personnalisées, notifications et tableau de bord récapitulatif.",
       gradient: "from-pink-500 via-red-500 to-purple-500",
       tech: ["Laravel", "MySQL", "React"],
@@ -430,6 +508,22 @@ function App() {
       gradient: "from-indigo-500 via-purple-500 to-pink-500",
       tech: ["Python"],
       image: "🎮",
+      github: "#",
+      demo: "#"
+    },{
+      title: "Gestion Personnel",
+      description: "Application desktop de gestion personnelle avec système de chat intégré.",
+      gradient: "from-yellow-500 to-amber-500",
+      tech: ["Python", "MySQL"],
+      image: "👥",
+      github: "#",
+      demo: "#"
+    },  {
+      title: "Jeu du Serpent",
+      description: "Jeu classique du serpent avec gestion des collisions et des scores.",
+      gradient: "from-emerald-500 to-green-600",
+      tech: ["Python", "JSON"],
+      image: "🐍",
       github: "#",
       demo: "#"
     }
@@ -466,8 +560,16 @@ function App() {
 
   return (
     <div className="scroll-smooth font-sans text-gray-800 overflow-x-hidden">
-      {/* Progress Bar */}
-      <div className="fixed top-0 left-0 w-full h-1 bg-gray-200 z-50">
+      {/* Curseur personnalisé */}
+      <motion.div
+        ref={cursorRef}
+        className="fixed top-0 left-0 rounded-full pointer-events-none z-[1000]"
+        variants={cursorVariants}
+        animate={cursorVariant}
+      />
+
+      {/* Barre de progression */}
+      <div className="fixed top-0 left-0 w-full h-1 bg-gray-200 z-[100]">
         <motion.div 
           className="h-full bg-gradient-to-r from-purple-600 to-pink-600"
           style={{ width: `${scrollProgress}%` }}
@@ -479,22 +581,22 @@ function App() {
 
       <Navbar />
 
-      {/* Hero Section Enhanced */}
+      {/* Hero Section */}
       <motion.section
         id="home"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
-        className="relative h-screen flex flex-col items-center justify-center text-center px-4 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 overflow-hidden pt-16"
+        className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 overflow-hidden pt-16"
       >
         <ParticleBackground density={100} />
         
         <motion.div 
           className="absolute w-96 h-96 rounded-full bg-gradient-to-r from-purple-500/40 to-pink-500/40 blur-3xl pointer-events-none"
           style={{
-            left: `${mousePosition.x}%`,
-            top: `${mousePosition.y}%`,
+            left: `${mousePosition.x}px`,
+            top: `${mousePosition.y}px`,
             transform: 'translate(-50%, -50%)'
           }}
           animate={{ scale: [1, 1.2, 1] }}
@@ -522,7 +624,7 @@ function App() {
           ></motion.div>
         </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto">
+        <div className="relative z-10 max-w-5xl mx-auto mt-16">
           <ProfileImage />
 
           <AnimatedText 
@@ -563,7 +665,7 @@ function App() {
               href="#contact"
               whileHover={{ scale: 1.1, boxShadow: "0px 0px 20px rgba(168, 85, 247, 0.5)" }}
               transition={{ duration: 0.5 }}
-              className="group bg-gradient-to-r from-purple-600 to-pink-600 text-white px-10 py-4 rounded-full flex items-center gap-3 relative overflow-hidden"
+              className="group bg-gradient-to-r from-purple-600 to-pink-600 text-white px-10 py-4 rounded-full flex items-center gap-3 relative overflow-hidden cursor-pointer"
             >
               <motion.div 
                 className="absolute inset-0 bg-white/20 scale-x-0 origin-left"
@@ -578,7 +680,7 @@ function App() {
               href="#about"
               whileHover={{ scale: 1.1, backgroundColor: "rgba(168, 85, 247, 0.2)", color: "#fff" }}
               transition={{ duration: 0.5 }}
-              className="border-2 border-purple-400 text-purple-400 px-10 py-4 rounded-full flex items-center gap-3 group"
+              className="border-2 border-purple-400 text-purple-400 px-10 py-4 rounded-full flex items-center gap-3 group cursor-pointer"
             >
               <FaEye className="group-hover:animate-pulse" />
               En savoir plus
@@ -588,7 +690,7 @@ function App() {
               href="#"
               whileHover={{ scale: 1.1, backgroundColor: "rgba(236, 72, 153, 0.2)", color: "#fff" }}
               transition={{ duration: 0.5 }}
-              className="border-2 border-pink-400 text-pink-400 px-10 py-4 rounded-full flex items-center gap-3 group"
+              className="border-2 border-pink-400 text-pink-400 px-10 py-4 rounded-full flex items-center gap-3 group cursor-pointer"
             >
               <FaDownload className="group-hover:animate-bounce" />
               Télécharger CV
@@ -605,14 +707,14 @@ function App() {
         </div>
       </motion.section>
 
-      {/* About Section Enhanced */}
+      {/* About Section */}
       <motion.section 
         id="about" 
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
-        className="min-h-screen flex items-center justify-center bg-white px-4 py-20 relative overflow-hidden"
+        className="min-h-screen flex items-center justify-center bg-white px-4 py-20 relative"
       >
         <div className="absolute inset-0 bg-gradient-to-br from-purple-50/50 to-pink-50/50"></div>
         
@@ -682,7 +784,7 @@ function App() {
               className="relative"
             >
               <div className="relative w-full h-96 bg-gradient-to-br from-purple-400 via-pink-400 to-blue-400 rounded-3xl shadow-2xl group">
-                <div className="absolute inset-4 bg-white rounded-2xl flex items-center justify-center overflow-hidden">
+                <div className="absolute inset-4 bg-white rounded-2xl flex items-center justify-center shadow-2xl">
                   <div className="text-center p-8">
                     <motion.div 
                       className="text-8xl mb-6"
@@ -721,7 +823,7 @@ function App() {
           </div>
 
           {/* Formation et Expérience */}
-          <div className="mt-20 grid md:grid-cols-2 gap-8">
+          <div className="mt-20 grid md:grid-cols-1 gap-8">
             <motion.div 
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -732,7 +834,7 @@ function App() {
                 <FaGraduationCap className="text-purple-600" />
                 Formation
               </h3>
-              <div className="space-y-6">
+              <div className="space-y-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
                 {education.map((edu, index) => (
                   <motion.div 
                     key={index}
@@ -757,7 +859,6 @@ function App() {
                 ))}
               </div>
             </motion.div>
-
           </div>
 
           {/* Langues et Centres d'intérêt */}
@@ -826,7 +927,7 @@ function App() {
         </div>
       </motion.section>
 
-      {/* Skills Section Enhanced */}
+      {/* Skills Section */}
       <motion.section 
         id="skills" 
         initial={{ opacity: 0, y: 50 }}
@@ -852,136 +953,78 @@ function App() {
             <p className="text-xl text-gray-600">Technologies que je maîtrise avec passion</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {skills.map((skill, index) => (
+          {/* Compétences par catégorie */}
+          <div className="space-y-16">
+            {skillsCategories.map((category, catIndex) => (
               <motion.div
-                key={skill.name}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                whileHover={{ scale: 1.1 }}
+                key={category.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: index * 0.15 }}
-                className={`group bg-gradient-to-br ${skill.bgColor} p-8 rounded-3xl shadow-xl border-2 ${skill.borderColor} relative overflow-hidden`}
+                transition={{ duration: 0.5, delay: catIndex * 0.1 }}
+                className="bg-white/80 backdrop-blur-sm p-8 rounded-3xl shadow-lg border border-gray-100"
               >
-                <motion.div 
-                  className="absolute inset-0 bg-white/20 scale-x-0 origin-left rounded-3xl"
-                  whileHover={{ scaleX: 1 }}
-                  transition={{ duration: 0.5 }}
-                ></motion.div>
+                <h3 className="text-3xl font-bold mb-8 text-gray-800 flex items-center gap-3">
+                  <span className="bg-gradient-to-r from-purple-600 to-pink-600 text-white p-3 rounded-xl">
+                    {category.title.includes("Langages") && <FaCode />}
+                    {category.title.includes("Frontend") && <FaLaptopCode />}
+                    {category.title.includes("Backend") && <FaServer />}
+                    {category.title.includes("API") && <FaDatabase />}
+                    {category.title.includes("Bases") && <FaDatabase />}
+                    {category.title.includes("Outils") && <FaCode />}
+                  </span>
+                  {category.title}
+                </h3>
                 
-                <div className="text-center relative z-10">
-                  <div className="relative mb-6">
-                    <skill.icon 
-                      size={64} 
-                      className={`${skill.color} mx-auto transition-all duration-300`}
-                    />
-                    <motion.div 
-                      className="absolute -inset-2 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-lg opacity-0"
-                      whileHover={{ opacity: 1 }}
-                      transition={{ duration: 0.5 }}
-                    ></motion.div>
-                  </div>
-                  
-                  <h3 className="text-xl font-bold text-gray-800 group-hover:text-purple-600 transition-colors duration-300 mb-4">
-                    {skill.name}
-                  </h3>
-                  
-                  <div className="text-sm text-gray-500 mb-4 group-hover:text-purple-500 transition-colors">
-                    {skill.level}%
-                  </div>
-                </div>
-                
-                <div className="mt-6 bg-gray-200 rounded-full h-2 overflow-hidden relative">
-                  <motion.div 
-                    className="bg-gradient-to-r from-purple-500 to-pink-500 h-full rounded-full"
-                    initial={{ x: "-100%" }}
-                    whileInView={{ x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
-                    style={{ width: `${skill.level}%` }}
-                  ></motion.div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                  {category.items.map((skill, skillIndex) => (
+                    <motion.div
+                      key={skill.name}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      whileHover={{ scale: 1.05 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.3, delay: skillIndex * 0.05 }}
+                      className="group bg-gradient-to-br from-white to-gray-50 p-6 rounded-2xl shadow-md border border-gray-200 relative overflow-hidden text-center"
+                    >
+                      <motion.div 
+                        className="absolute inset-0 bg-gradient-to-r from-purple-400/10 to-pink-400/10 scale-x-0 origin-left"
+                        whileHover={{ scaleX: 1 }}
+                        transition={{ duration: 0.5 }}
+                      ></motion.div>
+                      
+                      <div className="relative mb-4">
+                        <skill.icon 
+                          size={48} 
+                          className={`${skill.color} mx-auto transition-all duration-300`}
+                        />
+                        <motion.div 
+                          className="absolute -inset-2 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-lg opacity-0"
+                          whileHover={{ opacity: 1 }}
+                          transition={{ duration: 0.5 }}
+                        ></motion.div>
+                      </div>
+                      
+                      <h4 className="text-lg font-bold text-gray-800 group-hover:text-purple-600 transition-colors duration-300">
+                        {skill.name}
+                      </h4>
+                    </motion.div>
+                  ))}
                 </div>
               </motion.div>
             ))}
           </div>
-
-          {/* Frameworks et Outils */}
-          <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mt-20"
-          >
-            <h3 className="text-3xl font-bold mb-8 text-center text-gray-800">Frameworks & Outils</h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-              {[
-                { name: "React", color: "bg-blue-100 text-blue-800" },
-                { name: "Laravel", color: "bg-red-100 text-red-800" },
-                { name: "Spring Boot", color: "bg-green-100 text-green-800" },
-                { name: "Bootstrap", color: "bg-purple-100 text-purple-800" },
-                { name: "Tailwind CSS", color: "bg-cyan-100 text-cyan-800" },
-                { name: "ASP.NET", color: "bg-indigo-100 text-indigo-800" },
-                { name: "Node.js", color: "bg-green-100 text-green-800" },
-                { name: "React Native", color: "bg-blue-100 text-blue-800" },
-                { name: "Symfony", color: "bg-gray-100 text-gray-800" },
-                { name: "Git/GitHub", color: "bg-gray-100 text-gray-800" }
-              ].map((tool, index) => (
-                <motion.div 
-                  key={tool.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  whileHover={{ boxShadow: "0px 10px 20px rgba(0,0,0,0.1)" }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  className={`p-4 rounded-xl ${tool.color} font-medium text-center shadow-md`}
-                >
-                  {tool.name}
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Bases de données */}
-          <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-12"
-          >
-            <h3 className="text-3xl font-bold mb-8 text-center text-gray-800">Bases de données</h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {[
-                { name: "PostgreSQL", color: "bg-blue-100 text-blue-800" },
-                { name: "MySQL", color: "bg-orange-100 text-orange-800" },
-                { name: "MongoDB", color: "bg-green-100 text-green-800" }
-              ].map((db, index) => (
-                <motion.div 
-                  key={db.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  whileHover={{ boxShadow: "0px 10px 20px rgba(0,0,0,0.1)" }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  className={`p-4 rounded-xl ${db.color} font-medium text-center shadow-md`}
-                >
-                  {db.name}
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
         </div>
       </motion.section>
 
-      {/* Projects Section Enhanced */}
+      {/* Projects Section */}
       <motion.section 
         id="projects" 
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
-        className="min-h-screen flex items-center justify-center bg-white px-4 py-20 relative overflow-hidden"
+        className="min-h-screen flex items-center justify-center bg-white px-4 py-20 relative"
       >
         <div className="absolute inset-0 bg-gradient-to-br from-purple-50/30 to-pink-50/30"></div>
         
@@ -1081,7 +1124,7 @@ function App() {
                       href={project.github}
                       whileHover={{ x: 2 }}
                       transition={{ duration: 0.3 }}
-                      className="flex items-center gap-2 text-purple-600 hover:text-purple-800 font-medium px-4 py-2 rounded-lg hover:bg-purple-50"
+                      className="flex items-center gap-2 text-purple-600 hover:text-purple-800 font-medium px-4 py-2 rounded-lg hover:bg-purple-50 cursor-pointer"
                     >
                       <FaGithub className="animate-pulse" />
                       GitHub
@@ -1090,7 +1133,7 @@ function App() {
                       href={project.demo}
                       whileHover={{ scale: 1.05 }}
                       transition={{ duration: 0.3 }}
-                      className="flex items-center gap-2 text-pink-600 hover:text-pink-800 font-medium px-4 py-2 rounded-lg hover:bg-pink-50"
+                      className="flex items-center gap-2 text-pink-600 hover:text-pink-800 font-medium px-4 py-2 rounded-lg hover:bg-pink-50 cursor-pointer"
                     >
                       <FaRocket />
                       Demo
@@ -1105,7 +1148,7 @@ function App() {
         </div>
       </motion.section>
 
-      {/* Contact Section Enhanced */}
+      {/* Contact Section */}
       <motion.section 
         id="contact" 
         initial={{ opacity: 0, y: 50 }}
@@ -1185,15 +1228,17 @@ function App() {
                 className="flex gap-6"
               >
                 {[
-                  { icon: FaGithub, href: "#", color: "group-hover:text-gray-300", bg: "group-hover:bg-gray-600/20" },
-                  { icon: FaLinkedin, href: "#", color: "group-hover:text-blue-400", bg: "group-hover:bg-blue-600/20" }
+                  { icon: FaGithub, href: "https://github.com/jainjy", color: "group-hover:text-gray-300", bg: "group-hover:bg-gray-600/20" },
+                  { icon: FaLinkedin, href: "www.linkedin.com/in/ramamonjisoa-andrianina", color: "group-hover:text-blue-400", bg: "group-hover:bg-blue-600/20" }
                 ].map((social, index) => (
                   <motion.a
                     key={index}
                     whileHover={{ scale: 1.1 }}
                     transition={{ duration: 0.3 }}
                     href={social.href}
-                    className={`group w-16 h-16 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center text-white text-2xl ${social.color} ${social.bg} border border-white/20 group-hover:border-white/40`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`group w-16 h-16 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center text-white text-2xl ${social.color} ${social.bg} border border-white/20 group-hover:border-white/40 cursor-pointer`}
                   >
                     <social.icon />
                   </motion.a>
@@ -1229,14 +1274,14 @@ function App() {
                     transition={{ duration: 0.3 }}
                     type="text"
                     placeholder="Votre nom"
-                    className="w-full p-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 hover:bg-white/12"
+                    className="w-full p-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 hover:bg-white/12 cursor-pointer"
                   />
                   <motion.input
                     whileFocus={{ backgroundColor: "rgba(255,255,255,0.15)", ringColor: "rgba(168,85,247,1)" }}
                     transition={{ duration: 0.3 }}
                     type="email"
                     placeholder="Votre email"
-                    className="w-full p-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 hover:bg-white/12"
+                    className="w-full p-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 hover:bg-white/12 cursor-pointer"
                   />
                 </div>
                 
@@ -1245,7 +1290,7 @@ function App() {
                   transition={{ duration: 0.3 }}
                   type="text"
                   placeholder="Sujet"
-                  className="w-full p-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 hover:bg-white/12"
+                  className="w-full p-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 hover:bg-white/12 cursor-pointer"
                 />
                 
                 <motion.textarea
@@ -1253,7 +1298,7 @@ function App() {
                   transition={{ duration: 0.3 }}
                   placeholder="Décrivez votre projet..."
                   rows="6"
-                  className="w-full p-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 resize-none hover:bg-white/12"
+                  className="w-full p-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 resize-none hover:bg-white/12 cursor-pointer"
                 />
                 
                 <motion.button
@@ -1261,7 +1306,7 @@ function App() {
                   onClick={() => alert('Message envoyé ! (Fonction de démonstration)')}
                   whileHover={{ scale: 1.05, boxShadow: "0px 0px 25px rgba(168,85,247,0.25)" }}
                   transition={{ duration: 0.5 }}
-                  className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white p-4 rounded-xl font-bold text-lg shadow-2xl group relative overflow-hidden"
+                  className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white p-4 rounded-xl font-bold text-lg shadow-2xl group relative overflow-hidden cursor-pointer"
                 >
                   <motion.div 
                     className="absolute inset-0 bg-white/10 scale-x-0 origin-left"
@@ -1279,7 +1324,7 @@ function App() {
         </div>
       </motion.section>
 
-      {/* Footer Enhanced */}
+      {/* Footer */}
       <footer className="bg-gradient-to-r from-gray-900 to-black text-center py-12 border-t border-gray-800 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         <div className="max-w-6xl mx-auto px-4 relative z-10">
@@ -1310,7 +1355,7 @@ function App() {
                 whileHover={{ color: "#a855f7" }}
                 transition={{ duration: 0.3 }}
                 href={link.href}
-                className="text-gray-400"
+                className="text-gray-400 cursor-pointer"
               >
                 {link.name}
               </motion.a>

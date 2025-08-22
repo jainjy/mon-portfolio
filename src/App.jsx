@@ -7,17 +7,13 @@ import {
   FaJava, FaLaravel, FaNodeJs, FaDatabase, FaServer 
 } from "react-icons/fa";
 import { 
-  SiPython, SiSpringboot, SiDjango, SiFlask, SiExpress,
-  SiPostgresql, SiMongodb, SiMysql, SiFirebase, SiGraphql,
-  SiDocker, SiKubernetes, SiGooglecloud,
-  SiGit, SiJira, SiPostman, SiSwagger, SiRedux,
-  SiTypescript, SiNextdotjs, SiNestjs, SiFastapi, SiApollographql,
-  SiAwsamplify
+  SiPython, SiSpringboot, SiPostgresql, SiMongodb, SiMysql, 
+  SiGit, SiPostman, SiSwagger, SiBootstrap, SiTailwindcss, 
+  SiPhp
 } from "react-icons/si";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import TSParticles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
-import { VscAzure } from "react-icons/vsc";
 
 // Composant Navbar amélioré avec animations Framer Motion
 const Navbar = () => {
@@ -397,38 +393,38 @@ function App() {
       items: [
         { name: "Python", icon: SiPython, color: "text-blue-500" },
         { name: "Java", icon: FaJava, color: "text-red-500" },
+        { name: "Go", icon: FaCode, color: "text-cyan-500" },
         { name: "JavaScript", icon: FaJsSquare, color: "text-yellow-500" },
-        { name: "TypeScript", icon: SiTypescript, color: "text-blue-600" },
         { name: "HTML/CSS", icon: FaHtml5, color: "text-orange-500" },
+        { name: "C#", icon: FaCode, color: "text-purple-500" },
+        { name: "PHP", icon: SiPhp, color: "text-blue-600" },
       ]
     },
     {
       title: "Frameworks Frontend",
       items: [
         { name: "React", icon: FaReact, color: "text-blue-400" },
-        { name: "Next.js", icon: SiNextdotjs, color: "text-gray-800" },
-        { name: "Redux", icon: SiRedux, color: "text-purple-500" },
+        { name: "Bootstrap", icon: SiBootstrap, color: "text-purple-600" },
+        { name: "Tailwind CSS", icon: SiTailwindcss, color: "text-teal-500" },
+        { name: "React Native", icon: FaMobile, color: "text-blue-400" },
       ]
     },
     {
       title: "Frameworks Backend",
       items: [
-        { name: "Node.js", icon: FaNodeJs, color: "text-green-600" },
-        { name: "Express", icon: SiExpress, color: "text-gray-400" },
         { name: "Spring Boot", icon: SiSpringboot, color: "text-green-500" },
         { name: "Laravel", icon: FaLaravel, color: "text-red-400" },
-        { name: "Django", icon: SiDjango, color: "text-green-800" },
-        { name: "Flask", icon: SiFlask, color: "text-gray-300" },
-        { name: "NestJS", icon: SiNestjs, color: "text-red-600" },
+        { name: "ASP.NET", icon: FaCode, color: "text-blue-600" },
+        { name: "Node.js", icon: FaNodeJs, color: "text-green-600" },
+        { name: "Symfony", icon: FaCode, color: "text-gray-600" },
       ]
     },
     {
       title: "API & Services Web",
       items: [
         { name: "REST API", icon: FaServer, color: "text-purple-400" },
-        { name: "GraphQL", icon: SiGraphql, color: "text-pink-600" },
-        { name: "Apollo", icon: SiApollographql, color: "text-indigo-600" },
-        { name: "FastAPI", icon: SiFastapi, color: "text-green-400" },
+        { name: "Postman", icon: SiPostman, color: "text-orange-500" },
+        { name: "Swagger", icon: SiSwagger, color: "text-green-600" },
       ]
     },
     {
@@ -437,21 +433,13 @@ function App() {
         { name: "PostgreSQL", icon: SiPostgresql, color: "text-blue-600" },
         { name: "MongoDB", icon: SiMongodb, color: "text-green-500" },
         { name: "MySQL", icon: SiMysql, color: "text-orange-600" },
-        { name: "Firebase", icon: SiFirebase, color: "text-yellow-500" },
       ]
     },
     {
-      title: "Outils & DevOps",
+      title: "Outils",
       items: [
         { name: "Git", icon: SiGit, color: "text-orange-600" },
-        { name: "Docker", icon: SiDocker, color: "text-blue-500" },
-        { name: "Kubernetes", icon: SiKubernetes, color: "text-blue-600" },
-        { name: "AWS", icon: SiAwsamplify, color: "text-yellow-600" },
-        { name: "Azure", icon: VscAzure, color: "text-blue-700" },
-        { name: "GCP", icon: SiGooglecloud, color: "text-red-500" },
-        { name: "Postman", icon: SiPostman, color: "text-orange-500" },
-        { name: "Swagger", icon: SiSwagger, color: "text-green-600" },
-        { name: "Jira", icon: SiJira, color: "text-blue-400" },
+        { name: "GitHub", icon: FaGithub, color: "text-gray-800" },
       ]
     }
   ];
@@ -479,7 +467,7 @@ function App() {
       title: "Application de gestion de projet",
       description: "Logiciel de gestion de projet permettant de suivre les équipes, les tâches, le personnel avec un système de notifications.",
       gradient: "from-green-500 via-teal-500 to-blue-500",
-      tech: ["Java EE", "MySQL", "Bootstrap", "JavaScript"],
+      tech: ["Java", "Spring Boot", "MySQL", "Bootstrap", "JavaScript"],
       image: "📊",
       github: "#",
       demo: "#"
@@ -510,7 +498,8 @@ function App() {
       image: "🎮",
       github: "#",
       demo: "#"
-    },{
+    },
+    {
       title: "Gestion Personnel",
       description: "Application desktop de gestion personnelle avec système de chat intégré.",
       gradient: "from-yellow-500 to-amber-500",
@@ -518,11 +507,12 @@ function App() {
       image: "👥",
       github: "#",
       demo: "#"
-    },  {
+    },
+    {
       title: "Jeu du Serpent",
       description: "Jeu classique du serpent avec gestion des collisions et des scores.",
       gradient: "from-emerald-500 to-green-600",
-      tech: ["Python", "JSON"],
+      tech: ["Python"],
       image: "🐍",
       github: "#",
       demo: "#"
@@ -969,7 +959,7 @@ function App() {
                     {category.title.includes("Langages") && <FaCode />}
                     {category.title.includes("Frontend") && <FaLaptopCode />}
                     {category.title.includes("Backend") && <FaServer />}
-                    {category.title.includes("API") && <FaDatabase />}
+                    {category.title.includes("API") && <FaServer />}
                     {category.title.includes("Bases") && <FaDatabase />}
                     {category.title.includes("Outils") && <FaCode />}
                   </span>

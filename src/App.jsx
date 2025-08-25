@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import { HiOutlineMail, HiOutlinePhone, HiOutlineLocationMarker } from "react-icons/hi";
 import { 
   FaBars, FaTimes, FaHtml5, FaCss3Alt, FaJsSquare, FaReact, 
   FaGithub, FaLinkedin, FaArrowDown, FaCode, FaRocket, 
@@ -282,8 +283,7 @@ function App() {
       gradient: "from-purple-500 via-pink-500 to-red-500",
       tech: ["ASP.NET", "React", "PostgreSQL", "Tailwind CSS"],
       image: "🎓",
-      github: "#",
-      demo: "#"
+      github: "#"
     },
     {
       title: "TAXIII - Commande de taxi",
@@ -291,8 +291,7 @@ function App() {
       gradient: "from-blue-500 via-purple-500 to-indigo-500",
       tech: ["React Native", "Node.js", "MongoDB"],
       image: "🚖",
-      github: "#",
-      demo: "#"
+      github: "#"
     },
     {
       title: "Application de gestion de projet",
@@ -300,8 +299,7 @@ function App() {
       gradient: "from-green-500 via-teal-500 to-blue-500",
       tech: ["Java", "Spring Boot", "MySQL", "Bootstrap", "JavaScript"],
       image: "📊",
-      github: "#",
-      demo: "#"
+      github: "#"
     },
     {
       title: "Music Player - E-Heno",
@@ -309,8 +307,7 @@ function App() {
       gradient: "from-yellow-500 via-orange-500 to-red-500",
       tech: ["Python"],
       image: "🎵",
-      github: "#",
-      demo: "#"
+      github: "#"
     },
     {
       title: "Application de santé et Bien-Etre",
@@ -318,8 +315,7 @@ function App() {
       gradient: "from-pink-500 via-red-500 to-purple-500",
       tech: ["Laravel", "MySQL", "React"],
       image: "🏥",
-      github: "#",
-      demo: "#"
+      github: "#"
     },
     {
       title: "Fanorona",
@@ -327,8 +323,7 @@ function App() {
       gradient: "from-indigo-500 via-purple-500 to-pink-500",
       tech: ["Python"],
       image: "🎮",
-      github: "#",
-      demo: "#"
+      github: "#"
     },
     {
       title: "Gestion Personnel",
@@ -336,8 +331,7 @@ function App() {
       gradient: "from-yellow-500 to-amber-500",
       tech: ["Python", "MySQL"],
       image: "👥",
-      github: "#",
-      demo: "#"
+      github: "#"
     },
     {
       title: "Jeu du Serpent",
@@ -345,8 +339,7 @@ function App() {
       gradient: "from-emerald-500 to-green-600",
       tech: ["Python"],
       image: "🐍",
-      github: "#",
-      demo: "#"
+      github: "#"
     }
   ];
 
@@ -950,15 +943,7 @@ function App() {
                       <FaGithub className="animate-pulse" />
                       GitHub
                     </motion.a>
-                    <motion.a 
-                      href={project.demo}
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.3 }}
-                      className="flex items-center gap-2 text-pink-600 hover:text-pink-800 font-medium px-4 py-2 rounded-lg hover:bg-pink-50 cursor-pointer"
-                    >
-                      <FaRocket />
-                      Demo
-                    </motion.a>
+          
                   </div>
                 </div>
                 
@@ -1066,20 +1051,29 @@ function App() {
                 ))}
               </motion.div>
 
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/10"
-              >
-                <h4 className="text-xl font-bold text-white mb-4">Informations de contact</h4>
-                <div className="space-y-3 text-purple-200">
-                  <p>📧 ramamonjisoandrianina@gmail.com</p>
-                  <p>📱 +261 34 20 219 88</p>
-                  <p>📍 0708L405 Ambohimena, Antsirabe, Madagascar</p>
-                </div>
-              </motion.div>  
+              <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: 0.2 }}
+      className="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/10"
+    >
+      <h4 className="text-xl font-bold text-white mb-4">Informations de contact</h4>
+      <div className="space-y-3 text-purple-200">
+        <p className="flex items-center gap-2">
+          <HiOutlineMail className="text-purple-400 text-lg" />
+          ramamonjisoandrianina@gmail.com
+        </p>
+        <p className="flex items-center gap-2">
+          <HiOutlinePhone className="text-purple-400 text-lg" />
+          +261 34 20 219 88
+        </p>
+        <p className="flex items-center gap-2">
+          <HiOutlineLocationMarker className="text-purple-400 text-lg" />
+          0708L405 Ambohimena, Antsirabe, Madagascar
+        </p>
+      </div>
+    </motion.div>
             </div>
 
             <ContactForm />
@@ -1128,9 +1122,6 @@ function App() {
           <div className="border-t border-gray-800 pt-8">
             <p className="text-gray-500 mb-2">
               © 2025 RAMAMONJISOA Hoelatiana Andrianina. Tous droits réservés.
-            </p>
-            <p className="text-gray-600 text-sm">
-              Fait avec <FaHeart className="inline text-red-500" /> et beaucoup de café ☕
             </p>
           </div>
         </div>

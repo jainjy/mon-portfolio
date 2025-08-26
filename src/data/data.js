@@ -26,6 +26,7 @@ import {
   FaNodeJs,
   FaDatabase,
   FaServer,
+  FaMusic,
 } from "react-icons/fa";
 import {
   SiPython,
@@ -197,6 +198,8 @@ import {
     { icon: FaGamepad, name: "Jeux Vidéo" },
     { icon: FaFilm, name: "Cinéma" },
     { icon: FaBook, name: "Lecture" },
+    { icon: FaMusic, name: "Musique" },
+
   ];
 
   const languages = [

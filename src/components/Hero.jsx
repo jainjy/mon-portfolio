@@ -74,9 +74,8 @@ export const Hero = ({mousePosition}) => {
 
         <div className="relative z-10 max-w-5xl mx-auto mt-16">
           <ProfileImage />
-
           <AnimatedText
-            text="Bonjour, je suis"
+            text="Bonjours, je suis"
             className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent"
           />
 

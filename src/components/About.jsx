@@ -1,21 +1,63 @@
-import React from 'react'
-import data from '../data/data';
-import { motion } from 'framer-motion';
-import {
-    FaCode,
-    FaHeart,
-    FaGraduationCap,
-  } from "react-icons/fa";
+import React from "react";
+import data from "../data/data";
+import { motion } from "framer-motion";
+import { FaCode, FaHeart, FaGraduationCap } from "react-icons/fa";
+const FormationXp=()=>{
+    const education=data.education
+    return <>
+              {/* Formation et Expérience */}
+              <div className="mt-20 grid md:grid-cols-1 gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <h3 className="text-3xl font-bold mb-8 text-gray-800 flex items-center gap-3">
+                <FaGraduationCap className="text-purple-600" />
+                Formation
+              </h3>
+              <div className="space-y-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                {education.map((edu, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    whileHover={{ boxShadow: "0px 10px 20px rgba(0,0,0,0.1)" }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.3, delay: index * 0.2 }}
+                    className="bg-white p-6 rounded-xl shadow-lg border-l-4 border-purple-500"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="bg-purple-100 p-3 rounded-full">
+                        <edu.icon className="text-purple-600 text-xl" />
+                      </div>
+                      <div>
+                        <h4 className="text-xl font-bold text-gray-800">
+                          {edu.title}
+                        </h4>
+                        <p className="text-purple-600 font-medium">
+                          {edu.institution} • {edu.period}
+                        </p>
+                        <p className="text-gray-600 mt-2">{edu.description}</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+    </>
+}
 export const About = () => {
-    const education =data.education;
 
-    const interests =data.interests;
-  
-    const languages = data.languages;
+  const interests = data.interests;
+
+  const languages = data.languages;
   return (
     <>
-          {/* About Section */}
-          <motion.section
+      {/* About Section */}
+      <motion.section
         id="about"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -150,49 +192,7 @@ export const About = () => {
               </div>
             </motion.div>
           </div>
-
-          {/* Formation et Expérience */}
-          <div className="mt-20 grid md:grid-cols-1 gap-8">
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <h3 className="text-3xl font-bold mb-8 text-gray-800 flex items-center gap-3">
-                <FaGraduationCap className="text-purple-600" />
-                Formation
-              </h3>
-              <div className="space-y-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-                {education.map((edu, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    whileHover={{ boxShadow: "0px 10px 20px rgba(0,0,0,0.1)" }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: index * 0.2 }}
-                    className="bg-white p-6 rounded-xl shadow-lg border-l-4 border-purple-500"
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className="bg-purple-100 p-3 rounded-full">
-                        <edu.icon className="text-purple-600 text-xl" />
-                      </div>
-                      <div>
-                        <h4 className="text-xl font-bold text-gray-800">
-                          {edu.title}
-                        </h4>
-                        <p className="text-purple-600 font-medium">
-                          {edu.institution} • {edu.period}
-                        </p>
-                        <p className="text-gray-600 mt-2">{edu.description}</p>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
+          <FormationXp/>
 
           {/* Langues et Centres d'intérêt */}
           <div className="mt-20 grid md:grid-cols-2 gap-8">
@@ -274,6 +274,7 @@ export const About = () => {
             </motion.div>
           </div>
         </div>
-      </motion.section></>
-  )
-}
+      </motion.section>
+    </>
+  );
+};

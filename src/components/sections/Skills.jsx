@@ -7,8 +7,9 @@ import {
   FaDatabase,
   FaServer,
 } from "react-icons/fa";
+import { FaGear, FaGears } from "react-icons/fa6";
 export const Skills = () => {
-  // Compétences organisées par catégorie
+
   const skillsCategories = data.skillsCategories;
   return (
     <>
@@ -19,11 +20,11 @@ export const Skills = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
-        className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-purple-50 px-4 py-20 relative"
+        className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-purple-50  py-10 relative w-full"
       >
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
 
-        <div className="max-w-6xl mx-auto relative z-10">
+        <div className="w-full relative z-10 mx-10">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -58,7 +59,7 @@ export const Skills = () => {
                     {category.title.includes("Backend") && <FaServer />}
                     {category.title.includes("API") && <FaServer />}
                     {category.title.includes("Bases") && <FaDatabase />}
-                    {category.title.includes("Outils") && <FaCode />}
+                    {category.title.includes("Outils") && <FaGear />}
                   </span>
                   {category.title}
                 </h3>

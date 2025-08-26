@@ -16,8 +16,8 @@ import ContactForm from '../ContactForm';
 export const Contact = () => {
   return (
     <>
-          {/* Contact Section */}
-          <motion.section
+        {/* Contact Section */}
+        <motion.section
         id="contact"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}

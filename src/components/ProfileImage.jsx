@@ -6,7 +6,7 @@ const ProfileImage = () => {
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 1.5, ease: "easeOut" }}
-      className="relative mb-8 group"
+      className="relative mb-8 group "
     >
       <motion.div
         className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full blur-xl opacity-30"
@@ -30,11 +30,6 @@ const ProfileImage = () => {
             whileHover={{ scale: 1.1 }}
           />
         </div>
-        <motion.div
-          className="absolute -top-2 -right-2 w-6 h-6 bg-green-500 rounded-full border-2 border-white"
-          animate={{ scale: [1, 1.2, 1] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-        ></motion.div>
       </div>
     </motion.div>
   );

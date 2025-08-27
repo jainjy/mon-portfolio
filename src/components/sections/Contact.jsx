@@ -23,7 +23,7 @@ export const Contact = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
-        className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 px-4 py-20 relative overflow-hidden"
+        className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 dark:from-gray-900 dark:via-purple-900 dark:to-indigo-900 px-4 py-20 relative overflow-hidden"
       >
         <ParticleBackground density={120} />
 
@@ -74,7 +74,7 @@ export const Contact = () => {
                 whileHover={{ backgroundColor: "rgba(255,255,255,0.15)" }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className="bg-white/10 backdrop-blur-xl p-8 rounded-3xl border border-white/20 group"
+                className="bg-white/10 dark:bg-gray-800/10 backdrop-blur-xl p-8 rounded-3xl border border-white/20 dark:border-gray-700/20 group"
               >
                 <h3 className="text-3xl font-bold text-white mb-6 group-hover:text-purple-300 transition-colors">
                   Discutons de votre projet

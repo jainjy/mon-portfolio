@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <>
     {/* Footer */}
-    <footer className="bg-gradient-to-r from-gray-900 to-black text-center py-12 border-t border-gray-800 relative overflow-hidden">
+    <footer className="bg-gradient-to-r from-gray-900 to-black dark:from-black dark:to-gray-900 text-center py-12 border-t border-gray-800 dark:border-gray-700 relative overflow-hidden">
     <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
     <div className="max-w-6xl mx-auto px-4 relative z-10">
       <div className="mb-8">
@@ -35,15 +35,15 @@ export default function Footer() {
             whileHover={{ color: "#a855f7" }}
             transition={{ duration: 0.3 }}
             href={link.href}
-            className="text-gray-400 cursor-pointer"
+            className="text-gray-400 dark:text-gray-500 cursor-pointer"
           >
             {link.name}
           </motion.a>
         ))}
       </div>
 
-      <div className="border-t border-gray-800 pt-8">
-        <p className="text-gray-500 mb-2">
+      <div className="border-t border-gray-800 dark:border-gray-700 pt-8">
+        <p className="text-gray-500 dark:text-gray-400 mb-2">
           © 2025 RAMAMONJISOA Hoelatiana Andrianina. Tous droits réservés.
         </p>
       </div>

@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaSun, FaMoon } from "react-icons/fa";
+import { useTheme } from "../context/ThemeContext";
 
 // Composant Navbar amélioré avec animations Framer Motion
 const Navbar = () => {
@@ -9,6 +10,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isHome, setIsHome] = useState(true);
   const navRef = useRef(null);
+  const { isDark, setIsDark } = useTheme();
 
   const sections = ["#home", "#about", "#skills", "#projects", "#contact"];
 
@@ -69,7 +71,7 @@ const Navbar = () => {
       transition={{ duration: 0.7, ease: "easeOut" }}
       className={`fixed w-full z-[99] transition-all duration-700 ${
         scrolled 
-          ? "bg-white/90 backdrop-blur-xl shadow-2xl border-b border-purple-100/50" 
+          ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl shadow-2xl border-b border-purple-100/50 dark:border-purple-900/50" 
           : "bg-transparent"
       }`}
     >
@@ -94,9 +96,11 @@ const Navbar = () => {
                 href={link.href}
                 onClick={() => handleClick(link.href)}
                 className={`relative px-3 py-2 ${
-                  !scrolled && isHome ? 'text-white' : 'text-gray-700'
-                } hover:text-purple-600 transition-all duration-300 group ${
-                  active === link.href ? "text-purple-600 font-semibold" : ""
+                  !scrolled && isHome 
+                    ? 'text-white' 
+                    : 'text-gray-700 dark:text-white'
+                } hover:text-purple-600 dark:hover:text-purple-400 transition-all duration-300 group ${
+                  active === link.href ? "text-purple-600 dark:text-purple-400 font-semibold" : ""
                 }`}
               >
                 {link.name}
@@ -108,7 +112,7 @@ const Navbar = () => {
                   transition={{ duration: 0.5 }}
                 ></motion.span>
                 <motion.span 
-                  className="absolute inset-0 bg-purple-100/20 rounded-lg -z-10"
+                  className="absolute inset-0 bg-purple-100/20 dark:bg-purple-900/20 rounded-lg -z-10"
                   initial={{ scale: 0 }}
                   whileHover={{ scale: 1 }}
                   transition={{ duration: 0.3 }}
@@ -118,20 +122,33 @@ const Navbar = () => {
           ))}
         </ul>
 
-        <div className="md:hidden">
-          <button 
-            onClick={() => setNavOpen(!navOpen)} 
-            className={`focus:outline-none p-2 rounded-lg transition-all duration-300 ${
-              !scrolled && isHome ? 'text-white hover:bg-white/20' : 'text-gray-700 hover:bg-purple-50'
-            }`}
+        <div className="flex items-center">
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={() => setIsDark(!isDark)}
+            className="p-2 rounded-full bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-400 ml-4"
           >
-            <motion.div 
-              animate={{ rotate: navOpen ? 180 : 0 }}
-              transition={{ duration: 0.3 }}
+            {isDark ? <FaSun size={20} /> : <FaMoon size={20} />}
+          </motion.button>
+
+          <div className="md:hidden">
+            <button 
+              onClick={() => setNavOpen(!navOpen)} 
+              className={`focus:outline-none p-2 rounded-lg transition-all duration-300 ${
+                !scrolled && isHome 
+                  ? 'text-white hover:bg-white/20' 
+                  : 'text-gray-700 dark:text-white hover:bg-purple-50 dark:hover:bg-purple-900/20'
+              }`}
             >
-              {navOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-            </motion.div>
-          </button>
+              <motion.div 
+                animate={{ rotate: navOpen ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {navOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+              </motion.div>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -142,7 +159,7 @@ const Navbar = () => {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: "-100%", opacity: 0 }}
             transition={{ duration: 0.5 }}
-            className="md:hidden fixed top-16 left-0 w-full bg-white/95 backdrop-blur-xl shadow-2xl"
+            className="md:hidden fixed top-16 left-0 w-full bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl shadow-2xl"
           >
             <ul className="flex flex-col items-center py-6 space-y-4">
               {links.map((link, index) => (
@@ -155,10 +172,10 @@ const Navbar = () => {
                   <a
                     href={link.href}
                     onClick={() => handleClick(link.href)}
-                    className={`text-gray-700 px-6 py-3 rounded-full transition-all duration-300 ${
+                    className={`text-gray-700 dark:text-white px-6 py-3 rounded-full transition-all duration-300 ${
                       active === link.href 
-                        ? "bg-gradient-to-r from-purple-100 to-pink-100 text-purple-600 font-semibold" 
-                        : "hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 hover:text-purple-600"
+                        ? "bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900 dark:to-pink-900 text-purple-600 dark:text-purple-400 font-semibold" 
+                        : "hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 dark:hover:from-purple-900/50 dark:hover:to-pink-900/50 hover:text-purple-600 dark:hover:text-purple-400"
                     }`}
                   >
                     {link.name}

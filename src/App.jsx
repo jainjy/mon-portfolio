@@ -9,6 +9,7 @@ import { Projects } from "./components/sections/Projects";
 import { Skills } from "./components/sections/Skills";
 import { Hero } from "./components/sections/Hero";
 import { About } from "./components/sections/About";
+import { ThemeProvider } from "./context/ThemeContext";
 
 function App() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -77,38 +78,39 @@ function App() {
     },
   };
 
-
   return (
-    <div className="scroll-smooth font-sans text-gray-800 overflow-x-hidden">
-      {/* Curseur personnalisé */}
-      <motion.div
-        ref={cursorRef}
-        className="fixed top-0 left-0 rounded-full pointer-events-none z-[1000]"
-        variants={cursorVariants}
-        animate={cursorVariant}
-      />
-
-      {/* Barre de progression */}
-      <div className="fixed top-0 left-0 w-full h-1 bg-gray-200 z-[100]">
+    <ThemeProvider>
+      <div className="scroll-smooth font-sans text-gray-800 dark:text-gray-200 overflow-x-hidden bg-white dark:bg-gray-900 transition-colors duration-300">
+        {/* Curseur personnalisé */}
         <motion.div
-          className="h-full bg-gradient-to-r from-purple-600 to-pink-600"
-          style={{ width: `${scrollProgress}%` }}
-          initial={{ width: 0 }}
-          animate={{ width: `${scrollProgress}%` }}
-          transition={{ duration: 0.3 }}
-        ></motion.div>
+          ref={cursorRef}
+          className="fixed top-0 left-0 rounded-full pointer-events-none z-[1000]"
+          variants={cursorVariants}
+          animate={cursorVariant}
+        />
+
+        {/* Barre de progression */}
+        <div className="fixed top-0 left-0 w-full h-1 bg-gray-200 z-[100]">
+          <motion.div
+            className="h-full bg-gradient-to-r from-purple-600 to-pink-600"
+            style={{ width: `${scrollProgress}%` }}
+            initial={{ width: 0 }}
+            animate={{ width: `${scrollProgress}%` }}
+            transition={{ duration: 0.3 }}
+          ></motion.div>
+        </div>
+
+        <Navbar />
+        <Hero mousePosition={mousePosition}/>
+        <About/>
+        <Skills/>
+        <Projects/>
+        <Contact/>
+
+        {/* Footer */}
+        <Footer/>
       </div>
-
-      <Navbar />
-      <Hero mousePosition={mousePosition}/>
-      <About/>
-      <Skills/>
-      <Projects/>
-      <Contact/>
-
-      {/* Footer */}
-      <Footer/>
-    </div>
+    </ThemeProvider>
   );
 }
 

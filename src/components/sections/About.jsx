@@ -63,9 +63,9 @@ export const About = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
-        className="min-h-screen flex items-center justify-center bg-white px-4 py-20 relative"
+        className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4 py-20 relative"
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-50/50 to-pink-50/50"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-50/50 to-pink-50/50 dark:from-purple-900/50 dark:to-pink-900/50"></div>
 
         <div className="max-w-6xl mx-auto relative z-10">
           <motion.div
@@ -113,7 +113,7 @@ export const About = () => {
                   whileHover={{ scale: 1.05 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.2 }}
-                  className={`bg-gradient-to-br ${item.bg} p-8 rounded-3xl shadow-xl border ${item.border}`}
+                  className={`bg-gradient-to-br ${item.bg} dark:from-purple-900 dark:to-pink-900 p-8 rounded-3xl shadow-xl border ${item.border}`}
                 >
                   <div className="flex items-center mb-6">
                     <div
@@ -121,11 +121,11 @@ export const About = () => {
                     >
                       <item.icon className="text-white text-2xl" />
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-800">
+                    <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
                       {item.title}
                     </h3>
                   </div>
-                  <p className="text-gray-600 leading-relaxed text-lg">
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
                     {item.description}
                   </p>
                 </motion.div>

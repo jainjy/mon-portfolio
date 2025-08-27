@@ -20,7 +20,7 @@ export const Skills = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
-        className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-purple-50  py-10 relative w-full"
+        className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 py-10 relative w-full"
       >
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
 
@@ -50,9 +50,9 @@ export const Skills = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: catIndex * 0.1 }}
-                className="bg-white/80 backdrop-blur-sm p-8 rounded-3xl shadow-lg border border-gray-100"
+                className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-8 rounded-3xl shadow-lg border border-gray-100 dark:border-gray-700"
               >
-                <h3 className="text-3xl font-bold mb-8 text-gray-800 flex items-center gap-3">
+                <h3 className="text-3xl font-bold mb-8 text-gray-800 dark:text-gray-100 flex items-center gap-3">
                   <span className="bg-gradient-to-r from-purple-600 to-pink-600 text-white p-3 rounded-xl">
                     {category.title.includes("Langages") && <FaCode />}
                     {category.title.includes("Frontend") && <FaLaptopCode />}
@@ -73,7 +73,7 @@ export const Skills = () => {
                       whileHover={{ scale: 1.05 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.3, delay: skillIndex * 0.05 }}
-                      className="group bg-gradient-to-br from-white to-gray-50 p-6 rounded-2xl shadow-md border border-gray-200 relative overflow-hidden text-center"
+                      className="group bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-700 p-6 rounded-2xl shadow-md border border-gray-200 dark:border-gray-600 relative overflow-hidden text-center"
                     >
                       <motion.div
                         className="absolute inset-0 bg-gradient-to-r from-purple-400/10 to-pink-400/10 scale-x-0 origin-left"
@@ -93,7 +93,7 @@ export const Skills = () => {
                         ></motion.div>
                       </div>
 
-                      <h4 className="text-lg font-bold text-gray-800 group-hover:text-purple-600 transition-colors duration-300">
+                      <h4 className="text-lg font-bold text-gray-800 dark:text-gray-100 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-300">
                         {skill.name}
                       </h4>
                     </motion.div>

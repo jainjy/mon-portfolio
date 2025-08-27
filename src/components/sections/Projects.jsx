@@ -19,9 +19,9 @@ export const Projects = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8 }}
-      className="min-h-screen flex items-center justify-center bg-white px-4 py-20 relative"
+      className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4 py-20 relative"
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-50/30 to-pink-50/30"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-50/30 to-pink-50/30 dark:from-purple-900/30 dark:to-pink-900/30"></div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Title */}
@@ -54,7 +54,7 @@ export const Projects = () => {
                 whileHover={{ scale: 1.05 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: index * 0.2 }}
-                className="group bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 relative"
+                className="group bg-white dark:bg-gray-800 rounded-3xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700 relative"
               >
                 {/* Image/Emoji zone */}
                 <div
@@ -101,10 +101,10 @@ export const Projects = () => {
                 </div>
 
                 <div className="p-8">
-                  <h3 className="text-2xl font-bold mb-4 text-gray-800 group-hover:text-purple-600 transition-colors duration-300">
+                  <h3 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-100 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-300">
                     {project.title}
                   </h3>
-                  <p className="text-gray-600 mb-6 leading-relaxed text-base">
+                  <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed text-base">
                     {project.description}
                   </p>
 
@@ -150,7 +150,7 @@ export const Projects = () => {
           <div className="text-center mt-10">
             <button
               onClick={handleSeeMore}
-              className="px-8 py-3 bg-purple-600 text-white font-semibold rounded-xl hover:bg-purple-700 transition-colors"
+              className="px-8 py-3 bg-purple-600 dark:bg-purple-500 text-white font-semibold rounded-xl hover:bg-purple-700 dark:hover:bg-purple-600 transition-colors"
             >
               Voir plus
             </button>

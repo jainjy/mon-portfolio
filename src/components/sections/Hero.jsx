@@ -142,7 +142,8 @@ export const Hero = ({mousePosition}) => {
             </motion.a>
 
             <motion.a
-              href="#"
+              href="/CV_RAMAMONJISOA_Hoelatiana_ Andrianina.pdf"
+              download={"CV_RAMAMONJISOA_Hoelatiana_ Andrianina"}
               whileHover={{
                 scale: 1.1,
                 backgroundColor: "rgba(236, 72, 153, 0.2)",

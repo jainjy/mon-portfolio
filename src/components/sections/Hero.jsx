@@ -1,25 +1,12 @@
-import { motion } from 'framer-motion'
-import React from 'react'
+import { motion } from "framer-motion";
+import React from "react";
 import ParticleBackground from "../ParticleBackground";
-import ProfileImage from '../ProfileImage';
-import AnimatedText from '../AnimatedText';
-import {
-    FaGithub,
-    FaArrowDown,
-    FaCode,
-    FaRocket,
-    FaHeart,
-    FaEye,
-    FaDownload,
-    FaGraduationCap,
-    FaLaptopCode,
-    FaDatabase,
-    FaServer,
-  } from "react-icons/fa";
-export const Hero = ({mousePosition}) => {
+import ProfileImage from "../ProfileImage";
+import AnimatedText from "../AnimatedText";
+import { FaArrowDown, FaRocket, FaEye, FaDownload } from "react-icons/fa";
+export const Hero = ({ mousePosition }) => {
   return (
     <>
-    
       {/* Hero Section */}
       <motion.section
         id="home"
@@ -160,12 +147,12 @@ export const Hero = ({mousePosition}) => {
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
-            className="text-purple-300"
+            className="flex justify-center mt-10 mb-2 text-purple-300" // centrage et marge top
           >
-            <FaArrowDown size={24} />
+            <FaArrowDown size={48} /> {/* taille plus grande */}
           </motion.div>
         </div>
       </motion.section>
-</>
-  )
-}
+    </>
+  );
+};

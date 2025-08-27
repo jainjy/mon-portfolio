@@ -4,7 +4,6 @@ import {
   FaJsSquare,
   FaReact,
   FaGithub,
-  FaCode,
   FaGraduationCap,
   FaMobile,
   FaGamepad,
@@ -16,6 +15,7 @@ import {
   FaServer,
   FaMusic,
 } from "react-icons/fa";
+import { FaGolang } from "react-icons/fa6";
 import {
   SiPython,
   SiSpringboot,
@@ -28,6 +28,9 @@ import {
   SiBootstrap,
   SiTailwindcss,
   SiPhp,
+  SiDotnet,
+  SiSymfony,
+  SiC,
 } from "react-icons/si";
 
   // Compétences organisées par catégorie
@@ -37,10 +40,10 @@ import {
       items: [
         { name: "Python", icon: SiPython, color: "text-blue-500" },
         { name: "Java", icon: FaJava, color: "text-red-500" },
-        { name: "Go", icon: FaCode, color: "text-cyan-500" },
+        { name: "Go", icon: FaGolang, color: "text-cyan-500" },
         { name: "JavaScript", icon: FaJsSquare, color: "text-yellow-500" },
         { name: "HTML/CSS", icon: FaHtml5, color: "text-orange-500" },
-        { name: "C#", icon: FaCode, color: "text-purple-500" },
+        { name: "C#", icon:SiC, color: "text-purple-500" },
         { name: "PHP", icon: SiPhp, color: "text-blue-600" },
       ],
     },
@@ -58,9 +61,9 @@ import {
       items: [
         { name: "Spring Boot", icon: SiSpringboot, color: "text-green-500" },
         { name: "Laravel", icon: FaLaravel, color: "text-red-400" },
-        { name: "ASP.NET", icon: FaCode, color: "text-blue-600" },
+        { name: "ASP.NET", icon: SiDotnet, color: "text-blue-600" },
         { name: "Node.js", icon: FaNodeJs, color: "text-green-600" },
-        { name: "Symfony", icon: FaCode, color: "text-gray-600" },
+        { name: "Symfony", icon: SiSymfony, color: "text-gray-600" },
       ],
     },
     {
@@ -95,8 +98,8 @@ import {
         "Plateforme e-learning interactive avec cours en ligne, évaluations certifiantes, visioconférence, suivi personnalisé, messagerie avec partage de fichiers et certificats automatiques vérifiables.",
       gradient: "from-purple-500 via-pink-500 to-red-500",
       tech: ["ASP.NET", "React", "PostgreSQL", "Tailwind CSS"],
-      image: "🎓",
-      github: "#",
+      image: "/images/ebosy.png",
+      github: "https://github.com/jainjy/e-bosy-app", 
     },
     {
       title: "TAXIII - Commande de taxi",
@@ -105,7 +108,7 @@ import {
       gradient: "from-blue-500 via-purple-500 to-indigo-500",
       tech: ["React Native", "Node.js", "MongoDB"],
       image: "🚖",
-      github: "#",
+      github: "https://github.com/jainjy/TAXIII",
     },
     {
       title: "Application de gestion de projet",
@@ -114,7 +117,7 @@ import {
       gradient: "from-green-500 via-teal-500 to-blue-500",
       tech: ["Java", "Spring Boot", "MySQL", "Bootstrap", "JavaScript"],
       image: "📊",
-      github: "#",
+      github: "https://github.com/jainjy/ProjetJavaWeb",
     },
     {
       title: "Music Player - E-Heno",
@@ -123,7 +126,7 @@ import {
       gradient: "from-yellow-500 via-orange-500 to-red-500",
       tech: ["Python"],
       image: "🎵",
-      github: "#",
+      github: "https://github.com/jainjy/E_Heno_music_player",
     },
     {
       title: "Application de santé et Bien-Etre",
@@ -132,7 +135,7 @@ import {
       gradient: "from-pink-500 via-red-500 to-purple-500",
       tech: ["Laravel", "MySQL", "React"],
       image: "🏥",
-      github: "#",
+      github: "https://github.com/jainjy/SanteEtBienEtre",
     },
     {
       title: "Fanorona",
@@ -141,7 +144,7 @@ import {
       gradient: "from-indigo-500 via-purple-500 to-pink-500",
       tech: ["Python"],
       image: "🎮",
-      github: "#",
+      github: "https://github.com/jainjy/fanorona",
     },
     {
       title: "Gestion Personnel",
@@ -150,7 +153,7 @@ import {
       gradient: "from-yellow-500 to-amber-500",
       tech: ["Python", "MySQL"],
       image: "👥",
-      github: "#",
+      github: "https://github.com/jainjy/gestionPersonnel",
     },
     {
       title: "Jeu du Serpent",
@@ -159,7 +162,7 @@ import {
       gradient: "from-emerald-500 to-green-600",
       tech: ["Python"],
       image: "🐍",
-      github: "#",
+      github: "https://github.com/jainjy/SnakeGame",
     },
     {
       title: "gestion de restaurant",
@@ -168,7 +171,15 @@ import {
       gradient: "from-blue-500 to-green-600",
       tech: ["Java Swing","Mysq"],
       image: "🍽️",
-      github: "#",
+      github: "https://github.com/jainjy/ApplicationRestaurant",
+    },  {
+      title: "Sudoku",
+      description:
+        "Implémentation d’un jeu de Sudoku avec interface graphique et résolution automatique.",
+      gradient: "from-purple-400 via-indigo-500 to-blue-500",
+      tech: ["Python"],
+      image: "🔢",
+      github: "https://github.com/jainjy/sudoku",
     },
   ];
 

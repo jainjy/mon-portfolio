@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion'
 import React from 'react'
-import ParticleBackground from "./ParticleBackground";
-import ProfileImage from './ProfileImage';
-import AnimatedText from './AnimatedText';
+import ParticleBackground from "../ParticleBackground";
+import ProfileImage from '../ProfileImage';
+import AnimatedText from '../AnimatedText';
 import {
     FaGithub,
     FaArrowDown,

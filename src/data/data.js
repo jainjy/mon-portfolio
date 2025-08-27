@@ -1,30 +1,18 @@
 
 import {
-  FaBars,
-  FaTimes,
   FaHtml5,
-  FaCss3Alt,
   FaJsSquare,
   FaReact,
   FaGithub,
-  FaLinkedin,
-  FaArrowDown,
   FaCode,
-  FaRocket,
-  FaHeart,
-  FaEye,
-  FaDownload,
   FaGraduationCap,
   FaMobile,
-  FaLaptopCode,
   FaGamepad,
   FaFilm,
   FaBook,
-  FaPython,
   FaJava,
   FaLaravel,
   FaNodeJs,
-  FaDatabase,
   FaServer,
   FaMusic,
 } from "react-icons/fa";
@@ -167,10 +155,19 @@ import {
     {
       title: "Jeu du Serpent",
       description:
-        "Jeu classique du serpent avec gestion des collisions et des scores.",
+        "Une application desktop de gestion pour restaurants, permettant de gérer les commandes, les tables avec une interface graphique construite en Java Swing",
       gradient: "from-emerald-500 to-green-600",
       tech: ["Python"],
       image: "🐍",
+      github: "#",
+    },
+    {
+      title: "gestion de restaurant",
+      description:
+        "Jeu classique du serpent avec gestion des collisions et des scores.",
+      gradient: "from-blue-500 to-green-600",
+      tech: ["Java Swing","Mysq"],
+      image: "🍽️",
       github: "#",
     },
   ];

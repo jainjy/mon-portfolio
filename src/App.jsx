@@ -3,12 +3,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer"
+import Footer from "./components/sections/Footer"
 import { Contact } from "./components/sections/Contact";
 import { Projects } from "./components/sections/Projects";
 import { Skills } from "./components/sections/Skills";
-import { Hero } from "./components/Hero";
-import { About } from "./components/About";
+import { Hero } from "./components/sections/Hero";
+import { About } from "./components/sections/About";
 
 function App() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });

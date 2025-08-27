@@ -1,5 +1,5 @@
 import React from "react";
-import data from "../data/data";
+import data from "../../data/data";
 import { motion } from "framer-motion";
 import { FaCode, FaHeart, FaGraduationCap } from "react-icons/fa";
 const FormationXp=()=>{

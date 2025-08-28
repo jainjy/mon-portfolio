@@ -2,9 +2,15 @@ import { motion } from "framer-motion";
 import React, { useState } from "react";
 import data from "../../data/data";
 import { FaGithub, FaCode } from "react-icons/fa";
+import { useLanguage } from "../../context/LanguageContext";
+import { translations } from "../../data/translations";
+import ParticleBackground from "../ParticleBackground";
 
 export const Projects = () => {
-  const projects = data.projects;
+  const { language } = useLanguage();
+  const t = translations[language];
+
+  const projects = data.projects[language]; // Utiliser les projets selon la langue
   const initialCount = 3; // nombre de projets affichés initialement
   const [visibleCount, setVisibleCount] = useState(initialCount);
 
@@ -21,6 +27,7 @@ export const Projects = () => {
       transition={{ duration: 0.8 }}
       className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4 py-20 relative"
     >
+      <ParticleBackground density={120} />
       <div className="absolute inset-0 bg-gradient-to-br from-purple-50/30 to-pink-50/30 dark:from-purple-900/30 dark:to-pink-900/30"></div>
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -33,11 +40,11 @@ export const Projects = () => {
           className="text-center mb-16"
         >
           <h2 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
-            Mes projets
+            {t.projects.title}
           </h2>
           <div className="w-32 h-1 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 mx-auto mb-8 rounded-full"></div>
           <p className="text-xl text-gray-600">
-            Découvrez mes réalisations les plus récentes
+            {t.projects.subtitle}
           </p>
         </motion.div>
 
@@ -134,7 +141,7 @@ export const Projects = () => {
                       className="flex items-center gap-2 text-purple-600 hover:text-purple-800 font-medium px-4 py-2 rounded-lg hover:bg-purple-50 cursor-pointer"
                     >
                       <FaGithub className="animate-pulse" />
-                      GitHub
+                      {t.projects.viewGithub}
                     </motion.a>
                   </div>
                 </div>
@@ -152,7 +159,7 @@ export const Projects = () => {
               onClick={handleSeeMore}
               className="px-8 py-3 bg-purple-600 dark:bg-purple-500 text-white font-semibold rounded-xl hover:bg-purple-700 dark:hover:bg-purple-600 transition-colors"
             >
-              Voir plus
+              {t.projects.seeMore}
             </button>
           </div>
         )}

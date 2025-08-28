@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import { FaRocket } from 'react-icons/fa';
+import { translations } from '../data/translations';
+import { useLanguage } from '../context/LanguageContext';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +12,8 @@ const ContactForm = () => {
     subject: '',
     message: '',
   });
+    const { language } = useLanguage();
+    const t = translations[language];
   const [status, setStatus] = useState('');
 
   const handleChange = (e) => {
@@ -51,7 +55,7 @@ const ContactForm = () => {
             transition={{ duration: 0.3 }}
             type="text"
             name="name"
-            placeholder="Votre nom"
+            placeholder={t.contact.form.name}
             value={formData.name}
             onChange={handleChange}
             required
@@ -62,7 +66,7 @@ const ContactForm = () => {
             transition={{ duration: 0.3 }}
             type="email"
             name="email"
-            placeholder="Votre email"
+            placeholder={t.contact.form.email}
             value={formData.email}
             onChange={handleChange}
             required
@@ -75,7 +79,7 @@ const ContactForm = () => {
           transition={{ duration: 0.3 }}
           type="text"
           name="subject"
-          placeholder="Sujet"
+          placeholder={t.contact.form.subject}
           value={formData.subject}
           onChange={handleChange}
           required
@@ -86,7 +90,7 @@ const ContactForm = () => {
           whileFocus={{ backgroundColor: 'rgba(255,255,255,0.15)', ringColor: 'rgba(168,85,247,1)' }}
           transition={{ duration: 0.3 }}
           name="message"
-          placeholder="Décrivez votre projet..."
+          placeholder={t.contact.form.message}
           rows={6}
           value={formData.message}
           onChange={handleChange}
@@ -107,7 +111,7 @@ const ContactForm = () => {
           ></motion.div>
           <div className="relative z-10 flex items-center justify-center gap-3">
             <FaRocket />
-            Envoyer le message
+            {t.contact.form.send}
           </div>
         </motion.button>
       </form>

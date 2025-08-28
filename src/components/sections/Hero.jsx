@@ -4,7 +4,13 @@ import ParticleBackground from "../ParticleBackground";
 import ProfileImage from "../ProfileImage";
 import AnimatedText from "../AnimatedText";
 import { FaArrowDown, FaRocket, FaEye, FaDownload } from "react-icons/fa";
+import { useLanguage } from "../../context/LanguageContext";
+import { translations } from "../../data/translations";
+
 export const Hero = ({ mousePosition }) => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   return (
     <>
       {/* Hero Section */}
@@ -62,7 +68,7 @@ export const Hero = ({ mousePosition }) => {
         <div className="relative z-10 max-w-5xl mx-auto mt-16">
           <ProfileImage />
           <AnimatedText
-            text="Bonjours, je suis"
+            text={t.hero.greeting}
             className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent"
           />
 
@@ -78,7 +84,7 @@ export const Hero = ({ mousePosition }) => {
             transition={{ duration: 0.8 }}
             className="text-xl md:text-2xl mb-8 text-purple-100 max-w-3xl mx-auto leading-relaxed"
           >
-            Développeur Web passionné & Créateur d'applications innovantes
+            {t.hero.role}
           </motion.p>
           <motion.p
             initial={{ opacity: 0, y: 50 }}
@@ -86,8 +92,7 @@ export const Hero = ({ mousePosition }) => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-lg text-purple-200/80 mb-8"
           >
-            Je transforme vos idées en réalité digitale avec créativité et
-            innovation
+            {t.hero.description}
           </motion.p>
 
           <motion.div
@@ -111,7 +116,7 @@ export const Hero = ({ mousePosition }) => {
                 transition={{ duration: 0.5 }}
               ></motion.div>
               <FaRocket className="group-hover:animate-bounce relative z-10" />
-              <span className="relative z-10">Me contacter</span>
+              <span className="relative z-10">{t.hero.contact}</span>
             </motion.a>
 
             <motion.a
@@ -125,12 +130,12 @@ export const Hero = ({ mousePosition }) => {
               className="border-2 border-purple-400 text-purple-400 px-10 py-4 rounded-full flex items-center gap-3 group cursor-pointer"
             >
               <FaEye className="group-hover:animate-pulse" />
-              En savoir plus
+              {t.hero.more}
             </motion.a>
 
             <motion.a
-              href="/CV_RAMAMONJISOA_Hoelatiana_ Andrianina.pdf"
-              download={"CV_RAMAMONJISOA_Hoelatiana_ Andrianina"}
+              href="/CV.pdf"
+              download
               whileHover={{
                 scale: 1.1,
                 backgroundColor: "rgba(236, 72, 153, 0.2)",
@@ -140,7 +145,7 @@ export const Hero = ({ mousePosition }) => {
               className="border-2 border-pink-400 text-pink-400 px-10 py-4 rounded-full flex items-center gap-3 group cursor-pointer"
             >
               <FaDownload className="group-hover:animate-bounce" />
-              Télécharger CV
+              {t.hero.download}
             </motion.a>
           </motion.div>
 

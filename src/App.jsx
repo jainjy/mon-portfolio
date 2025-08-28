@@ -1,20 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
-
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaArrowUp } from "react-icons/fa";
 
 import Navbar from "./components/Navbar";
-import Footer from "./components/sections/Footer"
+import Footer from "./components/sections/Footer";
 import { Contact } from "./components/sections/Contact";
 import { Projects } from "./components/sections/Projects";
 import { Skills } from "./components/sections/Skills";
 import { Hero } from "./components/sections/Hero";
 import { About } from "./components/sections/About";
 import { ThemeProvider } from "./context/ThemeContext";
+import { LanguageProvider } from "./context/LanguageContext";
 
 function App() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [scrollProgress, setScrollProgress] = useState(0);
   const [cursorVariant, setCursorVariant] = useState("default");
+  const [showScrollTop, setShowScrollTop] = useState(false);
   const cursorRef = useRef(null);
 
   useEffect(() => {
@@ -30,6 +32,7 @@ function App() {
         document.documentElement.scrollHeight - window.innerHeight;
       const progress = (window.scrollY / totalHeight) * 100;
       setScrollProgress(progress);
+      setShowScrollTop(window.scrollY > 300);
     };
 
     const handleMouseEnter = (e) => {
@@ -78,38 +81,64 @@ function App() {
     },
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <ThemeProvider>
-      <div className="scroll-smooth font-sans text-gray-800 dark:text-gray-200 overflow-x-hidden bg-white dark:bg-gray-900 transition-colors duration-300">
-        {/* Curseur personnalisé */}
-        <motion.div
-          ref={cursorRef}
-          className="fixed top-0 left-0 rounded-full pointer-events-none z-[1000]"
-          variants={cursorVariants}
-          animate={cursorVariant}
-        />
-
-        {/* Barre de progression */}
-        <div className="fixed top-0 left-0 w-full h-1 bg-gray-200 z-[100]">
+      <LanguageProvider>
+        <div className="scroll-smooth font-sans text-gray-800 dark:text-gray-200 overflow-x-hidden bg-white dark:bg-gray-900 transition-colors duration-300">
+          {/* Curseur personnalisé */}
           <motion.div
-            className="h-full bg-gradient-to-r from-purple-600 to-pink-600"
-            style={{ width: `${scrollProgress}%` }}
-            initial={{ width: 0 }}
-            animate={{ width: `${scrollProgress}%` }}
-            transition={{ duration: 0.3 }}
-          ></motion.div>
+            ref={cursorRef}
+            className="fixed top-0 left-0 rounded-full pointer-events-none z-[1000]"
+            variants={cursorVariants}
+            animate={cursorVariant}
+          />
+
+          {/* Barre de progression */}
+          <div className="fixed top-0 left-0 w-full h-1 bg-gray-200 z-[100]">
+            <motion.div
+              className="h-full bg-gradient-to-r from-purple-600 to-pink-600"
+              style={{ width: `${scrollProgress}%` }}
+              initial={{ width: 0 }}
+              animate={{ width: `${scrollProgress}%` }}
+              transition={{ duration: 0.3 }}
+            ></motion.div>
+          </div>
+
+          <AnimatePresence>
+            {showScrollTop && (
+              <motion.button
+                onClick={scrollToTop}
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.5 }}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className="fixed bottom-8 right-8 p-4 rounded-full bg-purple-600/70 text-white shadow-lg cursor-pointer z-50 hover:bg-purple-700 transition-colors duration-300"
+              >
+                <FaArrowUp className="text-xl" />
+                <div className="absolute inset-0 rounded-full bg-purple-400 animate-ping opacity-25"></div>
+              </motion.button>
+            )}
+          </AnimatePresence>
+
+          <Navbar />
+          <Hero mousePosition={mousePosition} />
+          <About />
+          <Skills />
+          <Projects />
+          <Contact />
+
+          {/* Footer */}
+          <Footer />
         </div>
-
-        <Navbar />
-        <Hero mousePosition={mousePosition}/>
-        <About/>
-        <Skills/>
-        <Projects/>
-        <Contact/>
-
-        {/* Footer */}
-        <Footer/>
-      </div>
+      </LanguageProvider>
     </ThemeProvider>
   );
 }

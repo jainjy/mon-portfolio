@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 import ParticleBackground from "../ParticleBackground";
 import React from 'react'
+import { useLanguage } from "../../context/LanguageContext";
+import { translations } from "../../data/translations";
 
 import {
     HiOutlineMail,
@@ -14,6 +16,9 @@ import {
 import ContactForm from '../ContactForm';
   
 export const Contact = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   return (
     <>
         {/* Contact Section */}
@@ -58,11 +63,11 @@ export const Contact = () => {
             className="text-center mb-16"
           >
             <h2 className="text-5xl md:text-7xl font-bold mb-6 text-white">
-              Contactez-moi
+              {t.contact.title}
             </h2>
             <div className="w-32 h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 mx-auto mb-8 rounded-full"></div>
             <p className="text-xl text-purple-200">
-              Créons ensemble quelque chose d'extraordinaire
+              {t.contact.subtitle}
             </p>
           </motion.div>
 
@@ -77,12 +82,10 @@ export const Contact = () => {
                 className="bg-white/10 dark:bg-gray-800/10 backdrop-blur-xl p-8 rounded-3xl border border-white/20 dark:border-gray-700/20 group"
               >
                 <h3 className="text-3xl font-bold text-white mb-6 group-hover:text-purple-300 transition-colors">
-                  Discutons de votre projet
+                  {t.contact.discussion.title}
                 </h3>
                 <p className="text-purple-200 leading-relaxed text-lg mb-6">
-                  Vous avez une idée géniale ? Un projet ambitieux ? Je serais
-                  ravi de discuter avec vous et de voir comment nous pouvons
-                  créer quelque chose d'exceptionnel ensemble.
+                  {t.contact.discussion.description}
                 </p>
                 <div className="flex items-center gap-4 text-purple-300">
                   <motion.div
@@ -90,7 +93,7 @@ export const Contact = () => {
                     animate={{ scale: [1, 1.2, 1] }}
                     transition={{ duration: 1.5, repeat: Infinity }}
                   ></motion.div>
-                  <span>Disponible pour de nouveaux projets</span>
+                  <span>{t.contact.discussion.status}</span>
                 </div>
               </motion.div>
 
@@ -137,7 +140,7 @@ export const Contact = () => {
                 className="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/10"
               >
                 <h4 className="text-xl font-bold text-white mb-4">
-                  Informations de contact
+                  {t.contact.info.title}
                 </h4>
                 <div className="space-y-3 text-purple-200">
                   <p className="flex items-center gap-2">
@@ -156,7 +159,7 @@ export const Contact = () => {
               </motion.div>
             </div>
 
-            <ContactForm />
+          <ContactForm/>
           </div>
         </div>
       </motion.section></>

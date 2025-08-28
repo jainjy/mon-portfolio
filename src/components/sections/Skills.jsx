@@ -8,7 +8,13 @@ import {
   FaServer,
 } from "react-icons/fa";
 import { FaGear, FaGears } from "react-icons/fa6";
+import { useLanguage } from "../../context/LanguageContext";
+import { translations } from "../../data/translations";
+import ParticleBackground from "../ParticleBackground";
+
 export const Skills = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
 
   const skillsCategories = data.skillsCategories;
   return (
@@ -22,6 +28,7 @@ export const Skills = () => {
         transition={{ duration: 0.8 }}
         className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 py-10 relative w-full"
       >
+        <ParticleBackground density={120} />
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
 
         <div className="w-full relative z-10 mx-10">
@@ -33,11 +40,11 @@ export const Skills = () => {
             className="text-center mb-16"
           >
             <h2 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
-              Mes compétences
+              {t.skills.title}
             </h2>
             <div className="w-32 h-1 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 mx-auto mb-8 rounded-full"></div>
             <p className="text-xl text-gray-600">
-              Technologies que je maîtrise avec passion
+              {t.skills.subtitle}
             </p>
           </motion.div>
 
@@ -61,7 +68,7 @@ export const Skills = () => {
                     {category.title.includes("Bases") && <FaDatabase />}
                     {category.title.includes("Outils") && <FaGear />}
                   </span>
-                  {category.title}
+                  {t.skills.categories[category.key]}
                 </h3>
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">

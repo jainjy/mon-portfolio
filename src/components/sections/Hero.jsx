@@ -96,58 +96,68 @@ export const Hero = ({ mousePosition }) => {
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12"
-          >
-            <motion.a
-              href="#contact"
-              whileHover={{
-                scale: 1.1,
-                boxShadow: "0px 0px 20px rgba(168, 85, 247, 0.5)",
-              }}
-              transition={{ duration: 0.5 }}
-              className="group bg-gradient-to-r from-purple-600 to-pink-600 text-white px-10 py-4 rounded-full flex items-center gap-3 relative overflow-hidden cursor-pointer"
-            >
-              <motion.div
-                className="absolute inset-0 bg-white/20 scale-x-0 origin-left"
-                whileHover={{ scaleX: 1 }}
-                transition={{ duration: 0.5 }}
-              ></motion.div>
-              <FaRocket className="group-hover:animate-bounce relative z-10" />
-              <span className="relative z-10">{t.hero.contact}</span>
-            </motion.a>
+  initial={{ opacity: 0, y: 50 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8, delay: 0.4 }}
+  className="flex flex-wrap justify-center items-center gap-4 sm:flex-nowrap mb-12"
+>
+  <motion.a
+    href="#contact"
+    whileHover={{
+      scale: 1.1,
+      boxShadow: "0px 0px 20px rgba(168, 85, 247, 0.5)",
+    }}
+    transition={{ duration: 0.5 }}
+    className="group bg-gradient-to-r from-purple-600 to-pink-600 text-white 
+               px-6 sm:px-10 py-3 sm:py-4 text-sm sm:text-base 
+               rounded-full flex justify-center items-center gap-2 sm:gap-3 
+               relative overflow-hidden cursor-pointer w-[48%] sm:w-auto text-center"
+  >
+    <motion.div
+      className="absolute inset-0 bg-white/20 scale-x-0 origin-left"
+      whileHover={{ scaleX: 1 }}
+      transition={{ duration: 0.5 }}
+    ></motion.div>
+    <FaRocket className="group-hover:animate-bounce relative z-10" />
+    <span className="relative z-10">{t.hero.contact}</span>
+  </motion.a>
 
-            <motion.a
-              href="#about"
-              whileHover={{
-                scale: 1.1,
-                backgroundColor: "rgba(168, 85, 247, 0.2)",
-                color: "#fff",
-              }}
-              transition={{ duration: 0.5 }}
-              className="border-2 border-purple-400 text-purple-400 px-10 py-4 rounded-full flex items-center gap-3 group cursor-pointer"
-            >
-              <FaEye className="group-hover:animate-pulse" />
-              {t.hero.more}
-            </motion.a>
+  <motion.a
+    href="#about"
+    whileHover={{
+      scale: 1.1,
+      backgroundColor: "rgba(168, 85, 247, 0.2)",
+      color: "#fff",
+    }}
+    transition={{ duration: 0.5 }}
+    className="border-2 border-purple-400 text-purple-400 
+               px-6 sm:px-10 py-3 sm:py-4 text-sm sm:text-base
+               rounded-full flex justify-center items-center gap-2 sm:gap-3 
+               group cursor-pointer w-[48%] sm:w-auto text-center"
+  >
+    <FaEye className="group-hover:animate-pulse" />
+    {t.hero.more}
+  </motion.a>
 
-            <motion.a
-              href="/CV.pdf"
-              download
-              whileHover={{
-                scale: 1.1,
-                backgroundColor: "rgba(236, 72, 153, 0.2)",
-                color: "#fff",
-              }}
-              transition={{ duration: 0.5 }}
-              className="border-2 border-pink-400 text-pink-400 px-10 py-4 rounded-full flex items-center gap-3 group cursor-pointer"
-            >
-              <FaDownload className="group-hover:animate-bounce" />
-              {t.hero.download}
-            </motion.a>
-          </motion.div>
+  <motion.a
+    href="/CV.pdf"
+    download
+    whileHover={{
+      scale: 1.1,
+      backgroundColor: "rgba(236, 72, 153, 0.2)",
+      color: "#fff",
+    }}
+    transition={{ duration: 0.5 }}
+    className="border-2 border-pink-400 text-pink-400 
+               px-6 sm:px-10 py-3 sm:py-4 text-sm sm:text-base
+               rounded-full flex justify-center items-center gap-2 sm:gap-3 
+               group cursor-pointer w-[48%] sm:w-auto text-center"
+  >
+    <FaDownload className="group-hover:animate-bounce" />
+    {t.hero.download}
+  </motion.a>
+</motion.div>
+
 
           <motion.div
             animate={{ y: [0, 10, 0] }}

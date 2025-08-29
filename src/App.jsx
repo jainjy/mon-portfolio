@@ -100,15 +100,22 @@ function App() {
             animate={cursorVariant}
           />
 
-          {/* Barre de progression */}
-          <div className="fixed top-0 left-0 w-full h-1 bg-gray-200 z-[100]">
+          {/* Barre de progression modifiée */}
+          <div className="fixed top-0 left-0 w-full h-1 bg-transparent z-[100]">
             <motion.div
-              className="h-full bg-gradient-to-r from-purple-600 to-pink-600"
-              style={{ width: `${scrollProgress}%` }}
+              className="h-full bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500 backdrop-blur-sm"
+              style={{ 
+                width: `${scrollProgress}%`,
+                boxShadow: '0 0 10px rgba(168, 85, 247, 0.5)'
+              }}
               initial={{ width: 0 }}
-              animate={{ width: `${scrollProgress}%` }}
-              transition={{ duration: 0.3 }}
-            ></motion.div>
+              animate={{ 
+                width: `${scrollProgress}%`,
+                transition: { duration: 0.3 }
+              }}
+            >
+              <div className="absolute right-0 top-0 h-full w-5 bg-white/20 blur-sm" />
+            </motion.div>
           </div>
 
           <AnimatePresence>

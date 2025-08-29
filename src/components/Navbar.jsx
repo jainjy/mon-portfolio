@@ -162,11 +162,24 @@ const Navbar = () => {
               >
                 {link.name}
                 <motion.span 
-                  className={`absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600`}
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: active === link.href ? 1 : 0 }}
-                  whileHover={{ scaleX: 1 }}
-                  transition={{ duration: 0.5 }}
+                  className={`absolute bottom-0 left-0 w-full h-0.5 rounded-full bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500`}
+                  initial={{ scaleX: 0, opacity: 0 }}
+                  animate={{ 
+                    scaleX: active === link.href ? 1 : 0,
+                    opacity: active === link.href ? 1 : 0
+                  }}
+                  whileHover={{ 
+                    scaleX: 1, 
+                    opacity: 1,
+                    boxShadow: '0 0 8px rgba(168, 85, 247, 0.5)'
+                  }}
+                  transition={{ 
+                    duration: 0.5,
+                    ease: "easeInOut"
+                  }}
+                  style={{
+                    filter: active === link.href ? 'drop-shadow(0 0 2px rgba(168, 85, 247, 0.5))' : 'none'
+                  }}
                 ></motion.span>
               </a>
             </motion.li>

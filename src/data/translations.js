@@ -13,7 +13,7 @@ export const translations = {
       description: "Je transforme vos idées en réalité digitale avec créativité et innovation",
       contact: "Me contacter",
       more: "En savoir plus",
-      download: "Télécharger CV"
+      download: "Mon CV"
     },
     about: {
       title: "À propos de moi",
@@ -95,7 +95,7 @@ export const translations = {
       description: "I transform your ideas into digital reality with creativity and innovation",
       contact: "Contact Me",
       more: "Learn More",
-      download: "Download CV"
+      download: "My CV"
     },
     about: {
       title: "About Me",

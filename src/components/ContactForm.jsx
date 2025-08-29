@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
-import { FaRocket } from 'react-icons/fa';
+import { FaRocket, FaCheckCircle, FaExclamationTriangle } from 'react-icons/fa';
 import { translations } from '../data/translations';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -14,7 +14,14 @@ const ContactForm = () => {
   });
     const { language } = useLanguage();
     const t = translations[language];
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState(null);
+  const [isSending, setIsSending] = useState(false);
+
+  useEffect(() => {
+    if (!status) return;
+    const tId = setTimeout(() => setStatus(null), 6000);
+    return () => clearTimeout(tId);
+  }, [status]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -22,23 +29,36 @@ const ContactForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsSending(true);
+    setStatus(null);
+
+    const start = Date.now();
+    const minDelay = 800; // avoid spinner flicker
 
     emailjs
       .send(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         formData,
-        import.meta.env.VITE_EMAILJS_USER_ID // Utilise la Public Key
+        import.meta.env.VITE_EMAILJS_USER_ID
       )
-      .then(
-        () => {
-          setStatus('Message envoyé avec succès !');
-          setFormData({ name: '', email: '', subject: '', message: '' });
-        },
-        (error) => {
-          setStatus(`Erreur lors de l'envoi : ${error.text}`);
-        }
-      );
+      .then(() => {
+        const msg = language === 'fr' ? 'Message envoyé avec succès !' : 'Message sent successfully!';
+        const desc = language === 'fr' ? "Merci ! Je vous répondrai bientôt." : "Thanks! I will get back to you soon.";
+        setStatus({ type: 'success', message: msg, description: desc });
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      })
+      .catch((error) => {
+        const msg = language === 'fr' ? "Échec de l'envoi du message" : 'Failed to send message';
+        const descPrefix = language === 'fr' ? 'Veuillez réessayer plus tard.' : 'Please try again later.';
+        const desc = `${descPrefix} ${error?.text ? `(${error.text})` : ''}`.trim();
+        setStatus({ type: 'error', message: msg, description: desc });
+      })
+      .finally(() => {
+        const elapsed = Date.now() - start;
+        const remaining = Math.max(0, minDelay - elapsed);
+        setTimeout(() => setIsSending(false), remaining);
+      });
   };
 
   return (
@@ -100,9 +120,11 @@ const ContactForm = () => {
 
         <motion.button
           type="submit"
+          disabled={isSending}
+          aria-busy={isSending}
           whileHover={{ scale: 1.05, boxShadow: '0px 0px 25px rgba(168,85,247,0.25)' }}
           transition={{ duration: 0.5 }}
-          className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white p-4 rounded-xl font-bold text-lg shadow-2xl group relative overflow-hidden cursor-pointer"
+          className={`w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white p-4 rounded-xl font-bold text-lg shadow-2xl group relative overflow-hidden ${isSending ? 'opacity-80 cursor-not-allowed' : 'cursor-pointer'}`}
         >
           <motion.div
             className="absolute inset-0 bg-white/10 scale-x-0 origin-left"
@@ -110,20 +132,47 @@ const ContactForm = () => {
             transition={{ duration: 0.5 }}
           ></motion.div>
           <div className="relative z-10 flex items-center justify-center gap-3">
-            <FaRocket />
-            {t.contact.form.send}
+            {isSending ? (
+              <>
+                <span className="h-5 w-5 rounded-full border-2 border-white/40 border-t-white animate-spin" />
+                <span>{language === 'fr' ? 'Envoi...' : 'Sending...'}</span>
+              </>
+            ) : (
+              <>
+                <FaRocket />
+                <span>{t.contact.form.send}</span>
+              </>
+            )}
           </div>
         </motion.button>
       </form>
       {status && (
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="mt-4 text-center text-lg text-purple-200"
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35 }}
+          role="status"
+          aria-live="polite"
+          className={`mt-6 rounded-xl border p-4 backdrop-blur-sm ${
+            status.type === 'success'
+              ? 'border-green-400/30 bg-green-400/10 text-green-200'
+              : 'border-red-400/30 bg-red-400/10 text-red-200'
+          }`}
         >
-          {status}
-        </motion.p>
+          <div className="flex items-start gap-3">
+            {status.type === 'success' ? (
+              <FaCheckCircle className="mt-0.5 text-green-300 shrink-0" size={20} />
+            ) : (
+              <FaExclamationTriangle className="mt-0.5 text-red-300 shrink-0" size={20} />
+            )}
+            <div>
+              <p className="font-semibold">{status.message}</p>
+              {status.description && (
+                <p className="text-sm/6 opacity-90">{status.description}</p>
+              )}
+            </div>
+          </div>
+        </motion.div>
       )}
     </motion.div>
   );

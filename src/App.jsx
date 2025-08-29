@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaArrowUp } from "react-icons/fa";
+import Loader from "./components/Loader";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/sections/Footer";
@@ -17,6 +18,7 @@ function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [cursorVariant, setCursorVariant] = useState("default");
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const cursorRef = useRef(null);
 
   useEffect(() => {
@@ -58,6 +60,61 @@ function App() {
     };
   }, []);
 
+  // Initial app loader logic
+  useEffect(() => {
+    const start = Date.now();
+    const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    const slow = !!(conn && ((conn.effectiveType && (conn.effectiveType === 'slow-2g' || conn.effectiveType === '2g')) || conn.saveData));
+    const minDuration = slow ? 2200 : 1100;
+
+    // Lock body scroll while loading
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+
+    const complete = () => {
+      const elapsed = Date.now() - start;
+      const remaining = Math.max(0, minDuration - elapsed);
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, remaining);
+      return timer;
+    };
+
+    let timerId;
+
+    if (document.readyState === 'complete') {
+      timerId = complete();
+    } else {
+      const onLoad = () => {
+        timerId = complete();
+      };
+      window.addEventListener('load', onLoad, { once: true });
+      // Fallback in case load doesn't fire
+      setTimeout(() => {
+        if (!timerId) {
+          timerId = complete();
+        }
+      }, minDuration + 1200);
+
+      return () => {
+        window.removeEventListener('load', onLoad);
+        if (timerId) clearTimeout(timerId);
+      };
+    }
+
+    return () => {
+      if (timerId) clearTimeout(timerId);
+    };
+  }, []);
+
+  // Restore scroll when loading ends
+  useEffect(() => {
+    if (!isLoading) {
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    }
+  }, [isLoading]);
+
   const cursorVariants = {
     default: {
       x: mousePosition.x - 10,
@@ -91,6 +148,7 @@ function App() {
   return (
     <ThemeProvider>
       <LanguageProvider>
+        <AnimatePresence>{isLoading && <Loader />}</AnimatePresence>
         <div className="scroll-smooth font-sans text-gray-800 dark:text-gray-200 overflow-x-hidden bg-white dark:bg-gray-900 transition-colors duration-300">
           {/* Curseur personnalisé */}
           <motion.div

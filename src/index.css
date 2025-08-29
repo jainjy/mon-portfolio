@@ -35,4 +35,14 @@
   .backface-hidden {
     backface-visibility: hidden;
   }
+
+  /* Loader helpers */
+  .loader-gradient {
+    background: radial-gradient(1200px 700px at 20% 20%, rgba(168,85,247,0.15), transparent 60%),
+                radial-gradient(1200px 700px at 80% 80%, rgba(59,130,246,0.15), transparent 60%),
+                radial-gradient(1000px 500px at 50% 50%, rgba(236,72,153,0.12), transparent 60%);
+  }
+  .glow {
+    filter: drop-shadow(0 0 10px rgba(168,85,247,0.5)) drop-shadow(0 0 20px rgba(59,130,246,0.3));
+  }
   

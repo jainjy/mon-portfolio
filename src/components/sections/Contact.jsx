@@ -172,7 +172,7 @@ export const Contact = ({ mousePosition }) => {
                   </a>
                   <p className="flex items-center gap-2">
                     <HiOutlineLocationMarker className="text-purple-400 text-lg" />
-                    0708L405 Ambohimena, Antsirabe, Madagascar
+                  Antsirabe, Madagascar
                   </p>
                 </div>
               </motion.div>

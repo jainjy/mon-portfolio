@@ -15,7 +15,7 @@ import {
   } from "react-icons/fa";
 import ContactForm from '../ContactForm';
   
-export const Contact = () => {
+export const Contact = ({ mousePosition }) => {
   const { language } = useLanguage();
   const t = translations[language];
 
@@ -30,27 +30,46 @@ export const Contact = () => {
         transition={{ duration: 0.8 }}
         className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 dark:from-gray-900 dark:via-purple-900 dark:to-indigo-900 px-4 py-20 relative overflow-hidden"
       >
-        <ParticleBackground density={120} />
+        <ParticleBackground density={100} />
 
-        <div className="absolute inset-0 overflow-hidden">
+        <motion.div
+          className="absolute w-96 h-96 rounded-full bg-gradient-to-r from-purple-500/40 to-pink-500/40 blur-3xl pointer-events-none"
+          style={{
+            left: `${mousePosition.x}px`,
+            top: `${mousePosition.y}px`,
+            transform: "translate(-50%, -50%)",
+          }}
+          animate={{ scale: [1, 1.2, 1] }}
+          transition={{ duration: 1, repeat: Infinity }}
+        />
+
+        <div className="absolute inset-0 pointer-events-none">
           <motion.div
-            className="absolute top-20 left-10 w-40 h-40 border border-purple-400/20 rounded-full"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          ></motion.div>
-          <motion.div
-            className="absolute bottom-20 right-10 w-32 h-32 bg-pink-500/10 rounded-full"
+            initial={{ y: 0 }}
             animate={{ y: -20 }}
             transition={{
               duration: 3,
               repeat: Infinity,
               repeatType: "reverse",
             }}
+            className="absolute top-20 left-10 w-20 h-20 border border-purple-400/30 rotate-45"
           ></motion.div>
           <motion.div
-            className="absolute top-1/2 left-1/4 w-24 h-24 bg-blue-500/10 transform rotate-45"
+            initial={{ y: 0 }}
+            animate={{ y: -20 }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              repeatType: "reverse",
+              delay: 0.5,
+            }}
+            className="absolute top-40 right-20 w-16 h-16 bg-pink-500/20 rounded-full"
+          ></motion.div>
+          <motion.div
+            initial={{ scale: 1 }}
             animate={{ scale: [1, 1.1, 1] }}
             transition={{ duration: 2, repeat: Infinity }}
+            className="absolute bottom-40 left-20 w-12 h-12 bg-blue-500/20 transform rotate-45"
           ></motion.div>
         </div>
 
@@ -113,7 +132,7 @@ export const Contact = () => {
                   },
                   {
                     icon: FaLinkedin,
-                    href: "www.linkedin.com/in/ramamonjisoa-andrianina",
+                    href: "https://linkedin.com/in/ramamonjisoa-andrianina",
                     color: "group-hover:text-blue-400",
                     bg: "group-hover:bg-blue-600/20",
                   },
@@ -143,14 +162,14 @@ export const Contact = () => {
                   {t.contact.info.title}
                 </h4>
                 <div className="space-y-3 text-purple-200">
-                  <p className="flex items-center gap-2">
+                  <a className="flex items-center gap-2" href='mailto:ramamonjisoandrianina@gmail.com'>
                     <HiOutlineMail className="text-purple-400 text-lg" />
                     ramamonjisoandrianina@gmail.com
-                  </p>
-                  <p className="flex items-center gap-2">
+                  </a>
+                  <a className="flex items-center gap-2" href='tel:+261 34 20 219 88'>
                     <HiOutlinePhone className="text-purple-400 text-lg" />
                     +261 34 20 219 88
-                  </p>
+                  </a>
                   <p className="flex items-center gap-2">
                     <HiOutlineLocationMarker className="text-purple-400 text-lg" />
                     0708L405 Ambohimena, Antsirabe, Madagascar

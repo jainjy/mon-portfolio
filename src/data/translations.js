@@ -12,7 +12,6 @@ export const translations = {
       role: "Développeur Web passionné & Créateur d'applications innovantes",
       description: "Je transforme vos idées en réalité digitale avec créativité et innovation",
       contact: "Me contacter",
-      more: "En savoir plus",
       download: "Mon CV"
     },
     about: {
@@ -94,7 +93,6 @@ export const translations = {
       role: "Passionate Web Developer & Innovative App Creator",
       description: "I transform your ideas into digital reality with creativity and innovation",
       contact: "Contact Me",
-      more: "Learn More",
       download: "My CV"
     },
     about: {

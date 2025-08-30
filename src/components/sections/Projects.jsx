@@ -64,17 +64,19 @@ export const Projects = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.15, ease: 'easeOut' }}
                 layout
-                className="group bg-white dark:bg-gray-800 rounded-3xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700 relative h-full flex flex-col"
+                className="group bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700 relative h-full flex flex-col ring-1 ring-gray-200/60 dark:ring-white/10 hover:ring-purple-300/40 transition-colors duration-300"
               >
+                {/* Accent bar */}
+                <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 opacity-60" />
                 {/* Image/Emoji zone */}
                 <div
-                  className={`h-64 relative overflow-hidden ${
+                  className={`h-56 relative overflow-hidden ${
                     !isImage ? "bg-gradient-to-br " + project.gradient : ""
                   }`}
                 >
                   {isImage && (
                     <div
-                      className="absolute inset-0 bg-cover bg-center"
+                      className="absolute inset-0 bg-cover bg-center transform transition-transform duration-700 group-hover:scale-105"
                       style={{ backgroundImage: `url(${project.image})` }}
                     />
                   )}
@@ -129,9 +131,9 @@ export const Projects = () => {
                     <motion.button
                       type="button"
                       onClick={() => toggleExpand(index)}
-                      whileTap={{ scale: 0.98 }}
-                      whileHover={{ scale: 1.02 }}
-                      className="mb-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium bg-purple-50 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300 border border-purple-200 dark:border-purple-800"
+                      whileTap={{ scale: 0.97 }}
+                      whileHover={{ scale: 1.03 }}
+                      className="mb-3 self-start max-w-fit inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-purple-50/60 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300 border border-purple-200/70 dark:border-purple-800 hover:bg-purple-100/70 dark:hover:bg-purple-900/50 transition-colors"
                     >
                       <span>{isExpanded ? (language === 'fr' ? 'Voir moins' : 'Show less') : (language === 'fr' ? 'Voir plus' : 'Show more')}</span>
                       {isExpanded ? <FaChevronUp /> : <FaChevronDown />}
@@ -149,19 +151,30 @@ export const Projects = () => {
                           duration: 0.3,
                           delay: techIndex * 0.1,
                         }}
-                        className="px-4 py-2 bg-gradient-to-r from-purple-50 to-pink-50 text-purple-700 rounded-full text-sm font-medium border border-purple-200 group-hover:from-purple-100 group-hover:to-pink-100 transition-colors duration-300"
+                        className="px-3 py-1.5 rounded-full text-xs font-medium bg-white/70 dark:bg-gray-900/30 text-gray-700 dark:text-gray-300 border border-gray-200/70 dark:border-gray-700 hover:border-purple-300 hover:bg-purple-50/60 dark:hover:bg-purple-900/20 transition-colors duration-300"
                       >
                         {tech}
                       </motion.span>
                     ))}
                   </div>
 
-                  <div className="flex gap-4 mt-auto">
+                  <div className="flex gap-3 mt-auto">
+                    {project.demo && (
+                      <motion.a
+                        href={project.demo}
+                        whileHover={{ x: 2 }}
+                        transition={{ duration: 0.3 }}
+                        className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium text-blue-700 dark:text-blue-300 border border-blue-200/70 dark:border-blue-800 bg-white/70 dark:bg-gray-900/20 hover:bg-blue-50/70 dark:hover:bg-blue-900/30 transition-colors"
+                      >
+                        <FaCode />
+                        {language === 'fr' ? 'Démo' : 'Live'}
+                      </motion.a>
+                    )}
                     <motion.a
                       href={project.github}
                       whileHover={{ x: 2 }}
                       transition={{ duration: 0.3 }}
-                      className="flex items-center gap-2 text-purple-600 hover:text-purple-800 font-medium px-4 py-2 rounded-lg hover:bg-purple-50 cursor-pointer"
+                      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium text-purple-700 dark:text-purple-300 border border-purple-200/70 dark:border-purple-800 bg-white/70 dark:bg-gray-900/20 hover:bg-purple-50/70 dark:hover:bg-purple-900/30 transition-colors"
                     >
                       <FaGithub className="animate-pulse" />
                       {t.projects.viewGithub}

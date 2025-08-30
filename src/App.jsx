@@ -198,7 +198,7 @@ function App() {
           <About />
           <Skills />
           <Projects />
-          <Contact />
+          <Contact mousePosition={mousePosition} />
 
           {/* Footer */}
           <Footer />

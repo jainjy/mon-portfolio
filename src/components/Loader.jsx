@@ -94,9 +94,9 @@ const Loader = () => {
             opacity="0.15"
           />
           <motion.path
-            d="M38 55 L62 55"
+            d="M36 55 L64 55"
             stroke="url(#aGrad)"
-            strokeWidth="12"
+            strokeWidth="14"
             strokeLinecap="round"
             strokeLinejoin="round"
             fill="none"
@@ -127,15 +127,15 @@ const Loader = () => {
             transition={{ duration: 1.1, ease: "easeInOut", delay: 0.15 }}
           />
           <motion.path
-            d="M38 55 L62 55"
+            d="M36 55 L64 55"
             stroke="url(#aGrad)"
-            strokeWidth="6.5"
+            strokeWidth="8"
             strokeLinecap="round"
             strokeLinejoin="round"
             fill="none"
             initial={{ pathLength: 0, opacity: 1 }}
             animate={{ pathLength: 1, opacity: 1 }}
-            transition={{ duration: 0.8, ease: "easeInOut", delay: 0.35 }}
+            transition={{ duration: 0.9, ease: "easeInOut", delay: 1.3 }}
           />
         </motion.svg>
 

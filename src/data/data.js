@@ -127,7 +127,7 @@ import {
         description: "Lecteur de musique MP3 offrant la lecture de fichiers audio, l'affichage des paroles et la modification des métadonnées des morceaux.",
         gradient: "from-yellow-500 via-orange-500 to-red-500",
         tech: ["Python"],
-        image: "🎵",
+        image: "/images/music.png",
         github: "https://github.com/jainjy/E_Heno_music_player",
       },
       {
@@ -135,7 +135,7 @@ import {
         description: "Application santé et bien-être offrant conseils en articles, tests d'analyses avec recommandations personnalisées, notifications et tableau de bord récapitulatif.",
         gradient: "from-pink-500 via-red-500 to-purple-500",
         tech: ["Laravel", "MySQL", "React"],
-        image: "🏥",
+        image: "/images/santeEtBienEtre.png",
         github: "https://github.com/jainjy/SanteEtBienEtre",
       },
       {
@@ -143,7 +143,7 @@ import {
         description: "Jeu de Fanarona avec interface interactive respectant les règles traditionnelles du célèbre jeu de stratégie malagasy.",
         gradient: "from-indigo-500 via-purple-500 to-pink-500",
         tech: ["Python"],
-        image: "🎮",
+        image: "/images/fanorona.png",
         github: "https://github.com/jainjy/fanorona",
       },
       {
@@ -151,7 +151,7 @@ import {
         description: "Application desktop de gestion personnelle avec système de chat intégré.",
         gradient: "from-yellow-500 to-amber-500",
         tech: ["Python", "MySQL"],
-        image: "👥",
+        image: "/images/perso.png",
         github: "https://github.com/jainjy/gestionPersonnel",
       },
       {
@@ -159,7 +159,7 @@ import {
         description: "Une application desktop de gestion pour restaurants, permettant de gérer les commandes, les tables avec une interface graphique construite en Java Swing",
         gradient: "from-emerald-500 to-green-600",
         tech: ["Python"],
-        image: "🐍",
+        image: "/images/snakeGame.png",
         github: "https://github.com/jainjy/SnakeGame",
       },
       {
@@ -174,7 +174,7 @@ import {
         description: "Implémentation d’un jeu de Sudoku avec interface graphique et résolution automatique.",
         gradient: "from-purple-400 via-indigo-500 to-blue-500",
         tech: ["Python"],
-        image: "🔢",
+        image: "/images/sudoku.png",
         github: "https://github.com/jainjy/sudoku",
       },
     ],
@@ -208,7 +208,7 @@ import {
         description: "MP3 music player offering audio file playback, lyrics display, and track metadata editing.",
         gradient: "from-yellow-500 via-orange-500 to-red-500",
         tech: ["Python"],
-        image: "🎵",
+        image: "/images/music.png",
         github: "https://github.com/jainjy/E_Heno_music_player",
       },
       {
@@ -224,7 +224,7 @@ import {
         description: "Fanorona game with an interactive interface respecting the traditional rules of the famous Malagasy strategy game.",
         gradient: "from-indigo-500 via-purple-500 to-pink-500",
         tech: ["Python"],
-        image: "🎮",
+        image: "/images/fanorona.png",
         github: "https://github.com/jainjy/fanorona",
       },
       {
@@ -232,7 +232,7 @@ import {
         description: "Desktop personal management application with integrated chat system.",
         gradient: "from-yellow-500 to-amber-500",
         tech: ["Python", "MySQL"],
-        image: "👥",
+        image: "/images/perso.png",
         github: "https://github.com/jainjy/gestionPersonnel",
       },
       {
@@ -240,7 +240,7 @@ import {
         description: "A desktop application for restaurant management, allowing to manage orders, tables with a graphical interface built in Java Swing",
         gradient: "from-emerald-500 to-green-600",
         tech: ["Python"],
-        image: "🐍",
+        image: "/images/snakeGame.png",
         github: "https://github.com/jainjy/SnakeGame",
       },
       {
@@ -255,7 +255,7 @@ import {
         description: "Implementation of a Sudoku game with graphical interface and automatic solving.",
         gradient: "from-purple-400 via-indigo-500 to-blue-500",
         tech: ["Python"],
-        image: "🔢",
+        image: "/images/sudoku.png",
         github: "https://github.com/jainjy/sudoku",
       },
     ]

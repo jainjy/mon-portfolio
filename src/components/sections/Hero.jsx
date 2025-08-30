@@ -78,22 +78,13 @@ export const Hero = ({ mousePosition }) => {
             delay={0.5}
           />
 
-          <motion.p
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-xl md:text-2xl mb-8 text-purple-100 max-w-3xl mx-auto leading-relaxed"
-          >
-            {t.hero.role}
-          </motion.p>
-          <motion.p
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-lg text-purple-200/80 mb-8"
-          >
-            {t.hero.description}
-          </motion.p>
+          <AnimatedText
+            texts={[t.hero.role, t.hero.description]}
+            className="text-lg sm:text-xl md:text-2xl mb-8 text-purple-100 max-w-3xl mx-auto leading-relaxed px-2"
+            delay={0}
+            interval={3800}
+            preserveSpaces={false}
+          />
 
           <motion.div
   initial={{ opacity: 0, y: 50 }}
@@ -120,23 +111,6 @@ export const Hero = ({ mousePosition }) => {
     ></motion.div>
     <FaRocket className="group-hover:animate-bounce relative z-10" />
     <span className="relative z-10">{t.hero.contact}</span>
-  </motion.a>
-
-  <motion.a
-    href="#about"
-    whileHover={{
-      scale: 1.1,
-      backgroundColor: "rgba(168, 85, 247, 0.2)",
-      color: "#fff",
-    }}
-    transition={{ duration: 0.5 }}
-    className="border-2 border-purple-400 text-purple-400 
-               px-6 sm:px-10 py-3 sm:py-4 text-sm sm:text-base
-               rounded-full flex justify-center items-center gap-2 sm:gap-3 
-               group cursor-pointer w-[48%] sm:w-auto text-center"
-  >
-    <FaEye className="group-hover:animate-pulse" />
-    {t.hero.more}
   </motion.a>
 
   <motion.a

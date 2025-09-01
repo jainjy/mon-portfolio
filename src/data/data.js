@@ -100,31 +100,35 @@ import {
     fr: [
       {
         title: "e-BoSy - Plateforme e-learning",
-        description: "Plateforme e-learning interactive avec cours en ligne, évaluations certifiantes, visioconférence, suivi personnalisé, messagerie avec partage de fichiers et certificats automatiques vérifiables.",
+        description:
+          "Plateforme e-learning interactive avec cours en ligne, évaluations certifiantes, visioconférence, suivi personnalisé, messagerie avec partage de fichiers et certificats automatiques vérifiables.",
         gradient: "from-purple-500 via-pink-500 to-red-500",
         tech: ["ASP.NET", "React", "PostgreSQL", "Tailwind CSS"],
         image: "/images/ebosy.png",
-        github: "https://github.com/jainjy/e-bosy-app"
+        github: "https://github.com/jainjy/e-bosy-app",
       },
       {
         title: "TAXIII - Commande de taxi",
-        description: "Application mobile de commande de taxi avec carte interactive affichant les véhicules disponibles, réservation en un clic et suivi du trajet en temps réel.",
+        description:
+          "Application mobile de commande de taxi avec carte interactive affichant les véhicules disponibles, réservation en un clic et suivi du trajet en temps réel.",
         gradient: "from-blue-500 via-purple-500 to-indigo-500",
         tech: ["React Native", "Node.js", "MongoDB"],
-        image: "🚖",
+        image: "/images/taxi.png",
         github: "https://github.com/jainjy/TAXIII",
       },
       {
         title: "Application de gestion de projet",
-        description: "Logiciel de gestion de projet permettant de suivre les équipes, les tâches, le personnel avec un système de notifications.",
+        description:
+          "Logiciel de gestion de projet permettant de suivre les équipes, les tâches, le personnel avec un système de notifications.",
         gradient: "from-green-500 via-teal-500 to-blue-500",
         tech: ["Java", "Spring Boot", "MySQL", "Bootstrap", "JavaScript"],
-        image: "📊",
+        image: "/images/gestionProjet.png",
         github: "https://github.com/jainjy/ProjetJavaWeb",
       },
       {
         title: "Music Player - E-Heno",
-        description: "Lecteur de musique MP3 offrant la lecture de fichiers audio, l'affichage des paroles et la modification des métadonnées des morceaux.",
+        description:
+          "Lecteur de musique MP3 offrant la lecture de fichiers audio, l'affichage des paroles et la modification des métadonnées des morceaux.",
         gradient: "from-yellow-500 via-orange-500 to-red-500",
         tech: ["Python"],
         image: "/images/music.png",
@@ -132,7 +136,8 @@ import {
       },
       {
         title: "Application de santé et Bien-Etre",
-        description: "Application santé et bien-être offrant conseils en articles, tests d'analyses avec recommandations personnalisées, notifications et tableau de bord récapitulatif.",
+        description:
+          "Application santé et bien-être offrant conseils en articles, tests d'analyses avec recommandations personnalisées, notifications et tableau de bord récapitulatif.",
         gradient: "from-pink-500 via-red-500 to-purple-500",
         tech: ["Laravel", "MySQL", "React"],
         image: "/images/santeEtBienEtre.png",
@@ -140,7 +145,8 @@ import {
       },
       {
         title: "Fanorona",
-        description: "Jeu de Fanarona avec interface interactive respectant les règles traditionnelles du célèbre jeu de stratégie malagasy.",
+        description:
+          "Jeu de Fanarona avec interface interactive respectant les règles traditionnelles du célèbre jeu de stratégie malagasy.",
         gradient: "from-indigo-500 via-purple-500 to-pink-500",
         tech: ["Python"],
         image: "/images/fanorona.png",
@@ -148,7 +154,8 @@ import {
       },
       {
         title: "Gestion Personnel",
-        description: "Application desktop de gestion personnelle avec système de chat intégré.",
+        description:
+          "Application desktop de gestion personnelle avec système de chat intégré.",
         gradient: "from-yellow-500 to-amber-500",
         tech: ["Python", "MySQL"],
         image: "/images/perso.png",
@@ -156,7 +163,8 @@ import {
       },
       {
         title: "Jeu du Serpent",
-        description: "Une application desktop de gestion pour restaurants, permettant de gérer les commandes, les tables avec une interface graphique construite en Java Swing",
+        description:
+          "Une application desktop de gestion pour restaurants, permettant de gérer les commandes, les tables avec une interface graphique construite en Java Swing",
         gradient: "from-emerald-500 to-green-600",
         tech: ["Python"],
         image: "/images/snakeGame.png",
@@ -164,14 +172,17 @@ import {
       },
       {
         title: "gestion de restaurant",
-        description: "Jeu classique du serpent avec gestion des collisions et des scores.",
+        description:
+          "Jeu classique du serpent avec gestion des collisions et des scores.",
         gradient: "from-blue-500 to-green-600",
-        tech: ["Java Swing","Mysq"],
-        image: "🍽️",
+        tech: ["Java Swing", "Mysq"],
+        image: "/images/restaurent.png",
         github: "https://github.com/jainjy/ApplicationRestaurant",
-      },  {
+      },
+      {
         title: "Sudoku",
-        description: "Implémentation d’un jeu de Sudoku avec interface graphique et résolution automatique.",
+        description:
+          "Implémentation d’un jeu de Sudoku avec interface graphique et résolution automatique.",
         gradient: "from-purple-400 via-indigo-500 to-blue-500",
         tech: ["Python"],
         image: "/images/sudoku.png",
@@ -181,31 +192,35 @@ import {
     en: [
       {
         title: "e-BoSy - E-learning Platform",
-        description: "Interactive e-learning platform with online courses, certifying assessments, video conferencing, personalized monitoring, messaging with file sharing and verifiable automatic certificates.",
+        description:
+          "Interactive e-learning platform with online courses, certifying assessments, video conferencing, personalized monitoring, messaging with file sharing and verifiable automatic certificates.",
         gradient: "from-purple-500 via-pink-500 to-red-500",
         tech: ["ASP.NET", "React", "PostgreSQL", "Tailwind CSS"],
         image: "/images/ebosy.png",
-        github: "https://github.com/jainjy/e-bosy-app"
+        github: "https://github.com/jainjy/e-bosy-app",
       },
       {
         title: "TAXIII - Taxi Booking",
-        description: "Mobile taxi booking application with interactive map displaying available vehicles, one-click booking and real-time journey tracking.",
+        description:
+          "Mobile taxi booking application with interactive map displaying available vehicles, one-click booking and real-time journey tracking.",
         gradient: "from-blue-500 via-purple-500 to-indigo-500",
         tech: ["React Native", "Node.js", "MongoDB"],
-        image: "🚖",
-        github: "https://github.com/jainjy/TAXIII"
+        image: "/images/taxi.png",
+        github: "https://github.com/jainjy/TAXIII",
       },
       {
         title: "Project Management Application",
-        description: "Project management software for tracking teams, tasks, staff with a notification system.",
+        description:
+          "Project management software for tracking teams, tasks, staff with a notification system.",
         gradient: "from-green-500 via-teal-500 to-blue-500",
         tech: ["Java", "Spring Boot", "MySQL", "Bootstrap", "JavaScript"],
-        image: "📊",
-        github: "https://github.com/jainjy/ProjetJavaWeb"
+        image: "/images/gestionProjet.png",
+        github: "https://github.com/jainjy/ProjetJavaWeb",
       },
       {
         title: "Music Player - E-Heno",
-        description: "MP3 music player offering audio file playback, lyrics display, and track metadata editing.",
+        description:
+          "MP3 music player offering audio file playback, lyrics display, and track metadata editing.",
         gradient: "from-yellow-500 via-orange-500 to-red-500",
         tech: ["Python"],
         image: "/images/music.png",
@@ -213,15 +228,17 @@ import {
       },
       {
         title: "Health and Wellness Application",
-        description: "Health and wellness application offering article advice, analysis tests with personalized recommendations, notifications, and a summary dashboard.",
+        description:
+          "Health and wellness application offering article advice, analysis tests with personalized recommendations, notifications, and a summary dashboard.",
         gradient: "from-pink-500 via-red-500 to-purple-500",
         tech: ["Laravel", "MySQL", "React"],
-        image: "🏥",
+        image: "/images/santeEtBienEtre.png",
         github: "https://github.com/jainjy/SanteEtBienEtre",
       },
       {
         title: "Fanorona",
-        description: "Fanorona game with an interactive interface respecting the traditional rules of the famous Malagasy strategy game.",
+        description:
+          "Fanorona game with an interactive interface respecting the traditional rules of the famous Malagasy strategy game.",
         gradient: "from-indigo-500 via-purple-500 to-pink-500",
         tech: ["Python"],
         image: "/images/fanorona.png",
@@ -229,7 +246,8 @@ import {
       },
       {
         title: "Personnel Management",
-        description: "Desktop personal management application with integrated chat system.",
+        description:
+          "Desktop personal management application with integrated chat system.",
         gradient: "from-yellow-500 to-amber-500",
         tech: ["Python", "MySQL"],
         image: "/images/perso.png",
@@ -237,7 +255,8 @@ import {
       },
       {
         title: "Snake Game",
-        description: "A desktop application for restaurant management, allowing to manage orders, tables with a graphical interface built in Java Swing",
+        description:
+          "A desktop application for restaurant management, allowing to manage orders, tables with a graphical interface built in Java Swing",
         gradient: "from-emerald-500 to-green-600",
         tech: ["Python"],
         image: "/images/snakeGame.png",
@@ -247,18 +266,20 @@ import {
         title: "Restaurant Management",
         description: "Classic snake game with collision and score management.",
         gradient: "from-blue-500 to-green-600",
-        tech: ["Java Swing","Mysq"],
-        image: "🍽️",
+        tech: ["Java Swing", "Mysq"],
+        image: "/images/restaurent.png",
         github: "https://github.com/jainjy/ApplicationRestaurant",
-      },  {
+      },
+      {
         title: "Sudoku",
-        description: "Implementation of a Sudoku game with graphical interface and automatic solving.",
+        description:
+          "Implementation of a Sudoku game with graphical interface and automatic solving.",
         gradient: "from-purple-400 via-indigo-500 to-blue-500",
         tech: ["Python"],
         image: "/images/sudoku.png",
         github: "https://github.com/jainjy/sudoku",
       },
-    ]
+    ],
   };
 
   const education = {

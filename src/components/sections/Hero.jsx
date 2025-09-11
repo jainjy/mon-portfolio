@@ -65,80 +65,90 @@ export const Hero = ({ mousePosition }) => {
           ></motion.div>
         </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto mt-16">
-          <ProfileImage />
-          <AnimatedText
-            text={t.hero.greeting}
-            className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent"
-          />
+        <div className="relative z-10 max-w-7xl mx-auto mt-16 px-4">
+          {/* Container flex pour desktop */}
+          <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-8 lg:gap-16">
+            {/* Colonne gauche pour la photo */}
+            <div className="w-full lg:w-5/12">
+              <ProfileImage />
+            </div>
 
-          <AnimatedText
-            text="Andrianina"
-            className="text-6xl md:text-8xl font-black mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent"
-            delay={0.5}
-          />
+            {/* Colonne droite pour le texte */}
+            <div className="w-full lg:w-7/12 lg:text-left text-center">
+              <AnimatedText
+                text={t.hero.greeting}
+                className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent"
+              />
 
-          <AnimatedText
-            texts={[t.hero.role, t.hero.description]}
-            className="text-lg sm:text-xl md:text-2xl mb-8 text-purple-100 max-w-3xl mx-auto leading-relaxed px-2"
-            delay={0}
-            interval={3800}
-            preserveSpaces={false}
-          />
+              <AnimatedText
+                text="Andrianina"
+                className="text-6xl md:text-8xl font-black mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent"
+                delay={0.5}
+              />
 
+              <AnimatedText
+                texts={[t.hero.role, t.hero.description]}
+                className="text-lg sm:text-xl md:text-2xl mb-8 text-purple-100 max-w-3xl lg:mx-0 mx-auto leading-relaxed"
+                delay={0}
+                interval={3800}
+                preserveSpaces={false}
+              />
+            </div>
+          </div>
+
+          {/* Section des boutons en bas */}
           <motion.div
-  initial={{ opacity: 0, y: 50 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8, delay: 0.4 }}
-  className="flex flex-wrap justify-center items-center gap-4 sm:flex-nowrap mb-12"
->
-  <motion.a
-    href="#contact"
-    whileHover={{
-      scale: 1.1,
-      boxShadow: "0px 0px 20px rgba(168, 85, 247, 0.5)",
-    }}
-    transition={{ duration: 0.5 }}
-    className="group bg-gradient-to-r from-purple-600 to-pink-600 text-white 
-               px-6 sm:px-10 py-3 sm:py-4 text-sm sm:text-base 
-               rounded-full flex justify-center items-center gap-2 sm:gap-3 
-               relative overflow-hidden cursor-pointer w-[48%] sm:w-auto text-center"
-  >
-    <motion.div
-      className="absolute inset-0 bg-white/20 scale-x-0 origin-left"
-      whileHover={{ scaleX: 1 }}
-      transition={{ duration: 0.5 }}
-    ></motion.div>
-    <FaRocket className="group-hover:animate-bounce relative z-10" />
-    <span className="relative z-10">{t.hero.contact}</span>
-  </motion.a>
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="flex flex-wrap justify-center gap-4 sm:flex-nowrap mt-12 lg:mt-20"
+          >
+            <motion.a
+              href="#contact"
+              whileHover={{
+                scale: 1.1,
+                boxShadow: "0px 0px 20px rgba(168, 85, 247, 0.5)",
+              }}
+              transition={{ duration: 0.5 }}
+              className="group bg-gradient-to-r from-purple-600 to-pink-600 text-white 
+                         px-8 sm:px-12 py-4 text-base 
+                         rounded-full flex justify-center items-center gap-3 
+                         relative overflow-hidden cursor-pointer w-[48%] sm:w-auto"
+            >
+              <motion.div
+                className="absolute inset-0 bg-white/20 scale-x-0 origin-left"
+                whileHover={{ scaleX: 1 }}
+                transition={{ duration: 0.5 }}
+              ></motion.div>
+              <FaRocket className="group-hover:animate-bounce relative z-10" />
+              <span className="relative z-10">{t.hero.contact}</span>
+            </motion.a>
 
-  <motion.a
-    href="/CV.pdf"
-    download
-    whileHover={{
-      scale: 1.1,
-      backgroundColor: "rgba(236, 72, 153, 0.2)",
-      color: "#fff",
-    }}
-    transition={{ duration: 0.5 }}
-    className="border-2 border-pink-400 text-pink-400 
-               px-6 sm:px-10 py-3 sm:py-4 text-sm sm:text-base
-               rounded-full flex justify-center items-center gap-2 sm:gap-3 
-               group cursor-pointer w-[48%] sm:w-auto text-center"
-  >
-    <FaDownload className="group-hover:animate-bounce" />
-    {t.hero.download}
-  </motion.a>
-</motion.div>
-
+            <motion.a
+              href="/CV.pdf"
+              download
+              whileHover={{
+                scale: 1.1,
+                backgroundColor: "rgba(236, 72, 153, 0.2)",
+                color: "#fff",
+              }}
+              transition={{ duration: 0.5 }}
+              className="border-2 border-pink-400 text-pink-400 
+                         px-8 sm:px-12 py-4 text-base
+                         rounded-full flex justify-center items-center gap-3 
+                         group cursor-pointer w-[48%] sm:w-auto"
+            >
+              <FaDownload className="group-hover:animate-bounce" />
+              {t.hero.download}
+            </motion.a>
+          </motion.div>
 
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
-            className="flex justify-center mt-10 mb-2 text-purple-300" // centrage et marge top
+            className="flex justify-center mt-10 mb-2 text-purple-300"
           >
-            <FaArrowDown size={48} /> {/* taille plus grande */}
+            <FaArrowDown size={48} />
           </motion.div>
         </div>
       </motion.section>

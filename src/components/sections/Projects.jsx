@@ -151,7 +151,7 @@ export const Projects = () => {
                           duration: 0.3,
                           delay: techIndex * 0.1,
                         }}
-                        className="px-3 py-1.5 rounded-full text-xs font-medium bg-white/70 dark:bg-gray-900/30 text-gray-700 dark:text-gray-300 border border-gray-200/70 dark:border-gray-700 hover:border-purple-300 hover:bg-purple-50/60 dark:hover:bg-purple-900/20 transition-colors duration-300"
+                        className="px-3 py-1.5 rounded-full text-xs font-medium bg-white/70 dark:bg-gray-900/30 text-gray-700 dark:text-gray-300 border border-gray-200/70 dark:border-gray-700 hover:border-purple-300 hover:bg-purple-50/60 dark:hover:bg-purple-900/20 transition-colors duration-300 shadow-sm"
                       >
                         {tech}
                       </motion.span>

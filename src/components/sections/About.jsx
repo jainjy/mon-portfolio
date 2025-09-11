@@ -9,7 +9,7 @@ const FormationXp = () => {
   const { language } = useLanguage();
   const t = translations[language];
   const education = data.education[language];
-  
+
   return (
     <>
       <div className="mt-20 grid md:grid-cols-1 gap-8">
@@ -93,53 +93,7 @@ export const About = () => {
             <div className="w-32 h-1 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 mx-auto mb-8 rounded-full"></div>
             <p className="text-xl text-gray-600">{t.about.subtitle}</p>
           </motion.div>
-
           <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8">
-              {[
-                {
-                  title: t.about.passion.title,
-                  description: t.about.passion.description,
-                  icon: FaCode,
-                  gradient: "from-purple-600 to-pink-600",
-                  bg: "from-purple-50 to-pink-50",
-                  border: "border-purple-100",
-                },
-                {
-                  title: t.about.innovation.title,
-                  description: t.about.innovation.description,
-                  icon: FaHeart,
-                  gradient: "from-blue-600 to-purple-600",
-                  bg: "from-blue-50 to-purple-50",
-                  border: "border-blue-100",
-                },
-              ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  whileHover={{ scale: 1.05 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.2 }}
-                  className={`bg-gradient-to-br ${item.bg} dark:from-purple-900 dark:to-pink-900 p-8 rounded-3xl shadow-xl border ${item.border}`}
-                >
-                  <div className="flex items-center mb-6">
-                    <div
-                      className={`w-14 h-14 bg-gradient-to-r ${item.gradient} rounded-full flex items-center justify-center mr-4`}
-                    >
-                      <item.icon className="text-white text-2xl" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
-                      {item.title}
-                    </h3>
-                  </div>
-                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
-                    {item.description}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-
             <motion.div
               initial={{ opacity: 0, rotate: 3 }}
               whileInView={{ opacity: 1, rotate: 0 }}
@@ -149,7 +103,7 @@ export const About = () => {
               className="relative"
             >
               <div className="relative w-full h-96 bg-gradient-to-br from-purple-400 via-pink-400 to-blue-400 rounded-3xl shadow-2xl group">
-                <div className="absolute inset-4 bg-white rounded-2xl flex items-center justify-center shadow-2xl">
+                <div className="absolute inset-4 bg-white rounded-2xl flex items-center justify-center shadow-2xl ">
                   <div className="text-center p-8">
                     <motion.div
                       className="text-8xl mb-6"
@@ -197,7 +151,52 @@ export const About = () => {
                 ></motion.div>
               </div>
             </motion.div>
+            <div className="space-y-8">
+              {[
+                {
+                  title: t.about.passion.title,
+                  description: t.about.passion.description,
+                  icon: FaCode,
+                  gradient: "from-purple-600 to-pink-600",
+                  bg: "from-purple-50 to-pink-50",
+                  border: "border-purple-100",
+                },
+                {
+                  title: t.about.innovation.title,
+                  description: t.about.innovation.description,
+                  icon: FaHeart,
+                  gradient: "from-blue-600 to-purple-600",
+                  bg: "from-blue-50 to-purple-50",
+                  border: "border-blue-100",
+                },
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  whileHover={{ scale: 1.05 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.2 }}
+                  className={`bg-gradient-to-br ${item.bg} dark:from-purple-900 dark:to-pink-900 p-8 rounded-3xl shadow-xl border ${item.border}`}
+                >
+                  <div className="flex items-center mb-6">
+                    <div
+                      className={`w-14 h-14 bg-gradient-to-r ${item.gradient} rounded-full flex items-center justify-center mr-4`}
+                    >
+                      <item.icon className="text-white text-2xl" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
+                      {item.title}
+                    </h3>
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
+                    {item.description}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
           </div>
+
           <FormationXp />
 
           {/* Langues et Centres d'intérêt */}

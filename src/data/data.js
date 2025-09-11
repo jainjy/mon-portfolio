@@ -30,6 +30,7 @@ import {
   SiDotnet,
   SiSymfony,
   SiC,
+  SiSupabase,
 } from "react-icons/si";
 
   // Compétences organisées par catégorie
@@ -75,6 +76,7 @@ import {
         { name: "REST API", icon: FaServer, color: "text-purple-400" },
         { name: "Postman", icon: SiPostman, color: "text-orange-500" },
         { name: "Swagger", icon: SiSwagger, color: "text-green-600" },
+        { name: "Supabase", icon: SiSupabase, color: "text-emerald-500" },
       ],
     },
     {

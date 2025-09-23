@@ -3,7 +3,7 @@ import React from "react";
 import ParticleBackground from "../ParticleBackground";
 import ProfileImage from "../ProfileImage";
 import AnimatedText from "../AnimatedText";
-import { FaArrowDown, FaRocket, FaEye, FaDownload } from "react-icons/fa";
+import { FaRocket, FaEye, FaDownload } from "react-icons/fa";
 import { useLanguage } from "../../context/LanguageContext";
 import { translations } from "../../data/translations";
 
@@ -65,16 +65,16 @@ export const Hero = ({ mousePosition }) => {
           ></motion.div>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto mt-16 px-4">
+        <div className="relative z-10 max-w-7xl mx-auto mt-16">
           {/* Container flex pour desktop */}
           <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-8 lg:gap-16">
             {/* Colonne gauche pour la photo */}
-            <div className="w-full lg:w-5/12">
+            <div className="w-full lg:w-5/12 flex-shrink-0">
               <ProfileImage />
             </div>
 
             {/* Colonne droite pour le texte */}
-            <div className="w-full lg:w-7/12 lg:text-left text-center">
+            <div className="w-full lg:w-7/12 lg:text-left text-center flex-shrink-0">
               <AnimatedText
                 text={t.hero.greeting}
                 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent"
@@ -86,13 +86,16 @@ export const Hero = ({ mousePosition }) => {
                 delay={0.5}
               />
 
-              <AnimatedText
-                texts={[t.hero.role, t.hero.description]}
-                className="text-lg sm:text-xl md:text-2xl mb-8 text-purple-100 max-w-3xl lg:mx-0 mx-auto leading-relaxed"
-                delay={0}
-                interval={3800}
-                preserveSpaces={false}
-              />
+              {/* Container avec hauteur fixe pour éviter les décalages */}
+              <div className="min-h-[4rem] sm:min-h-[5rem] md:min-h-[6rem] flex items-center justify-center lg:justify-start">
+                <AnimatedText
+                  texts={[t.hero.role, t.hero.description]}
+                  className="text-lg sm:text-xl md:text-2xl mb-8 text-purple-100 max-w-3xl lg:mx-0 mx-auto leading-relaxed"
+                  delay={0}
+                  interval={3800}
+                  preserveSpaces={false}
+                />
+              </div>
             </div>
           </div>
 
@@ -144,12 +147,38 @@ export const Hero = ({ mousePosition }) => {
           </motion.div>
 
           <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="flex justify-center mt-10 mb-2 text-purple-300"
+            className="flex justify-center mt-10 mb-10"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2 }}
           >
-            <FaArrowDown size={48} />
+            <motion.div
+              animate={{ y: [0, 15, 0] }}
+              transition={{ 
+                duration: 2.5, 
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="relative"
+            >
+              <div className="w-6 h-10 border-2 border-purple-400/40 rounded-full flex justify-center relative overflow-hidden">
+                <motion.div 
+                  className="w-1 h-3 bg-gradient-to-b from-purple-400 to-pink-600 rounded-full mt-2"
+                  animate={{
+                    scaleY: [1, 0.5, 1],
+                    opacity: [1, 0.7, 1],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+              </div>
+              <div className="absolute inset-0 bg-purple-500/20 rounded-full blur-md animate-pulse"></div>
+            </motion.div>
           </motion.div>
+       
         </div>
       </motion.section>
     </>

@@ -94,107 +94,48 @@ export const About = () => {
             <p className="text-xl text-gray-600">{t.about.subtitle}</p>
           </motion.div>
           <div className="grid md:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, rotate: 3 }}
-              whileInView={{ opacity: 1, rotate: 0 }}
-              whileHover={{ rotate: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-              className="relative"
-            >
-              <div className="relative w-full h-96 bg-gradient-to-br from-purple-400 via-pink-400 to-blue-400 rounded-3xl shadow-2xl group">
-                <div className="absolute inset-4 bg-white rounded-2xl flex items-center justify-center shadow-2xl ">
-                  <div className="text-center p-8">
-                    <motion.div
-                      className="text-8xl mb-6"
-                      animate={{ rotate: [0, 5, -5, 0] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    >
-                      👨‍💻
-                    </motion.div>
-                    <h4 className="text-3xl font-bold text-gray-800 mb-4">
-                      RAMAMONJISOA Hoelatiana Andrianina
-                    </h4>
-                    <p className="text-gray-600 text-lg">{t.about.role}</p>
-                    <div className="mt-6 flex justify-center space-x-4">
-                      <motion.div
-                        className="w-3 h-3 bg-red-500 rounded-full"
-                        animate={{ scale: [1, 1.2, 1] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                      ></motion.div>
-                      <motion.div
-                        className="w-3 h-3 bg-yellow-500 rounded-full"
-                        animate={{ scale: [1, 1.2, 1] }}
-                        transition={{
-                          duration: 1.5,
-                          repeat: Infinity,
-                          delay: 0.2,
-                        }}
-                      ></motion.div>
-                      <motion.div
-                        className="w-3 h-3 bg-green-500 rounded-full"
-                        animate={{ scale: [1, 1.2, 1] }}
-                        transition={{
-                          duration: 1.5,
-                          repeat: Infinity,
-                          delay: 0.4,
-                        }}
-                      ></motion.div>
-                    </div>
+            {[
+              {
+                title: t.about.passion.title,
+                description: t.about.passion.description,
+                icon: FaCode,
+                gradient: "from-purple-600 to-pink-600",
+                bg: "from-purple-50 to-pink-50",
+                border: "border-purple-100",
+              },
+              {
+                title: t.about.innovation.title,
+                description: t.about.innovation.description,
+                icon: FaHeart,
+                gradient: "from-blue-600 to-purple-600",
+                bg: "from-blue-50 to-purple-50",
+                border: "border-blue-100",
+              },
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                whileHover={{ scale: 1.05 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+                className={`bg-gradient-to-br ${item.bg} dark:from-purple-900 dark:to-pink-900 p-8 rounded-3xl shadow-xl border ${item.border}`}
+              >
+                <div className="flex items-center mb-6">
+                  <div
+                    className={`w-14 h-14 bg-gradient-to-r ${item.gradient} rounded-full flex items-center justify-center mr-4`}
+                  >
+                    <item.icon className="text-white text-2xl" />
                   </div>
+                  <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
+                    {item.title}
+                  </h3>
                 </div>
-                <motion.div
-                  className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl blur opacity-30"
-                  initial={{ opacity: 0.3 }}
-                  whileHover={{ opacity: 0.5 }}
-                  transition={{ duration: 0.7 }}
-                ></motion.div>
-              </div>
-            </motion.div>
-            <div className="space-y-8">
-              {[
-                {
-                  title: t.about.passion.title,
-                  description: t.about.passion.description,
-                  icon: FaCode,
-                  gradient: "from-purple-600 to-pink-600",
-                  bg: "from-purple-50 to-pink-50",
-                  border: "border-purple-100",
-                },
-                {
-                  title: t.about.innovation.title,
-                  description: t.about.innovation.description,
-                  icon: FaHeart,
-                  gradient: "from-blue-600 to-purple-600",
-                  bg: "from-blue-50 to-purple-50",
-                  border: "border-blue-100",
-                },
-              ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  whileHover={{ scale: 1.05 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.2 }}
-                  className={`bg-gradient-to-br ${item.bg} dark:from-purple-900 dark:to-pink-900 p-8 rounded-3xl shadow-xl border ${item.border}`}
-                >
-                  <div className="flex items-center mb-6">
-                    <div
-                      className={`w-14 h-14 bg-gradient-to-r ${item.gradient} rounded-full flex items-center justify-center mr-4`}
-                    >
-                      <item.icon className="text-white text-2xl" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
-                      {item.title}
-                    </h3>
-                  </div>
-                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
-                    {item.description}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
+                  {item.description}
+                </p>
+              </motion.div>
+            ))}
           </div>
 
           <FormationXp />

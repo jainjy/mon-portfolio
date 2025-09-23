@@ -149,20 +149,31 @@ const Navbar = () => {
               transition={{ delay: index * 0.1 }}
               className="whitespace-nowrap"
             >
-              <a
+              <motion.a
                 href={link.href}
                 onClick={() => handleClick(link.href)}
-                className={`relative px-2 sm:px-3 py-2 ${
-                  !scrolled && isHome 
-                    ? 'text-white' 
-                    : 'text-gray-700 dark:text-white'
-                } hover:text-purple-600 dark:hover:text-purple-400 transition-all duration-300 text-sm sm:text-base ${
-                  active === link.href ? "text-purple-600 dark:text-purple-400 font-semibold" : ""
+                className={`relative px-3 sm:px-4 py-2 rounded transition-all duration-300 text-sm sm:text-base ${
+                  active === link.href 
+                    ? "text-white font-semibold" 
+                    : !scrolled && isHome 
+                      ? 'text-white hover:text-purple-200' 
+                      : 'text-gray-700 dark:text-white hover:text-purple-600 dark:hover:text-purple-400'
                 }`}
+                animate={{
+                  background: active === link.href 
+                    ? "linear-gradient(135deg, rgba(147, 51, 234, 0.8), rgba(236, 72, 153, 0.8))"
+                    : "transparent"
+                }}
+                whileHover={{
+                  background: active === link.href 
+                    ? "linear-gradient(135deg, rgba(147, 51, 234, 0.9), rgba(236, 72, 153, 0.9))"
+                    : "rgba(147, 51, 234, 0.1)"
+                }}
+                transition={{ duration: 0.3 }}
               >
                 {link.name}
                 <motion.span 
-                  className={`absolute bottom-0 left-0 w-full h-0.5 rounded-full bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500`}
+                  className={`absolute -bottom-1.5 left-0 w-full h-0.5 rounded-full bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500`}
                   initial={{ scaleX: 0, opacity: 0 }}
                   animate={{ 
                     scaleX: active === link.href ? 1 : 0,
@@ -181,7 +192,7 @@ const Navbar = () => {
                     filter: active === link.href ? 'drop-shadow(0 0 2px rgba(168, 85, 247, 0.5))' : 'none'
                   }}
                 ></motion.span>
-              </a>
+              </motion.a>
             </motion.li>
           ))}
         </ul>

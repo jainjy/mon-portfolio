@@ -12,7 +12,8 @@ import { Hero } from "./components/sections/Hero";
 import { About } from "./components/sections/About";
 import { ThemeProvider } from "./context/ThemeContext";
 import { LanguageProvider } from "./context/LanguageContext";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 function App() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -63,13 +64,21 @@ function App() {
   // Initial app loader logic
   useEffect(() => {
     const start = Date.now();
-    const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-    const slow = !!(conn && ((conn.effectiveType && (conn.effectiveType === 'slow-2g' || conn.effectiveType === '2g')) || conn.saveData));
+    const conn =
+      navigator.connection ||
+      navigator.mozConnection ||
+      navigator.webkitConnection;
+    const slow = !!(
+      conn &&
+      ((conn.effectiveType &&
+        (conn.effectiveType === "slow-2g" || conn.effectiveType === "2g")) ||
+        conn.saveData)
+    );
     const minDuration = slow ? 2200 : 1100;
 
     // Lock body scroll while loading
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
 
     const complete = () => {
       const elapsed = Date.now() - start;
@@ -82,13 +91,13 @@ function App() {
 
     let timerId;
 
-    if (document.readyState === 'complete') {
+    if (document.readyState === "complete") {
       timerId = complete();
     } else {
       const onLoad = () => {
         timerId = complete();
       };
-      window.addEventListener('load', onLoad, { once: true });
+      window.addEventListener("load", onLoad, { once: true });
       // Fallback in case load doesn't fire
       setTimeout(() => {
         if (!timerId) {
@@ -97,7 +106,7 @@ function App() {
       }, minDuration + 1200);
 
       return () => {
-        window.removeEventListener('load', onLoad);
+        window.removeEventListener("load", onLoad);
         if (timerId) clearTimeout(timerId);
       };
     }
@@ -110,8 +119,8 @@ function App() {
   // Restore scroll when loading ends
   useEffect(() => {
     if (!isLoading) {
-      document.documentElement.style.overflow = '';
-      document.body.style.overflow = '';
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
     }
   }, [isLoading]);
 
@@ -144,6 +153,13 @@ function App() {
       behavior: "smooth",
     });
   };
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // durée de l'animation
+      once: true, // animation une seule fois
+      offset: 100, // distance avant déclenchement
+    });
+  }, []);
 
   return (
     <ThemeProvider>
@@ -162,14 +178,14 @@ function App() {
           <div className="fixed top-0 left-0 w-full h-1 bg-transparent z-[100]">
             <motion.div
               className="h-full bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500 backdrop-blur-sm"
-              style={{ 
+              style={{
                 width: `${scrollProgress}%`,
-                boxShadow: '0 0 10px rgba(168, 85, 247, 0.5)'
+                boxShadow: "0 0 10px rgba(168, 85, 247, 0.5)",
               }}
               initial={{ width: 0 }}
-              animate={{ 
+              animate={{
                 width: `${scrollProgress}%`,
-                transition: { duration: 0.3 }
+                transition: { duration: 0.3 },
               }}
             >
               <div className="absolute right-0 top-0 h-full w-5 bg-white/20 blur-sm" />

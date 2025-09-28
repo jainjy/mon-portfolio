@@ -76,6 +76,7 @@ export const About = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
         className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4 py-20 relative"
+        
       >
         <div className="absolute inset-0 bg-gradient-to-br from-purple-50/50 to-pink-50/50 dark:from-purple-900/50 dark:to-pink-900/50"></div>
 
@@ -114,7 +115,8 @@ export const About = () => {
             ].map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, scale: 0.95 }}
+                //initial={{ opacity: 0, scale: 0.95 }}
+                data-aos="slide-left"
                 whileInView={{ opacity: 1, scale: 1 }}
                 whileHover={{ scale: 1.05 }}
                 viewport={{ once: true }}
@@ -154,8 +156,9 @@ export const About = () => {
               <div className="space-y-4">
                 {languages.map((lang, index) => (
                   <motion.div
+                  data-aos="slide-right"
                     key={index}
-                    initial={{ opacity: 0, scale: 0.95 }}
+                    // initial={{ opacity: 0, scale: 0.95 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.3, delay: index * 0.1 }}

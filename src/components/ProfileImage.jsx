@@ -26,6 +26,7 @@ const ProfileImage = () => {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 1.2, ease: "easeOut" }}
       className="relative mb-10 flex justify-center"
+      
     >
       {/* Glow animé autour */}
       <motion.div

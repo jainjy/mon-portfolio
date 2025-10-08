@@ -4,6 +4,8 @@ import { FaBars, FaTimes, FaSun, FaMoon } from "react-icons/fa";
 import { useTheme } from "../context/ThemeContext";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../data/translations";
+import { BiCode, BiFolderOpen, BiHome, BiLogoGmail, BiUser } from "react-icons/bi";
+
 
 // Inline SVG flag icons to avoid emoji rendering issues on some platforms
 const FlagFR = ({ className = "w-5 h-5" }) => (
@@ -99,11 +101,11 @@ const Navbar = () => {
   }, []);
 
   const links = [
-    { name: t.nav.home, href: "#home" },
-    { name: t.nav.about, href: "#about" },
-    { name: t.nav.skills, href: "#skills" },
-    { name: t.nav.projects, href: "#projects" },
-    { name: t.nav.contact, href: "#contact" },
+    { name: t.nav.home, href: "#home", icon: BiHome },
+    { name: t.nav.about, href: "#about", icon: BiUser },
+    { name: t.nav.skills, href: "#skills", icon: BiCode },
+    { name: t.nav.projects, href: "#projects", icon: BiFolderOpen },
+    { name: t.nav.contact, href: "#contact", icon: BiLogoGmail },
   ];
 
   const handleClick = (href) => {
@@ -141,60 +143,67 @@ const Navbar = () => {
 
         {/* Modifier le breakpoint de md: à lg: et ajuster l'espacement */}
         <ul className="hidden lg:flex space-x-4 xl:space-x-8">
-          {links.map((link, index) => (
-            <motion.li 
-              key={link.name} 
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="whitespace-nowrap"
-            >
-              <motion.a
-                href={link.href}
-                onClick={() => handleClick(link.href)}
-                className={`relative px-3 sm:px-4 py-2 rounded transition-all duration-300 text-sm sm:text-base ${
-                  active === link.href 
-                    ? "text-white font-semibold" 
-                    : !scrolled && isHome 
-                      ? 'text-white hover:text-purple-200' 
-                      : 'text-gray-700 dark:text-white hover:text-purple-600 dark:hover:text-purple-400'
-                }`}
-                animate={{
-                  background: active === link.href 
-                    ? "linear-gradient(135deg, rgba(147, 51, 234, 0.8), rgba(236, 72, 153, 0.8))"
-                    : "transparent"
-                }}
-                whileHover={{
-                  background: active === link.href 
-                    ? "linear-gradient(135deg, rgba(147, 51, 234, 0.9), rgba(236, 72, 153, 0.9))"
-                    : "rgba(147, 51, 234, 0.1)"
-                }}
-                transition={{ duration: 0.3 }}
+          {links.map((link, index) => {
+            const IconComponent = link.icon;
+            return (
+              <motion.li 
+                key={link.name} 
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="whitespace-nowrap"
               >
-                {link.name}
-                <motion.span 
-                  className={`absolute -bottom-1.5 left-0 w-full h-0.5 rounded-full bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500`}
-                  initial={{ scaleX: 0, opacity: 0 }}
-                  animate={{ 
-                    scaleX: active === link.href ? 1 : 0,
-                    opacity: active === link.href ? 1 : 0
+                <motion.a
+                  href={link.href}
+                  onClick={() => handleClick(link.href)}
+                  className={`relative px-3 sm:px-4 py-2 rounded transition-all duration-300 text-sm sm:text-base flex items-center gap-2 ${
+                    active === link.href 
+                      ? "text-white font-semibold" 
+                      : !scrolled && isHome 
+                        ? 'text-white hover:text-purple-200' 
+                        : 'text-gray-700 dark:text-white hover:text-purple-600 dark:hover:text-purple-400'
+                  }`}
+                  animate={{
+                    background: active === link.href 
+                      ? "linear-gradient(135deg, rgba(147, 51, 234, 0.8), rgba(236, 72, 153, 0.8))"
+                      : "transparent"
                   }}
-                  whileHover={{ 
-                    scaleX: 1, 
-                    opacity: 1,
-                    boxShadow: '0 0 8px rgba(168, 85, 247, 0.5)'
+                  whileHover={{
+                    background: active === link.href 
+                      ? "linear-gradient(135deg, rgba(147, 51, 234, 0.9), rgba(236, 72, 153, 0.9))"
+                      : "rgba(147, 51, 234, 0.1)"
                   }}
-                  transition={{ 
-                    duration: 0.5,
-                    ease: "easeInOut"
-                  }}
-                  style={{
-                    filter: active === link.href ? 'drop-shadow(0 0 2px rgba(168, 85, 247, 0.5))' : 'none'
-                  }}
-                ></motion.span>
-              </motion.a>
-            </motion.li>
-          ))}
+                  transition={{ duration: 0.3 }}
+                >
+                  <IconComponent 
+                    size={18} 
+                    className={active === link.href ? "text-white" : ""}
+                  />
+                  {link.name}
+                  <motion.span 
+                    className={`absolute -bottom-1.5 left-0 w-full h-0.5 rounded-full bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500`}
+                    initial={{ scaleX: 0, opacity: 0 }}
+                    animate={{ 
+                      scaleX: active === link.href ? 1 : 0,
+                      opacity: active === link.href ? 1 : 0
+                    }}
+                    whileHover={{ 
+                      scaleX: 1, 
+                      opacity: 1,
+                      boxShadow: '0 0 8px rgba(168, 85, 247, 0.5)'
+                    }}
+                    transition={{ 
+                      duration: 0.5,
+                      ease: "easeInOut"
+                    }}
+                    style={{
+                      filter: active === link.href ? 'drop-shadow(0 0 2px rgba(168, 85, 247, 0.5))' : 'none'
+                    }}
+                  ></motion.span>
+                </motion.a>
+              </motion.li>
+            );
+          })}
         </ul>
 
         {/* Ajuster l'espacement des boutons */}
@@ -291,26 +300,33 @@ const Navbar = () => {
             className="lg:hidden fixed top-16 left-0 w-full bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl shadow-2xl"
           >
             <ul className="flex flex-col items-center py-6 space-y-4">
-              {links.map((link, index) => (
-                <motion.li 
-                  key={link.name}
-                  initial={{ x: -100, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <a
-                    href={link.href}
-                    onClick={() => handleClick(link.href)}
-                    className={`text-gray-700 dark:text-white px-6 py-3 rounded-full transition-all duration-300 ${
-                      active === link.href 
-                        ? "bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900 dark:to-pink-900 text-purple-600 dark:text-purple-400 font-semibold" 
-                        : "hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 dark:hover:from-purple-900/50 dark:hover:to-pink-900/50 hover:text-purple-600 dark:hover:text-purple-400"
-                    }`}
+              {links.map((link, index) => {
+                const IconComponent = link.icon;
+                return (
+                  <motion.li 
+                    key={link.name}
+                    initial={{ x: -100, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: index * 0.1 }}
                   >
-                    {link.name}
-                  </a>
-                </motion.li>
-              ))}
+                    <a
+                      href={link.href}
+                      onClick={() => handleClick(link.href)}
+                      className={`text-gray-700 dark:text-white px-6 py-3 rounded-full transition-all duration-300 flex items-center gap-3 ${
+                        active === link.href 
+                          ? "bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900 dark:to-pink-900 text-purple-600 dark:text-purple-400 font-semibold" 
+                          : "hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 dark:hover:from-purple-900/50 dark:hover:to-pink-900/50 hover:text-purple-600 dark:hover:text-purple-400"
+                      }`}
+                    >
+                      <IconComponent 
+                        size={20} 
+                        className={active === link.href ? "text-purple-600 dark:text-purple-400" : ""}
+                      />
+                      {link.name}
+                    </a>
+                  </motion.li>
+                );
+              })}
             </ul>
           </motion.div>
         )}

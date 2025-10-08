@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import data from "../../data/data";
-import { motion } from "framer-motion";
 import { FaCode, FaHeart, FaGraduationCap } from "react-icons/fa";
 import { useLanguage } from "../../context/LanguageContext";
 import { translations } from "../../data/translations";
@@ -13,11 +14,9 @@ const FormationXp = () => {
   return (
     <>
       <div className="mt-20 grid md:grid-cols-1 gap-8">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+        <div
+          data-aos="fade-up"
+          data-aos-delay="100"
         >
           <h3 className="text-3xl font-bold mb-8 text-gray-800 dark:text-gray-100 flex items-center gap-3">
             <FaGraduationCap className="text-purple-600 dark:text-purple-400" />
@@ -25,14 +24,11 @@ const FormationXp = () => {
           </h3>
           <div className="space-y-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
             {education.map((edu, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                whileHover={{ boxShadow: "0px 10px 20px rgba(0,0,0,0.1)" }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: index * 0.2 }}
-                className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border-l-4 border-purple-500 dark:border-purple-400"
+                data-aos="fade-right"
+                data-aos-delay={index * 100 + 200}
+                className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border-l-4 border-purple-500 dark:border-purple-400 transition-all duration-300 hover:shadow-xl"
               >
                 <div className="flex items-start gap-4">
                   <div className="bg-purple-100 dark:bg-purple-900/50 p-3 rounded-full">
@@ -50,10 +46,10 @@ const FormationXp = () => {
                     </p>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </>
   );
@@ -64,28 +60,31 @@ export const About = () => {
   const t = translations[language];
 
   const interests = data.interests[language];
-
   const languages = data.languages[language];
+
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100,
+    });
+  }, []);
+
   return (
     <>
       {/* About Section */}
-      <motion.section
+      <section
         id="about"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
+        data-aos="fade-up"
+        data-aos-delay="50"
         className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4 py-20 relative"
-        
       >
         <div className="absolute inset-0 bg-gradient-to-br from-purple-50/50 to-pink-50/50 dark:from-purple-900/50 dark:to-pink-900/50"></div>
 
         <div className="max-w-6xl mx-auto relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+          <div
+            data-aos="fade-up"
+            data-aos-delay="100"
             className="text-center mb-16"
           >
             <h2 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
@@ -93,7 +92,8 @@ export const About = () => {
             </h2>
             <div className="w-32 h-1 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 mx-auto mb-8 rounded-full"></div>
             <p className="text-xl text-gray-600">{t.about.subtitle}</p>
-          </motion.div>
+          </div>
+          
           <div className="grid md:grid-cols-2 gap-16 items-center">
             {[
               {
@@ -113,15 +113,12 @@ export const About = () => {
                 border: "border-blue-100",
               },
             ].map((item, index) => (
-              <motion.div
+              <div
                 key={index}
-                //initial={{ opacity: 0, scale: 0.95 }}
-                data-aos="slide-left"
-                whileInView={{ opacity: 1, scale: 1 }}
-                whileHover={{ scale: 1.05 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-                className={`bg-gradient-to-br ${item.bg} dark:from-purple-900 dark:to-pink-900 p-8 rounded-3xl shadow-xl border ${item.border}`}
+                data-aos={index === 0 ? "fade-right" : "fade-left"}
+                data-aos-delay={index * 100 + 200}
+                data-aos-duration="600"
+                className={`bg-gradient-to-br ${item.bg} dark:from-purple-900 dark:to-pink-900 p-8 rounded-3xl shadow-xl border ${item.border} transition-transform duration-300 hover:scale-105`}
               >
                 <div className="flex items-center mb-6">
                   <div
@@ -136,7 +133,7 @@ export const About = () => {
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
                   {item.description}
                 </p>
-              </motion.div>
+              </div>
             ))}
           </div>
 
@@ -144,24 +141,19 @@ export const About = () => {
 
           {/* Langues et Centres d'intérêt */}
           <div className="mt-20 grid md:grid-cols-2 gap-8">
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
+            <div
+              data-aos="fade-up"
+              data-aos-delay="100"
             >
               <h3 className="text-3xl font-bold mb-8 text-gray-800 dark:text-gray-100">
                 {t.about.languages}
               </h3>
               <div className="space-y-4">
                 {languages.map((lang, index) => (
-                  <motion.div
-                  data-aos="slide-right"
+                  <div
                     key={index}
-                    // initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                    data-aos="fade-right"
+                    data-aos-delay={index * 100 + 200}
                     className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700"
                   >
                     <div className="flex justify-between items-center">
@@ -173,59 +165,46 @@ export const About = () => {
                       </span>
                     </div>
                     <div className="mt-2 bg-gray-200 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
-                      <motion.div
-                        className="bg-gradient-to-r from-purple-500 to-pink-500 h-full rounded-full"
-                        initial={{ width: 0 }}
-                        whileInView={{
-                          width:
-                            lang.level === "Courant"
-                              ? "90%"
-                              : lang.level === "Débutant"
-                              ? "40%"
-                              : "100%",
+                      <div
+                        className="bg-gradient-to-r from-purple-500 to-pink-500 h-full rounded-full transition-all duration-1000 ease-out"
+                        style={{
+                          width: 
+                            lang.level === "Courant" ? "90%" :
+                            lang.level === "Débutant" ? "40%" : "100%"
                         }}
-                        transition={{ duration: 1, ease: "easeOut" }}
-                      ></motion.div>
+                      ></div>
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+            <div
+              data-aos="fade-up"
+              data-aos-delay="200"
             >
               <h3 className="text-3xl font-bold mb-8 text-gray-800 dark:text-gray-100">
                 {t.about.interests}
               </h3>
               <div className="grid grid-cols-2 gap-4">
                 {interests.map((interest, index) => (
-                  <motion.div
+                  <div
                     key={index}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    whileHover={{
-                      scale: 1.05,
-                      boxShadow: "0px 10px 20px rgba(0,0,0,0.1)",
-                    }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
-                    className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 flex flex-col items-center justify-center text-center"
+                    data-aos="zoom-in"
+                    data-aos-delay={index * 100 + 300}
+                    className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 flex flex-col items-center justify-center text-center transition-all duration-300 hover:scale-105 hover:shadow-lg"
                   >
                     <interest.icon className="text-4xl mb-3 text-purple-600 dark:text-purple-400" />
                     <span className="text-lg font-medium text-gray-800 dark:text-gray-100">
                       {interest.name}
                     </span>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
-      </motion.section>
+      </section>
     </>
   );
 };

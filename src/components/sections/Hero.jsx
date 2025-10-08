@@ -1,9 +1,10 @@
-import { motion } from "framer-motion";
-import React from "react";
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import ParticleBackground from "../ParticleBackground";
 import ProfileImage from "../ProfileImage";
 import AnimatedText from "../AnimatedText";
-import { FaRocket, FaEye, FaDownload } from "react-icons/fa";
+import { FaRocket, FaDownload } from "react-icons/fa";
 import { useLanguage } from "../../context/LanguageContext";
 import { translations } from "../../data/translations";
 
@@ -11,58 +12,38 @@ export const Hero = ({ mousePosition }) => {
   const { language } = useLanguage();
   const t = translations[language];
 
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100,
+    });
+  }, []);
+
   return (
     <>
       {/* Hero Section */}
-      <motion.section
+      <section
         id="home"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
+        data-aos="fade-up"
+        data-aos-delay="100"
         className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 dark:from-gray-900 dark:via-purple-900 dark:to-indigo-900 overflow-hidden pt-16"
       >
         <ParticleBackground density={100} />
 
-        <motion.div
-          className="absolute w-96 h-96 rounded-full bg-gradient-to-r from-purple-500/40 to-pink-500/40 blur-3xl pointer-events-none"
+        <div
+          className="absolute w-96 h-96 rounded-full bg-gradient-to-r from-purple-500/40 to-pink-500/40 blur-3xl pointer-events-none animate-pulse-slow"
           style={{
             left: `${mousePosition.x}px`,
             top: `${mousePosition.y}px`,
             transform: "translate(-50%, -50%)",
           }}
-          animate={{ scale: [1, 1.2, 1] }}
-          transition={{ duration: 1, repeat: Infinity }}
         />
 
         <div className="absolute inset-0 pointer-events-none">
-          <motion.div
-            initial={{ y: 0 }}
-            animate={{ y: -20 }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              repeatType: "reverse",
-            }}
-            className="absolute top-20 left-10 w-20 h-20 border border-purple-400/30 rotate-45"
-          ></motion.div>
-          <motion.div
-            initial={{ y: 0 }}
-            animate={{ y: -20 }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              repeatType: "reverse",
-              delay: 0.5,
-            }}
-            className="absolute top-40 right-20 w-16 h-16 bg-pink-500/20 rounded-full"
-          ></motion.div>
-          <motion.div
-            initial={{ scale: 1 }}
-            animate={{ scale: [1, 1.1, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="absolute bottom-40 left-20 w-12 h-12 bg-blue-500/20 transform rotate-45"
-          ></motion.div>
+          <div className="absolute top-20 left-10 w-20 h-20 border border-purple-400/30 rotate-45 animate-float"></div>
+          <div className="absolute top-40 right-20 w-16 h-16 bg-pink-500/20 rounded-full animate-float-delayed"></div>
+          <div className="absolute bottom-40 left-20 w-12 h-12 bg-blue-500/20 transform rotate-45 animate-pulse"></div>
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto mt-16">
@@ -100,87 +81,50 @@ export const Hero = ({ mousePosition }) => {
           </div>
 
           {/* Section des boutons en bas */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+          <div
+            data-aos="fade-up"
+            data-aos-delay="400"
             className="flex flex-wrap justify-center gap-4 sm:flex-nowrap mt-12 lg:mt-20"
           >
-            <motion.a
+            <a
               href="#contact"
-              whileHover={{
-                scale: 1.1,
-                boxShadow: "0px 0px 20px rgba(168, 85, 247, 0.5)",
-              }}
-              transition={{ duration: 0.5 }}
               className="group bg-gradient-to-r from-purple-600 to-pink-600 text-white 
                          px-8 sm:px-12 py-4 text-base 
                          rounded-full flex justify-center items-center gap-3 
-                         relative overflow-hidden cursor-pointer w-[48%] sm:w-auto"
+                         relative overflow-hidden cursor-pointer w-[48%] sm:w-auto transition-all duration-300 hover:scale-105 hover:shadow-2xl"
             >
-              <motion.div
-                className="absolute inset-0 bg-white/20 scale-x-0 origin-left"
-                whileHover={{ scaleX: 1 }}
-                transition={{ duration: 0.5 }}
-              ></motion.div>
+              <div className="absolute inset-0 bg-white/20 scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></div>
               <FaRocket className="group-hover:animate-bounce relative z-10" />
               <span className="relative z-10">{t.hero.contact}</span>
-            </motion.a>
+            </a>
 
-            <motion.a
+            <a
               href="/CV.pdf"
               download
-              whileHover={{
-                scale: 1.1,
-                backgroundColor: "rgba(236, 72, 153, 0.2)",
-                color: "#fff",
-              }}
-              transition={{ duration: 0.5 }}
               className="border-2 border-pink-400 text-pink-400 
                          px-8 sm:px-12 py-4 text-base
                          rounded-full flex justify-center items-center gap-3 
-                         group cursor-pointer w-[48%] sm:w-auto"
+                         group cursor-pointer w-[48%] sm:w-auto transition-all duration-300 hover:scale-105 hover:bg-pink-500/20 hover:text-white"
             >
               <FaDownload className="group-hover:animate-bounce" />
               {t.hero.download}
-            </motion.a>
-          </motion.div>
+            </a>
+          </div>
 
-          <motion.div
+          <div
+            data-aos="fade-up"
+            data-aos-delay="600"
             className="flex justify-center mt-10 mb-10"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2 }}
           >
-            <motion.div
-              animate={{ y: [0, 15, 0] }}
-              transition={{ 
-                duration: 2.5, 
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-              className="relative"
-            >
+            <div className="animate-bounce relative">
               <div className="w-6 h-10 border-2 border-purple-400/40 rounded-full flex justify-center relative overflow-hidden">
-                <motion.div 
-                  className="w-1 h-3 bg-gradient-to-b from-purple-400 to-pink-600 rounded-full mt-2"
-                  animate={{
-                    scaleY: [1, 0.5, 1],
-                    opacity: [1, 0.7, 1],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                />
+                <div className="w-1 h-3 bg-gradient-to-b from-purple-400 to-pink-600 rounded-full mt-2 animate-ping-slow" />
               </div>
               <div className="absolute inset-0 bg-purple-500/20 rounded-full blur-md animate-pulse"></div>
-            </motion.div>
-          </motion.div>
-       
+            </div>
+          </div>
         </div>
-      </motion.section>
+      </section>
     </>
   );
 };

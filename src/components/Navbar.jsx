@@ -152,7 +152,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6 flex justify-between items-center h-16">
         {/* Logo avec taille réduite sur mobile */}
         <motion.div
-          className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-600 via-yellow-600 to-blue-600 bg-clip-text text-transparent"
+          className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-700 via-purple-500 to-pink-500/80 bg-clip-text text-transparent"
           animate={{ scale: [1, 1.05, 1] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
@@ -307,7 +307,7 @@ const Navbar = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsDark(!isDark)}
-            className="p-2 rounded-full bg-yellow-100 dark:bg-purple-900 text-yellow-600 dark:text-purple-400 border-2 border-yellow-300 dark:border-purple-600 transition-all duration-300"
+            className="p-2 rounded-full bg-purple-100 dark:bg-yellow-900 text-purple-600 dark:text-yellow-400 border-2 border-purple-300 dark:border-yellow-400 transition-all duration-300"
           >
             {isDark ? <FaSun size={20} /> : <FaMoon size={20} />}
           </motion.button>

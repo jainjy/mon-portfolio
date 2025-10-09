@@ -28,7 +28,16 @@ export const Hero = ({ mousePosition }) => {
         data-aos="fade-up"
         data-aos-delay="100"
         className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 dark:from-gray-900 dark:via-purple-900 dark:to-indigo-900 overflow-hidden pt-16"
+        style={{
+          backgroundImage: "url('/images/bg.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundBlendMode: "overlay"
+        }}
       >
+        {/* Overlay sombre pour améliorer la lisibilité */}
+        <div className="absolute inset-0 bg-black/40 dark:bg-black/60"></div>
+        
         <ParticleBackground density={100} />
 
         <div

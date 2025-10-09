@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 const ProfileImage = () => {
   const images = [
     "/images/Andrianina.jpg", // face
-    "/images/Andrianina.png", // dos
+    "/images/Andrianina2.jpg", // dos
   ];
 
   const [isFlipped, setIsFlipped] = useState(false);

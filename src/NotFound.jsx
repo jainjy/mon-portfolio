@@ -4,7 +4,7 @@ export default function NotFound() {
       <div className="text-center">
         {/* Ajout du GIF */}
         <img 
-          src="/404.gif" 
+          src="/images/404.gif" 
           alt="Page non trouvée" 
           className="mx-auto mb-4 max-w-xs"
         />

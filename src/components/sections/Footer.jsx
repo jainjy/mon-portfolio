@@ -20,7 +20,7 @@ export default function Footer() {
   return (
     <>
       <ParticleBackground density={120} />
-      <footer className="bg-gradient-to-r from-gray-100 to-white dark:from-black dark:to-gray-900 text-center py-12 border-t border-gray-200 dark:border-gray-700 relative overflow-hidden">
+      <footer className="bg-gradient-to-r from-purple-400/90 to-yellow-500/70 dark:from-amber-900/20 dark:to-yellow-900/20 text-center py-4 border-t border-amber-200 dark:border-amber-800 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         <div className="max-w-6xl mx-auto px-4 relative z-10">
           <div className="mb-8">
@@ -34,7 +34,7 @@ export default function Footer() {
             <p 
               data-aos="fade-up"
               data-aos-delay="200"
-              className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
+              className="text-gray-700 dark:text-gray-300 max-w-2xl mx-auto"
             >
               {t.footer.description}
             </p>
@@ -57,7 +57,7 @@ export default function Footer() {
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="block px-3 py-2 text-sm sm:text-base text-gray-600 hover:text-purple-600 dark:text-gray-500 dark:hover:text-purple-400 cursor-pointer transition-colors duration-300"
+                    className="block px-3 py-2 text-sm sm:text-base text-gray-700 hover:text-purple-600 dark:text-gray-300 dark:hover:text-purple-400 cursor-pointer transition-colors duration-300"
                   >
                     {link.name}
                   </a>
@@ -69,9 +69,9 @@ export default function Footer() {
           <div 
             data-aos="fade-up"
             data-aos-delay="400"
-            className="border-t border-gray-200 dark:border-gray-700 pt-8"
+            className="border-t border-amber-200 dark:border-amber-700 pt-8"
           >
-            <p className="text-gray-600 dark:text-gray-400 mb-2">
+            <p className="text-gray-700 dark:text-gray-300 mb-2">
               {t.footer.rights}
             </p>
           </div>

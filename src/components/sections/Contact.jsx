@@ -35,7 +35,17 @@ export const Contact = ({ mousePosition }) => {
         data-aos="fade-up"
         data-aos-delay="100"
         className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 dark:from-gray-900 dark:via-purple-900 dark:to-indigo-900 px-4 py-20 relative overflow-hidden"
+        style={{
+          backgroundImage: "url('/images/bg.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundBlendMode: "overlay",
+          backgroundAttachment: "fixed"
+        }}
       >
+        {/* Overlay sombre pour améliorer la lisibilité */}
+        <div className="absolute inset-0 bg-black/50 dark:bg-black/70"></div>
+        
         <ParticleBackground density={100} />
 
         <div

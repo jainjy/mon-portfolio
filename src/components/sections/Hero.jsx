@@ -32,12 +32,12 @@ export const Hero = ({ mousePosition }) => {
           backgroundImage: "url('/images/bg.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          backgroundBlendMode: "overlay"
+          backgroundBlendMode: "overlay",
         }}
       >
         {/* Overlay sombre pour améliorer la lisibilité */}
         <div className="absolute inset-0 bg-black/40 dark:bg-black/60"></div>
-        
+
         <ParticleBackground density={100} />
 
         <div
@@ -126,8 +126,8 @@ export const Hero = ({ mousePosition }) => {
             className="flex justify-center mt-10 mb-10"
           >
             <div className="animate-bounce relative">
-              <div className="w-6 h-10 border-2 border-purple-400/40 rounded-full flex justify-center relative overflow-hidden">
-                <div className="w-1 h-3 bg-gradient-to-b from-purple-400 to-pink-600 rounded-full mt-2 animate-ping-slow" />
+              <div className="w-8 h-12 border-4 border-purple-400/70 rounded-full flex justify-center relative overflow-hidden">
+                <div className="w-1 h-3 bg-gradient-to-b from-purple-500 via-purple-800 to-white rounded-full mt-2 animate-ping-slow" />
               </div>
               <div className="absolute inset-0 bg-purple-500/20 rounded-full blur-md animate-pulse"></div>
             </div>

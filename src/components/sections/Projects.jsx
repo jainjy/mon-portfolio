@@ -72,7 +72,7 @@ export const Projects = () => {
                 key={project.title}
                 data-aos="fade-up"
                 data-aos-delay={index * 100 + 300}
-                className="group bg-gradient-to-br from-yellow-200/80 via-white to-purple-200/80 dark:bg-gradient-to-br dark:from-yellow-900/10 dark:via-gray-800/80 dark:to-purple-900/10 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden border  relative h-full flex flex-col ring-1 ring-yellow-200/30 dark:ring-yellow-600/10 hover:ring-yellow-400/40 transition-all duration-300 hover:-translate-y-2"
+                className="group bg-gradient-to-br from-yellow-200/80 via-white to-purple-200/90  dark:bg-gradient-to-br dark:from-yellow-900/30 dark:via-gray-800/80 dark:to-purple-900/30 backdrop-blur-sm   rounded-t-xl shadow-2xl overflow-hidden   relative h-full flex flex-col ring-1 ring-yellow-200/30 dark:ring-yellow-600/10 hover:ring-yellow-400/40 transition-all duration-300 hover:-translate-y-2"
               >
                 {/* Accent bar avec dégradé jaune */}
                 <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-yellow-400 via-purple-500 to-yellow-400" />

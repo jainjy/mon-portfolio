@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaArrowUp } from "react-icons/fa";
-import Loader from "./components/Loader";
+// Importation de React Router
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
+import Loader from "./components/Loader";
 import Navbar from "./components/Navbar";
+import NotFound from "./NotFound";
 import Footer from "./components/sections/Footer";
 import { Contact } from "./components/sections/Contact";
 import { Projects } from "./components/sections/Projects";
@@ -14,6 +17,20 @@ import { ThemeProvider } from "./context/ThemeContext";
 import { LanguageProvider } from "./context/LanguageContext";
 import AOS from "aos";
 import "aos/dist/aos.css";
+
+// Composant qui regroupe toutes les sections de la page d'accueil
+const HomePage = ({ mousePosition }) => (
+  <>
+    <Navbar />
+    <Hero mousePosition={mousePosition} />
+    <About />
+    <Skills />
+    <Projects />
+    <Contact mousePosition={mousePosition} />
+    <Footer />
+  </>
+);
+
 function App() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -164,61 +181,63 @@ function App() {
   return (
     <ThemeProvider>
       <LanguageProvider>
-        <AnimatePresence>{isLoading && <Loader />}</AnimatePresence>
-        <div className="scroll-smooth font-sans text-gray-800 dark:text-gray-200 overflow-x-hidden bg-white dark:bg-gray-900 transition-colors duration-300">
-          {/* Curseur personnalisé */}
-          <motion.div
-            ref={cursorRef}
-            className="fixed top-0 left-0 rounded-full pointer-events-none z-[1000]"
-            variants={cursorVariants}
-            animate={cursorVariant}
-          />
-
-          {/* Barre de progression modifiée */}
-          <div className="fixed top-0 left-0 w-full h-1 bg-transparent z-[100]">
+        <BrowserRouter> {/* Ajout du BrowserRouter en haut */}
+          <AnimatePresence>{isLoading && <Loader />}</AnimatePresence>
+          <div className="scroll-smooth font-sans text-gray-800 dark:text-gray-200 overflow-x-hidden bg-white dark:bg-gray-900 transition-colors duration-300">
+            {/* Curseur personnalisé */}
             <motion.div
-              className="h-full bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500 backdrop-blur-sm"
-              style={{
-                width: `${scrollProgress}%`,
-                boxShadow: "0 0 10px rgba(168, 85, 247, 0.5)",
-              }}
-              initial={{ width: 0 }}
-              animate={{
-                width: `${scrollProgress}%`,
-                transition: { duration: 0.3 },
-              }}
-            >
-              <div className="absolute right-0 top-0 h-full w-5 bg-white/20 blur-sm" />
-            </motion.div>
-          </div>
+              ref={cursorRef}
+              className="fixed top-0 left-0 rounded-full pointer-events-none z-[1000]"
+              variants={cursorVariants}
+              animate={cursorVariant}
+            />
 
-          <AnimatePresence>
-            {showScrollTop && (
-              <motion.button
-                onClick={scrollToTop}
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.5 }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="fixed bottom-8 right-8 p-4 rounded-full bg-purple-600/70 text-white shadow-lg cursor-pointer z-50 hover:bg-purple-700 transition-colors duration-300"
+            {/* Barre de progression modifiée */}
+            <div className="fixed top-0 left-0 w-full h-1 bg-transparent z-[100]">
+              <motion.div
+                className="h-full bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500 backdrop-blur-sm"
+                style={{
+                  width: `${scrollProgress}%`,
+                  boxShadow: "0 0 10px rgba(168, 85, 247, 0.5)",
+                }}
+                initial={{ width: 0 }}
+                animate={{
+                  width: `${scrollProgress}%`,
+                  transition: { duration: 0.3 },
+                }}
               >
-                <FaArrowUp className="text-xl" />
-                <div className="absolute inset-0 rounded-full bg-purple-400 animate-ping opacity-25"></div>
-              </motion.button>
-            )}
-          </AnimatePresence>
+                <div className="absolute right-0 top-0 h-full w-5 bg-white/20 blur-sm" />
+              </motion.div>
+            </div>
 
-          <Navbar />
-          <Hero mousePosition={mousePosition} />
-          <About />
-          <Skills />
-          <Projects />
-          <Contact mousePosition={mousePosition} />
+            <AnimatePresence>
+              {showScrollTop && (
+                <motion.button
+                  onClick={scrollToTop}
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.5 }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="fixed bottom-8 right-8 p-4 rounded-full bg-purple-600/70 text-white shadow-lg cursor-pointer z-50 hover:bg-purple-700 transition-colors duration-300"
+                >
+                  <FaArrowUp className="text-xl" />
+                  <div className="absolute inset-0 rounded-full bg-purple-400 animate-ping opacity-25"></div>
+                </motion.button>
+              )}
+            </AnimatePresence>
 
-          {/* Footer */}
-          <Footer />
-        </div>
+            {/* --- Définition des Routes --- */}
+            <Routes>
+              {/* Route principale (Page d'accueil) */}
+              <Route path="/" element={<HomePage mousePosition={mousePosition} />} />
+              {/* Route 404 - Le chemin '*' attrape toutes les routes non définies */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            {/* ------------------------------- */}
+
+          </div>
+        </BrowserRouter> {/* Fermeture du BrowserRouter */}
       </LanguageProvider>
     </ThemeProvider>
   );

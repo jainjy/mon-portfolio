@@ -341,7 +341,7 @@ const Navbar = () => {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: "-100%", opacity: 0 }}
             transition={{ duration: 0.5 }}
-            className="lg:hidden fixed top-16 left-0 w-full bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl shadow-2xl"
+            className="lg:hidden fixed top-16 left-0 w-full bg-white/90 dark:bg-gray-900/95 backdrop-blur-xl shadow-2xl rounded-b-2xl"
           >
             <ul className="flex flex-col items-center py-6 space-y-4">
               {links.map((link, index) => {
@@ -358,7 +358,7 @@ const Navbar = () => {
                       onClick={() => handleClick(link.href)}
                       className={`text-gray-700 dark:text-white px-6 py-3 rounded-full transition-all duration-300 flex items-center gap-3 ${
                         active === link.href
-                          ? "bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900 dark:to-pink-900 text-purple-600 dark:text-purple-400 font-semibold"
+                          ? "bg-gradient-to-r from-purple-300 to-yellow-200 dark:from-purple-900 dark:to-pink-900 text-purple-600 dark:text-purple-400 font-semibold"
                           : "hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 dark:hover:from-purple-900/50 dark:hover:to-pink-900/50 hover:text-purple-600 dark:hover:text-purple-400"
                       }`}
                     >

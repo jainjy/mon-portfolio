@@ -2,9 +2,16 @@ import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import data from "../../data/data";
-import { FaCode, FaHeart, FaGraduationCap } from "react-icons/fa";
+import {
+  FaCode,
+  FaHeart,
+  FaGraduationCap,
+  FaPlay,
+  FaTasks,
+} from "react-icons/fa";
 import { useLanguage } from "../../context/LanguageContext";
 import { translations } from "../../data/translations";
+import { FaLanguage } from "react-icons/fa6";
 
 const FormationXp = () => {
   const { language } = useLanguage();
@@ -14,10 +21,7 @@ const FormationXp = () => {
   return (
     <>
       <div className="mt-20 grid md:grid-cols-1 gap-8">
-        <div
-          data-aos="fade-up"
-          data-aos-delay="100"
-        >
+        <div data-aos="fade-up" data-aos-delay="100">
           <h3 className="text-3xl font-bold mb-8 text-gray-800 dark:text-gray-100 flex items-center gap-3">
             <FaGraduationCap className="text-purple-600 dark:text-purple-400" />
             {t.about.education.title}
@@ -78,29 +82,31 @@ export const About = () => {
         data-aos="fade-up"
         data-aos-delay="50"
         className="min-h-screen flex items-center justify-center  px-0 relative overflow-hidden"
-
       >
-        <div className="w-full relative z-10 dark:bg-gray-900/70 px-4 py-10"
+        <div
+          className="w-full relative z-10 dark:bg-gray-900/70 px-4 py-10"
           style={{
-          backgroundImage: "url('/images/bg2.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed",
-          backgroundBlendMode: "overlay"
-        }}
+            backgroundImage: "url('/images/bg2.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundAttachment: "fixed",
+            backgroundBlendMode: "overlay",
+          }}
         >
           <div
             data-aos="fade-up"
             data-aos-delay="100"
             className="text-center mb-16"
           >
-<h2 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-500 via-purple-600 to-pink-600 dark:from-yellow-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
-  {t.about.title}
-</h2>
+            <h2 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-500 via-purple-600 to-pink-600 dark:from-yellow-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
+              {t.about.title}
+            </h2>
             <div className="w-32 h-1 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 mx-auto mb-8 rounded-full"></div>
-            <p className="text-xl text-gray-700 dark:text-gray-300">{t.about.subtitle}</p>
+            <p className="text-xl text-gray-700 dark:text-gray-300">
+              {t.about.subtitle}
+            </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 gap-16 items-center">
             {[
               {
@@ -148,13 +154,17 @@ export const About = () => {
 
           {/* Langues et Centres d'intérêt */}
           <div className="mt-20 grid md:grid-cols-2 gap-8">
-            <div
-              data-aos="fade-up"
-              data-aos-delay="100"
-            >
-              <h3 className="text-3xl font-bold mb-8 text-gray-800 dark:text-gray-100">
-                {t.about.languages}
-              </h3>
+            <div data-aos="fade-up" data-aos-delay="100">
+              <div className="flex items-center mb-8">
+                <div
+                  className={`w-14 bg-gradient-to-r  rounded-full flex items-center justify-center`}
+                >
+                  <FaLanguage className="text-purple-700 dark:text-purple-400 text-3xl" />
+                </div>
+                <h3 className="text-3xl font-bold text-gray-800 dark:text-gray-100">
+                  {t.about.languages}
+                </h3>
+              </div>
               <div className="space-y-4">
                 {languages.map((lang, index) => (
                   <div
@@ -175,9 +185,12 @@ export const About = () => {
                       <div
                         className="bg-gradient-to-r from-purple-500/90 to-yellow-400/90 h-full rounded-full transition-all duration-1000 ease-out"
                         style={{
-                          width: 
-                            lang.level === "Courant" ? "90%" :
-                            lang.level === "Débutant" ? "40%" : "100%"
+                          width:
+                            lang.level === "Courant"
+                              ? "90%"
+                              : lang.level === "Débutant"
+                              ? "40%"
+                              : "100%",
                         }}
                       ></div>
                     </div>
@@ -186,13 +199,17 @@ export const About = () => {
               </div>
             </div>
 
-            <div
-              data-aos="fade-up"
-              data-aos-delay="200"
-            >
-              <h3 className="text-3xl font-bold mb-8 text-gray-800 dark:text-gray-100">
-                {t.about.interests}
-              </h3>
+            <div data-aos="fade-up" data-aos-delay="200">
+              <div className="flex items-center mb-8">
+                <div
+                  className={`w-14 bg-gradient-to-r rounded-full flex items-center justify-center`}
+                >
+                  <FaTasks className="text-purple-700 dark:text-purple-400 text-3xl" />
+                </div>
+                <h3 className="text-3xl font-bold text-gray-800 dark:text-gray-100">
+                  {t.about.interests}
+                </h3>
+              </div>
               <div className="grid grid-cols-2 gap-4">
                 {interests.map((interest, index) => (
                   <div

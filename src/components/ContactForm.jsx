@@ -124,7 +124,7 @@ const ContactForm = () => {
           aria-busy={isSending}
           whileHover={{ scale: 1.05, boxShadow: '0px 0px 25px rgba(168,85,247,0.25)' }}
           transition={{ duration: 0.5 }}
-          className={`w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white p-4 rounded-xl font-bold text-lg shadow-2xl group relative overflow-hidden ${isSending ? 'opacity-80 cursor-not-allowed' : 'cursor-pointer'}`}
+          className={`w-full bg-gradient-to-r from-purple-600 to-yellow-600 text-white p-4 rounded-xl font-bold text-lg shadow-2xl group relative overflow-hidden ${isSending ? 'opacity-80 cursor-not-allowed' : 'cursor-pointer'}`}
         >
           <motion.div
             className="absolute inset-0 bg-white/10 scale-x-0 origin-left"

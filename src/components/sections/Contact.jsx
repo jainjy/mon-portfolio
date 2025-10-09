@@ -34,9 +34,9 @@ export const Contact = ({ mousePosition }) => {
         id="contact"
         data-aos="fade-up"
         data-aos-delay="100"
-        className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 dark:from-gray-900 dark:via-purple-900 dark:to-indigo-900 px-4 py-20 relative overflow-hidden"
+        className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 dark:from-gray-900 dark:via-purple-900 dark:to-indigo-900 px-4 py-10 relative overflow-hidden"
         style={{
-          backgroundImage: "url('/images/bg.jpg')",
+          backgroundImage: "url('/images/bg3.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundBlendMode: "overlay",
@@ -75,7 +75,7 @@ export const Contact = ({ mousePosition }) => {
             data-aos-delay="200"
             className="text-center mb-16"
           >
-            <h2 className="text-5xl md:text-7xl font-bold mb-6 text-white">
+            <h2 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-500 via-purple-600 to-pink-600 dark:from-yellow-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
               {t.contact.title}
             </h2>
             <div className="w-32 h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 mx-auto mb-8 rounded-full"></div>

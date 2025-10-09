@@ -28,7 +28,6 @@ import {
   SiTailwindcss,
   SiPhp,
   SiDotnet,
-  SiSymfony,
   SiC,
   SiSupabase,
 } from "react-icons/si";
@@ -66,7 +65,7 @@ import {
         { name: "Laravel", icon: FaLaravel, color: "text-red-400" },
         { name: "ASP.NET", icon: SiDotnet, color: "text-blue-600" },
         { name: "Node.js", icon: FaNodeJs, color: "text-green-600" },
-        { name: "Symfony", icon: SiSymfony, color: "text-gray-600" },
+        
       ],
     },
     {

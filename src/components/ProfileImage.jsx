@@ -45,7 +45,7 @@ const ProfileImage = () => {
 
         {/* Conteneur principal avec perspective */}
         <div
-          className="absolute inset-3 bg-white/10 backdrop-blur-lg rounded-full flex items-center justify-center shadow-xl border border-white/20 overflow-hidden perspective-1000"
+          className="absolute inset-3 bg-white/10 backdrop-blur-lg rounded-full flex items-center justify-center shadow-2xl border border-white/20 overflow-hidden perspective-1000"
           onClick={handleClick}
         >
           {/* Carte 3D */}

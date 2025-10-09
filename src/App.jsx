@@ -181,7 +181,8 @@ function App() {
   return (
     <ThemeProvider>
       <LanguageProvider>
-        <BrowserRouter> {/* Ajout du BrowserRouter en haut */}
+        <BrowserRouter>
+          {" "}
           <AnimatePresence>{isLoading && <Loader />}</AnimatePresence>
           <div className="scroll-smooth font-sans text-gray-800 dark:text-gray-200 overflow-x-hidden bg-white dark:bg-gray-900 transition-colors duration-300">
             {/* Curseur personnalisé */}
@@ -195,7 +196,7 @@ function App() {
             {/* Barre de progression modifiée */}
             <div className="fixed top-0 left-0 w-full h-1 bg-transparent z-[100]">
               <motion.div
-                className="h-full bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500 backdrop-blur-sm"
+                className="h-full bg-gradient-to-r from-purple-600 via-blue-500 to-yellow-600 backdrop-blur-sm"
                 style={{
                   width: `${scrollProgress}%`,
                   boxShadow: "0 0 10px rgba(168, 85, 247, 0.5)",
@@ -219,25 +220,28 @@ function App() {
                   exit={{ opacity: 0, scale: 0.5 }}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  className="fixed bottom-8 right-8 p-4 rounded-full bg-purple-600/70 text-white shadow-lg cursor-pointer z-50 hover:bg-purple-700 transition-colors duration-300"
+                  className="fixed bottom-8 right-8 p-4 rounded-full bg-gradient-to-br from-purple-600 via-yellow-400 to-white text-gray-800 shadow-2xl cursor-pointer z-50 hover:from-purple-700 hover:via-yellow-500 hover:to-white transition-all duration-300 group"
                 >
-                  <FaArrowUp className="text-xl" />
-                  <div className="absolute inset-0 rounded-full bg-purple-400 animate-ping opacity-25"></div>
+                  <FaArrowUp className="text-xl group-hover:scale-110 transition-transform duration-300" />
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-500 via-yellow-300 to-white animate-ping opacity-30"></div>
                 </motion.button>
               )}
             </AnimatePresence>
 
-            {/* --- Définition des Routes --- */}
+          
             <Routes>
-              {/* Route principale (Page d'accueil) */}
-              <Route path="/" element={<HomePage mousePosition={mousePosition} />} />
-              {/* Route 404 - Le chemin '*' attrape toutes les routes non définies */}
+        
+              <Route
+                path="/"
+                element={<HomePage mousePosition={mousePosition} />}
+              />
+     
               <Route path="*" element={<NotFound />} />
             </Routes>
             {/* ------------------------------- */}
-
           </div>
-        </BrowserRouter> {/* Fermeture du BrowserRouter */}
+        </BrowserRouter>{" "}
+  
       </LanguageProvider>
     </ThemeProvider>
   );

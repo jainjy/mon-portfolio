@@ -20,7 +20,7 @@ export default function Footer() {
   return (
     <>
       <ParticleBackground density={120} />
-      <footer className="bg-gradient-to-r from-purple-400/90 to-yellow-500/70 dark:from-amber-900/20 dark:to-yellow-900/20 text-center py-4 border-t border-amber-200 dark:border-amber-800 relative overflow-hidden">
+      <footer className="bg-gradient-to-r from-purple-400/90 to-yellow-500/70 dark:from-amber-900/20 dark:to-yellow-900/20 text-center py-4 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         <div className="max-w-6xl mx-auto px-4 relative z-10">
           <div className="mb-8">

@@ -4,12 +4,22 @@ import { FaBars, FaTimes, FaSun, FaMoon } from "react-icons/fa";
 import { useTheme } from "../context/ThemeContext";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../data/translations";
-import { BiCode, BiFolderOpen, BiHome, BiLogoGmail, BiUser } from "react-icons/bi";
-
+import {
+  BiCode,
+  BiFolderOpen,
+  BiHome,
+  BiLogoGmail,
+  BiUser,
+} from "react-icons/bi";
 
 // Inline SVG flag icons to avoid emoji rendering issues on some platforms
 const FlagFR = ({ className = "w-5 h-5" }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className={className} aria-hidden="true">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    className={className}
+    aria-hidden="true"
+  >
     <defs>
       <clipPath id="flag-circle">
         <circle cx="12" cy="12" r="12" />
@@ -24,7 +34,12 @@ const FlagFR = ({ className = "w-5 h-5" }) => (
 );
 
 const FlagGB = ({ className = "w-5 h-5" }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className={className} aria-hidden="true">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    className={className}
+    aria-hidden="true"
+  >
     <defs>
       <clipPath id="flag-circle-gb">
         <circle cx="12" cy="12" r="12" />
@@ -63,8 +78,8 @@ const Navbar = () => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 50;
       setScrolled(isScrolled);
-      
-      const homeSection = document.getElementById('home');
+
+      const homeSection = document.getElementById("home");
       if (homeSection) {
         const homeRect = homeSection.getBoundingClientRect();
         setIsHome(window.scrollY < homeRect.height - 100);
@@ -77,8 +92,11 @@ const Navbar = () => {
         if (section) {
           const sectionTop = section.offsetTop;
           const sectionHeight = section.offsetHeight;
-          
-          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+
+          if (
+            scrollPosition >= sectionTop &&
+            scrollPosition < sectionTop + sectionHeight
+          ) {
             setActive(sectionId);
             break;
           }
@@ -96,8 +114,8 @@ const Navbar = () => {
         setLangOpen(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const links = [
@@ -111,10 +129,10 @@ const Navbar = () => {
   const handleClick = (href) => {
     setActive(href);
     setNavOpen(false);
-    
+
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -125,16 +143,16 @@ const Navbar = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.7, ease: "easeOut" }}
       className={`fixed w-full z-[99] transition-all duration-700 ${
-        scrolled 
-          ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl shadow-2xl border-b border-purple-100/50 dark:border-purple-900/50" 
+        scrolled
+          ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl shadow-2xl border-b border-purple-100/50 dark:border-purple-900/50"
           : "bg-transparent"
       }`}
     >
       {/* Ajuster le padding et la largeur max */}
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6 flex justify-between items-center h-16">
         {/* Logo avec taille réduite sur mobile */}
-        <motion.div 
-          className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent"
+        <motion.div
+          className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-600 via-yellow-600 to-blue-600 bg-clip-text text-transparent"
           animate={{ scale: [1, 1.05, 1] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
@@ -146,8 +164,8 @@ const Navbar = () => {
           {links.map((link, index) => {
             const IconComponent = link.icon;
             return (
-              <motion.li 
-                key={link.name} 
+              <motion.li
+                key={link.name}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
@@ -157,47 +175,52 @@ const Navbar = () => {
                   href={link.href}
                   onClick={() => handleClick(link.href)}
                   className={`relative px-3 sm:px-4 py-2 rounded transition-all duration-300 text-sm sm:text-base flex items-center gap-2 ${
-                    active === link.href 
-                      ? "text-white font-semibold" 
-                      : !scrolled && isHome 
-                        ? 'text-white hover:text-purple-200' 
-                        : 'text-gray-700 dark:text-white hover:text-purple-600 dark:hover:text-purple-400'
+                    active === link.href
+                      ? "text-white font-semibold"
+                      : !scrolled && isHome
+                      ? "text-white hover:text-purple-200"
+                      : "text-gray-700 dark:text-white hover:text-purple-600 dark:hover:text-purple-400"
                   }`}
                   animate={{
-                    background: active === link.href 
-                      ? "linear-gradient(135deg, rgba(147, 51, 234, 0.8), rgba(236, 72, 153, 0.8))"
-                      : "transparent"
+                    background:
+                      active === link.href
+                        ? "linear-gradient(135deg, rgba(147, 51, 234, 0.8), rgba(236, 72, 153, 0.8),rgba(255,255,0,0.7))"
+                        : "transparent",
                   }}
                   whileHover={{
-                    background: active === link.href 
-                      ? "linear-gradient(135deg, rgba(147, 51, 234, 0.9), rgba(236, 72, 153, 0.9))"
-                      : "rgba(147, 51, 234, 0.1)"
+                    background:
+                      active === link.href
+                        ? "linear-gradient(135deg, rgba(147, 51, 234, 0.9), rgba(236, 72, 153, 0.9))"
+                        : "rgba(147, 51, 234, 0.1)",
                   }}
                   transition={{ duration: 0.3 }}
                 >
-                  <IconComponent 
-                    size={18} 
+                  <IconComponent
+                    size={18}
                     className={active === link.href ? "text-white" : ""}
                   />
                   {link.name}
-                  <motion.span 
+                  <motion.span
                     className={`absolute -bottom-1.5 left-0 w-full h-0.5 rounded-full bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500`}
                     initial={{ scaleX: 0, opacity: 0 }}
-                    animate={{ 
+                    animate={{
                       scaleX: active === link.href ? 1 : 0,
-                      opacity: active === link.href ? 1 : 0
+                      opacity: active === link.href ? 1 : 0,
                     }}
-                    whileHover={{ 
-                      scaleX: 1, 
+                    whileHover={{
+                      scaleX: 1,
                       opacity: 1,
-                      boxShadow: '0 0 8px rgba(168, 85, 247, 0.5)'
+                      boxShadow: "0 0 8px rgba(168, 85, 247, 0.5)",
                     }}
-                    transition={{ 
+                    transition={{
                       duration: 0.5,
-                      ease: "easeInOut"
+                      ease: "easeInOut",
                     }}
                     style={{
-                      filter: active === link.href ? 'drop-shadow(0 0 2px rgba(168, 85, 247, 0.5))' : 'none'
+                      filter:
+                        active === link.href
+                          ? "drop-shadow(0 0 2px rgba(168, 85, 247, 0.5))"
+                          : "none",
                     }}
                   ></motion.span>
                 </motion.a>
@@ -218,13 +241,20 @@ const Navbar = () => {
               aria-expanded={langOpen}
               className="inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 rounded-full border border-purple-200 dark:border-purple-800 bg-white/70 dark:bg-gray-900/70 text-purple-700 dark:text-purple-300 backdrop-blur text-sm sm:text-base"
             >
-              {language === 'fr' ? (
+              {language === "fr" ? (
                 <FlagFR className="w-5 h-5 rounded-[2px]" />
               ) : (
                 <FlagGB className="w-5 h-5 rounded-[2px]" />
               )}
-              <span className="hidden sm:inline font-semibold">{language.toUpperCase()}</span>
-              <motion.span animate={{ rotate: langOpen ? 180 : 0 }} className="ml-1 text-xs">▾</motion.span>
+              <span className="hidden sm:inline font-semibold">
+                {language.toUpperCase()}
+              </span>
+              <motion.span
+                animate={{ rotate: langOpen ? 180 : 0 }}
+                className="ml-1 text-xs"
+              >
+                ▾
+              </motion.span>
             </motion.button>
 
             <AnimatePresence>
@@ -234,22 +264,36 @@ const Navbar = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.15 }}
-                  className="absolute right-0 mt-2 w-36 rounded-xl border border-purple-100 dark:border-purple-800 shadow-lg bg-white dark:bg-gray-900 z-[100] overflow-hidden"
+                  className="absolute right-0 mt-2 w-36 rounded-xl border border-purple-100 dark:border-purple-800 shadow-2xl bg-white dark:bg-gray-900 z-[100] overflow-hidden"
                 >
                   <button
-                    onClick={() => { setLanguage('fr'); setLangOpen(false); }}
-                    className={`w-full flex items-center gap-2 px-3 py-2 text-sm text-left hover:bg-purple-50 dark:hover:bg-purple-900/30 ${language === 'fr' ? 'bg-purple-50 dark:bg-purple-900/30 font-semibold' : ''}`}
+                    onClick={() => {
+                      setLanguage("fr");
+                      setLangOpen(false);
+                    }}
+                    className={`w-full flex items-center gap-2 px-3 py-2 text-sm text-left hover:bg-purple-50 dark:hover:bg-purple-900/30 ${
+                      language === "fr"
+                        ? "bg-purple-50 dark:bg-purple-900/30 font-semibold"
+                        : ""
+                    }`}
                     role="option"
-                    aria-selected={language === 'fr'}
+                    aria-selected={language === "fr"}
                   >
                     <FlagFR className="w-5 h-5 rounded-[2px]" />
                     <span>Français</span>
                   </button>
                   <button
-                    onClick={() => { setLanguage('en'); setLangOpen(false); }}
-                    className={`w-full flex items-center gap-2 px-3 py-2 text-sm text-left hover:bg-purple-50 dark:hover:bg-purple-900/30 ${language === 'en' ? 'bg-purple-50 dark:bg-purple-900/30 font-semibold' : ''}`}
+                    onClick={() => {
+                      setLanguage("en");
+                      setLangOpen(false);
+                    }}
+                    className={`w-full flex items-center gap-2 px-3 py-2 text-sm text-left hover:bg-purple-50 dark:hover:bg-purple-900/30 ${
+                      language === "en"
+                        ? "bg-purple-50 dark:bg-purple-900/30 font-semibold"
+                        : ""
+                    }`}
                     role="option"
-                    aria-selected={language === 'en'}
+                    aria-selected={language === "en"}
                   >
                     <FlagGB className="w-5 h-5 rounded-[2px]" />
                     <span>English</span>
@@ -263,22 +307,22 @@ const Navbar = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsDark(!isDark)}
-            className="p-2 rounded-full bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-400"
+            className="p-2 rounded-full bg-yellow-100 dark:bg-purple-900 text-yellow-600 dark:text-purple-400 border-2 border-yellow-300 dark:border-purple-600 transition-all duration-300"
           >
             {isDark ? <FaSun size={20} /> : <FaMoon size={20} />}
           </motion.button>
 
           {/* Modifier le breakpoint du menu burger */}
           <div className="lg:hidden">
-            <button 
-              onClick={() => setNavOpen(!navOpen)} 
+            <button
+              onClick={() => setNavOpen(!navOpen)}
               className={`focus:outline-none p-2 rounded-lg transition-all duration-300 ${
-                !scrolled && isHome 
-                  ? 'text-white hover:bg-white/20' 
-                  : 'text-gray-700 dark:text-white hover:bg-purple-50 dark:hover:bg-purple-900/20'
+                !scrolled && isHome
+                  ? "text-white hover:bg-white/20"
+                  : "text-gray-700 dark:text-white hover:bg-purple-50 dark:hover:bg-purple-900/20"
               }`}
             >
-              <motion.div 
+              <motion.div
                 animate={{ rotate: navOpen ? 180 : 0 }}
                 transition={{ duration: 0.3 }}
               >
@@ -303,7 +347,7 @@ const Navbar = () => {
               {links.map((link, index) => {
                 const IconComponent = link.icon;
                 return (
-                  <motion.li 
+                  <motion.li
                     key={link.name}
                     initial={{ x: -100, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
@@ -313,14 +357,18 @@ const Navbar = () => {
                       href={link.href}
                       onClick={() => handleClick(link.href)}
                       className={`text-gray-700 dark:text-white px-6 py-3 rounded-full transition-all duration-300 flex items-center gap-3 ${
-                        active === link.href 
-                          ? "bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900 dark:to-pink-900 text-purple-600 dark:text-purple-400 font-semibold" 
+                        active === link.href
+                          ? "bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900 dark:to-pink-900 text-purple-600 dark:text-purple-400 font-semibold"
                           : "hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 dark:hover:from-purple-900/50 dark:hover:to-pink-900/50 hover:text-purple-600 dark:hover:text-purple-400"
                       }`}
                     >
-                      <IconComponent 
-                        size={20} 
-                        className={active === link.href ? "text-purple-600 dark:text-purple-400" : ""}
+                      <IconComponent
+                        size={20}
+                        className={
+                          active === link.href
+                            ? "text-purple-600 dark:text-purple-400"
+                            : ""
+                        }
                       />
                       {link.name}
                     </a>

@@ -28,7 +28,7 @@ const FormationXp = () => {
                 key={index}
                 data-aos="fade-right"
                 data-aos-delay={index * 100 + 200}
-                className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border-l-4 border-purple-500 dark:border-purple-400 transition-all duration-300 hover:shadow-xl"
+                className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-xl shadow-2xl border-l-4 border-purple-500 dark:border-purple-400 transition-all duration-300 hover:shadow-2xl hover:bg-white/90 dark:hover:bg-gray-800/90"
               >
                 <div className="flex items-start gap-4">
                   <div className="bg-purple-100 dark:bg-purple-900/50 p-3 rounded-full">
@@ -77,21 +77,28 @@ export const About = () => {
         id="about"
         data-aos="fade-up"
         data-aos-delay="50"
-        className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4 py-20 relative"
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-50/50 to-pink-50/50 dark:from-purple-900/50 dark:to-pink-900/50"></div>
+        className="min-h-screen flex items-center justify-center  px-0 relative overflow-hidden"
 
-        <div className="max-w-6xl mx-auto relative z-10">
+      >
+        <div className="w-full relative z-10 dark:bg-gray-900/70 px-4 py-10"
+          style={{
+          backgroundImage: "url('/images/bg2.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
+          backgroundBlendMode: "overlay"
+        }}
+        >
           <div
             data-aos="fade-up"
             data-aos-delay="100"
             className="text-center mb-16"
           >
-            <h2 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
-              {t.about.title}
-            </h2>
+<h2 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-500 via-purple-600 to-pink-600 dark:from-yellow-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
+  {t.about.title}
+</h2>
             <div className="w-32 h-1 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 mx-auto mb-8 rounded-full"></div>
-            <p className="text-xl text-gray-600">{t.about.subtitle}</p>
+            <p className="text-xl text-gray-700 dark:text-gray-300">{t.about.subtitle}</p>
           </div>
           
           <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -101,7 +108,7 @@ export const About = () => {
                 description: t.about.passion.description,
                 icon: FaCode,
                 gradient: "from-purple-600 to-pink-600",
-                bg: "from-purple-50 to-pink-50",
+                bg: "from-purple-50/80 to-pink-50/80",
                 border: "border-purple-100",
               },
               {
@@ -109,7 +116,7 @@ export const About = () => {
                 description: t.about.innovation.description,
                 icon: FaHeart,
                 gradient: "from-blue-600 to-purple-600",
-                bg: "from-blue-50 to-purple-50",
+                bg: "from-blue-50/80 to-purple-50/80",
                 border: "border-blue-100",
               },
             ].map((item, index) => (
@@ -118,7 +125,7 @@ export const About = () => {
                 data-aos={index === 0 ? "fade-right" : "fade-left"}
                 data-aos-delay={index * 100 + 200}
                 data-aos-duration="600"
-                className={`bg-gradient-to-br ${item.bg} dark:from-purple-900 dark:to-pink-900 p-8 rounded-3xl shadow-xl border ${item.border} transition-transform duration-300 hover:scale-105`}
+                className={`bg-gradient-to-br ${item.bg} dark:from-purple-900/80 dark:to-pink-900/80 backdrop-blur-sm p-8 rounded-3xl shadow-2xl  transition-transform duration-300 hover:scale-105`}
               >
                 <div className="flex items-center mb-6">
                   <div
@@ -130,7 +137,7 @@ export const About = () => {
                     {item.title}
                   </h3>
                 </div>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
                   {item.description}
                 </p>
               </div>
@@ -154,7 +161,7 @@ export const About = () => {
                     key={index}
                     data-aos="fade-right"
                     data-aos-delay={index * 100 + 200}
-                    className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700"
+                    className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:bg-white/90 dark:hover:bg-gray-800/90"
                   >
                     <div className="flex justify-between items-center">
                       <span className="text-lg font-medium text-gray-800 dark:text-gray-100">
@@ -192,7 +199,7 @@ export const About = () => {
                     key={index}
                     data-aos="zoom-in"
                     data-aos-delay={index * 100 + 300}
-                    className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 flex flex-col items-center justify-center text-center transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                    className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 flex flex-col items-center justify-center text-center transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-white/90 dark:hover:bg-gray-800/90"
                   >
                     <interest.icon className="text-4xl mb-3 text-purple-600 dark:text-purple-400" />
                     <span className="text-lg font-medium text-gray-800 dark:text-gray-100">

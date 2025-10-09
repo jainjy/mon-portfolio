@@ -2,12 +2,7 @@ import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import data from "../../data/data";
-import {
-  FaCode,
-  FaLaptopCode,
-  FaDatabase,
-  FaServer,
-} from "react-icons/fa";
+import { FaCode, FaLaptopCode, FaDatabase, FaServer } from "react-icons/fa";
 import { FaGear, FaGears } from "react-icons/fa6";
 import { useLanguage } from "../../context/LanguageContext";
 import { translations } from "../../data/translations";
@@ -34,22 +29,31 @@ export const Skills = () => {
         id="skills"
         data-aos="fade-up"
         data-aos-delay="100"
-        className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 py-10 relative w-full"
+        className="min-h-screen flex items-center justify-center relative w-full"
       >
         <ParticleBackground density={120} />
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
 
-        <div className="w-full relative z-10 mx-10">
+        <div
+          className="w-full relative z-10 px-4 py-10 dark:bg-gray-900/70 bg-white/50"
+          style={{
+            backgroundImage: "url('/images/bg7.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundBlendMode: "overlay",
+            backgroundAttachment: "fixed",
+          }}
+        >
           <div
             data-aos="fade-up"
             data-aos-delay="200"
             className="text-center mb-16"
           >
-            <h2 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
+            <h2 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-500 via-purple-600 to-pink-600 dark:from-yellow-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
               {t.skills.title}
             </h2>
             <div className="w-32 h-1 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 mx-auto mb-8 rounded-full"></div>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 dark:text-gray-300">
               {t.skills.subtitle}
             </p>
           </div>
@@ -61,10 +65,10 @@ export const Skills = () => {
                 key={category.title}
                 data-aos="fade-up"
                 data-aos-delay={catIndex * 100 + 300}
-                className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-8 rounded-3xl shadow-lg border border-gray-100 dark:border-gray-700"
+                className="bg-gradient-to-br from-purple-400 via-white to-yellow-200 dark:bg-gradient-to-br dark:from-purple-900/20 dark:via-gray-800/20 dark:to-yellow-900/20 backdrop-blur-sm p-8 rounded-3xl shadow-2xl border border-gray-100 dark:border-gray-700"
               >
                 <h3 className="text-3xl font-bold mb-8 text-gray-800 dark:text-gray-100 flex items-center gap-3">
-                  <span className="bg-gradient-to-r from-purple-600 to-pink-600 text-white p-3 rounded-xl">
+                  <span className="bg-gradient-to-bl via-purple-600 from-yellow-400/80 to-pink-600 text-white p-3 rounded-xl">
                     {category.title.includes("Langages") && <FaCode />}
                     {category.title.includes("Frontend") && <FaLaptopCode />}
                     {category.title.includes("Backend") && <FaServer />}

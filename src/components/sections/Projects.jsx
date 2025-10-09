@@ -34,23 +34,30 @@ export const Projects = () => {
       id="projects"
       data-aos="fade-up"
       data-aos-delay="100"
-      className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4 py-20 relative"
+      className="min-h-screen flex items-center justify-center   relative"
     >
       <ParticleBackground density={120} />
       <div className="absolute inset-0 bg-gradient-to-br from-purple-50/30 to-pink-50/30 dark:from-purple-900/30 dark:to-pink-900/30"></div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="w-full  relative z-10 px-4 py-10 dark:bg-gray-900/70 bg-white/50"
+              style={{
+          backgroundImage: "url('/images/bg2.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundBlendMode: "overlay",
+          backgroundAttachment: "fixed"
+        }}>
         {/* Section Title */}
         <div
           data-aos="fade-up"
           data-aos-delay="200"
           className="text-center mb-16"
         >
-          <h2 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
+          <h2 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-500 via-purple-600 to-pink-600 dark:from-yellow-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
             {t.projects.title}
           </h2>
-          <div className="w-32 h-1 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 mx-auto mb-8 rounded-full"></div>
-          <p className="text-xl text-gray-600">{t.projects.subtitle}</p>
+          <div className="w-32 h-1 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 mx-auto mb-8 rounded-full "></div>
+          <p className="text-xl text-gray-600 dark:text-gray-300">{t.projects.subtitle}</p>
         </div>
 
         {/* Projects Grid */}
@@ -65,7 +72,7 @@ export const Projects = () => {
                 key={project.title}
                 data-aos="fade-up"
                 data-aos-delay={index * 100 + 300}
-                className="group bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700 relative h-full flex flex-col ring-1 ring-gray-200/60 dark:ring-white/10 hover:ring-purple-300/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+                className="group bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden border border-gray-100 dark:border-gray-700 relative h-full flex flex-col ring-1 ring-gray-200/60 dark:ring-white/10 hover:ring-purple-300/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
               >
                 {/* Accent bar */}
                 <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 opacity-60" />
@@ -181,7 +188,7 @@ export const Projects = () => {
                  text-gray-800 dark:text-gray-100
                  bg-gradient-to-r from-gray-100 to-gray-200 
                  dark:from-gray-800 dark:to-gray-700
-                 shadow-md hover:shadow-lg
+                 shadow-md hover:shadow-2xl
                  border border-gray-200 dark:border-gray-600
                  overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95"
             >

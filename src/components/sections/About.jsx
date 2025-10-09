@@ -107,16 +107,16 @@ export const About = () => {
                 title: t.about.passion.title,
                 description: t.about.passion.description,
                 icon: FaCode,
-                gradient: "from-purple-600 to-pink-600",
-                bg: "from-purple-50/80 to-pink-50/80",
+                gradient: "from-purple-600 to-yellow-600/80",
+                bg: "from-purple-100/80 to-yellow-100/80",
                 border: "border-purple-100",
               },
               {
                 title: t.about.innovation.title,
                 description: t.about.innovation.description,
                 icon: FaHeart,
-                gradient: "from-blue-600 to-purple-600",
-                bg: "from-blue-50/80 to-purple-50/80",
+                gradient: "from-yellow-600/60 to-purple-600",
+                bg: "from-yellow-100/80 to-purple-100/80",
                 border: "border-blue-100",
               },
             ].map((item, index) => (
@@ -167,13 +167,13 @@ export const About = () => {
                       <span className="text-lg font-medium text-gray-800 dark:text-gray-100">
                         {lang.name}
                       </span>
-                      <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-400 rounded-full text-sm font-medium">
+                      <span className="px-3 py-1 bg-yellow-400/40 dark:bg-purple-900/50 text-purple-700 dark:text-purple-400 rounded-full text-sm font-medium">
                         {lang.level}
                       </span>
                     </div>
                     <div className="mt-2 bg-gray-200 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
                       <div
-                        className="bg-gradient-to-r from-purple-500 to-pink-500 h-full rounded-full transition-all duration-1000 ease-out"
+                        className="bg-gradient-to-r from-purple-500/90 to-yellow-400/90 h-full rounded-full transition-all duration-1000 ease-out"
                         style={{
                           width: 
                             lang.level === "Courant" ? "90%" :
@@ -201,7 +201,7 @@ export const About = () => {
                     data-aos-delay={index * 100 + 300}
                     className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 flex flex-col items-center justify-center text-center transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-white/90 dark:hover:bg-gray-800/90"
                   >
-                    <interest.icon className="text-4xl mb-3 text-purple-600 dark:text-purple-400" />
+                    <interest.icon className="text-4xl mb-3 text-yellow-400/80 dark:text-purple-400" />
                     <span className="text-lg font-medium text-gray-800 dark:text-gray-100">
                       {interest.name}
                     </span>

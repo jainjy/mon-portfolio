@@ -78,6 +78,9 @@ export const translations = {
     footer: {
       description: "Développeur Web passionné créant des applications innovantes avec créativité et expertise technique.",
       rights: "© 2025 RAMAMONJISOA Hoelatiana Andrianina. Tous droits réservés."
+    },
+    upBoutton:{
+      texte:"retour en haut"
     }
   },
   en: {
@@ -159,6 +162,9 @@ export const translations = {
     footer: {
       description: "Passionate Web Developer creating innovative applications with creativity and technical expertise.",
       rights: "© 2025 RAMAMONJISOA Hoelatiana Andrianina. All rights reserved."
+    },
+    upBoutton:{
+      texte:"back to top"
     }
   }
 };

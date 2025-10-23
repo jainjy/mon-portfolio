@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 
 const ProfileImage = () => {
   const images = [
-    "/images/Andrianina.jpg", // face
-    "/images/Andrianina2.jpg", // dos
+    "/images/profile1.jpg",
+    "/images/profile2.jpg",
   ];
 
   const [isFlipped, setIsFlipped] = useState(false);

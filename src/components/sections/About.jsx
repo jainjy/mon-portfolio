@@ -84,9 +84,9 @@ export const About = () => {
         className="min-h-screen flex items-center justify-center  px-0 relative overflow-hidden"
       >
         <div
-          className="w-full relative z-10 dark:bg-gray-900/70 px-4 py-10"
+          className="w-full relative z-10 bg-white/70 dark:bg-gray-900/70 px-4 py-10"
           style={{
-            backgroundImage: "url('/images/bg2.jpg')",
+            backgroundImage: "url('/images/bg6.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundAttachment: "fixed",

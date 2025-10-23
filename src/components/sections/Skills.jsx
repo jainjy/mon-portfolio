@@ -37,7 +37,7 @@ export const Skills = () => {
         <div
           className="w-full relative z-10 px-4 py-10 dark:bg-gray-900/70 bg-white/50"
           style={{
-            backgroundImage: "url('/images/bg7.jpg')",
+            backgroundImage: "url('/images/bg1.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundBlendMode: "overlay",
@@ -65,7 +65,7 @@ export const Skills = () => {
                 key={category.title}
                 data-aos="fade-up"
                 data-aos-delay={catIndex * 100 + 300}
-                className="bg-gradient-to-br from-purple-400 via-white to-yellow-200 dark:bg-gradient-to-br dark:from-purple-900/20 dark:via-gray-800/20 dark:to-yellow-900/20 backdrop-blur-sm p-8 rounded-3xl shadow-2xl border border-gray-100 dark:border-gray-700"
+                className="bg-gradient-to-br from-purple-400 via-white to-yellow-200/50 dark:bg-gradient-to-br dark:from-purple-900/20 dark:via-gray-800/20 dark:to-yellow-900/20 backdrop-blur-sm p-8 rounded-3xl shadow-2xl border border-gray-100 dark:border-gray-700"
               >
                 <h3 className="text-3xl font-bold mb-8 text-gray-800 dark:text-gray-100 flex items-center gap-3">
                   <span className="bg-gradient-to-bl via-purple-600 from-yellow-400/80 to-pink-600 text-white p-3 rounded-xl">

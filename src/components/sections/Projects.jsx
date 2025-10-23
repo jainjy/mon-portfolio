@@ -41,7 +41,7 @@ export const Projects = () => {
 
       <div className="w-full relative z-10 px-4 py-10 dark:bg-gray-900/70 bg-white/50"
               style={{
-          backgroundImage: "url('/images/bg2.jpg')",
+          backgroundImage: "url('/images/bg6.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundBlendMode: "overlay",

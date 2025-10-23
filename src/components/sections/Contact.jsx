@@ -31,7 +31,7 @@ export const Contact = ({ mousePosition }) => {
         id="contact"
         data-aos="fade-up"
         data-aos-delay="100"
-        className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 dark:from-gray-900 dark:via-purple-950 dark:to-indigo-900 px-4 py-10 relative overflow-hidden"
+        className="min-h-screen flex items-center justify-center bg-white/10 dark:bg-purple-900/20  px-4 py-10 relative overflow-hidden"
         style={{
           backgroundImage: "url('/images/bg3.jpg')",
           backgroundSize: "cover",
@@ -61,7 +61,7 @@ export const Contact = ({ mousePosition }) => {
           <div className="absolute top-1/3 right-1/4 w-8 h-8 bg-purple-600/40 dark:bg-purple-500/30 rounded-full animate-bounce"></div>
         </div>
 
-        <div className="max-w-5xl mx-auto relative z-10">
+        <div className="max-w-5xl mx-auto relative z-10 bg-transparent">
           <div
             data-aos="fade-up"
             data-aos-delay="200"

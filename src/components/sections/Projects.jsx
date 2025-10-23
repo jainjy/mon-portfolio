@@ -130,7 +130,7 @@ export const Projects = () => {
                     <button
                       type="button"
                       onClick={() => toggleExpand(index)}
-                      className="mb-3 self-start max-w-fit inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-yellow-100/80 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-200 border border-yellow-200/70 dark:border-yellow-800 hover:bg-yellow-200/80 dark:hover:bg-yellow-800/40 transition-all duration-300 active:scale-95"
+                      className="mb-3 self-start max-w-fit inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-gray-100 text-yellow-800 dark:bg-gray-900/40 dark:text-yellow-200   hover:bg-yellow-200/80 dark:hover:bg-yellow-800/40 transition-all duration-300 active:scale-95"
                     >
                       <span>{isExpanded ? (language === 'fr' ? 'Voir moins' : 'Show less') : (language === 'fr' ? 'Voir plus' : 'Show more')}</span>
                       {isExpanded ? <FaChevronUp /> : <FaChevronDown />}

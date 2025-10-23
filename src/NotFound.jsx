@@ -1,4 +1,9 @@
+import { useLanguage } from "./context/LanguageContext";
+import { translations } from "./data/translations";
+
 export default function NotFound() {
+    const { language } = useLanguage();
+    const t = translations[language];
   return (
     <div className="flex min-h-screen items-center justify-center bg-white">
       <div className="text-center">
@@ -16,7 +21,7 @@ export default function NotFound() {
           href="/"
           className="inline-block rounded bg-blue-600 px-6 py-2 text-white hover:bg-blue-700 transition"
         >
-          Retour à l'accueil
+          {t.backHome.texte}
         </a>
       </div>
     </div>

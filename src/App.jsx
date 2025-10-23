@@ -230,7 +230,7 @@ function App() {
                   <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-500 via-yellow-300 to-white animate-ping opacity-30"></div>
 
                   {/* Texte qui apparaît au hover */}
-                  <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs font-medium px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
+                  <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-purple-800/80 backdrop-filter  text-white text-xs font-medium px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
                     Retour en haut
                   </div>
                 </motion.button>

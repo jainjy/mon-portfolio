@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaArrowUp } from "react-icons/fa";
-import './styles//font.css'
+import "./styles//font.css";
 // Importation de React Router
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
@@ -223,26 +223,31 @@ function App() {
                   whileTap={{ scale: 0.9 }}
                   className="fixed bottom-8 right-8 p-4 rounded-full bg-gradient-to-br from-purple-600 via-yellow-400 to-white text-gray-800 shadow-2xl cursor-pointer z-50 hover:from-purple-700 hover:via-yellow-500 hover:to-white transition-all duration-300 group"
                 >
+                  {/* Icône */}
                   <FaArrowUp className="text-xl group-hover:scale-110 transition-transform duration-300" />
+
+                  {/* Effet de pulsation */}
                   <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-500 via-yellow-300 to-white animate-ping opacity-30"></div>
+
+                  {/* Texte qui apparaît au hover */}
+                  <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs font-medium px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
+                    Retour en haut
+                  </div>
                 </motion.button>
               )}
             </AnimatePresence>
 
-          
             <Routes>
-        
               <Route
                 path="/"
                 element={<HomePage mousePosition={mousePosition} />}
               />
-     
+
               <Route path="*" element={<NotFound />} />
             </Routes>
             {/* ------------------------------- */}
           </div>
         </BrowserRouter>{" "}
-  
       </LanguageProvider>
     </ThemeProvider>
   );

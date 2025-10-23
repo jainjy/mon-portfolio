@@ -97,7 +97,7 @@ export const Hero = ({ mousePosition }) => {
           >
             <a
               href="#contact"
-              className="group bg-gradient-to-r from-purple-600 to-pink-600 text-white 
+              className="azonix group bg-gradient-to-r from-purple-600 to-pink-600 text-white 
                          px-8 sm:px-12 py-4 text-base 
                          rounded-full flex justify-center items-center gap-3 
                          relative overflow-hidden cursor-pointer w-[48%] sm:w-auto transition-all duration-300 hover:scale-105 hover:shadow-2xl"
@@ -110,7 +110,7 @@ export const Hero = ({ mousePosition }) => {
             <a
               href="/CV.pdf"
               download
-              className="border-2 border-pink-400 text-pink-400 
+              className="azonix border-2 border-pink-400 text-pink-400 
                          px-8 sm:px-12 py-4 text-base
                          rounded-full flex justify-center items-center gap-3 
                          group cursor-pointer w-[48%] sm:w-auto transition-all duration-300 hover:scale-105 hover:bg-pink-500/20 hover:text-white"

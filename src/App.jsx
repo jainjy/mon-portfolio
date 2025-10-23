@@ -21,7 +21,7 @@ import "aos/dist/aos.css";
 
 // Composant qui regroupe toutes les sections de la page d'accueil
 const HomePage = ({ mousePosition }) => (
-  <>
+  <div className="railway">
     <Navbar />
     <Hero mousePosition={mousePosition} />
     <About />
@@ -29,7 +29,7 @@ const HomePage = ({ mousePosition }) => (
     <Projects />
     <Contact mousePosition={mousePosition} />
     <Footer />
-  </>
+  </div>
 );
 
 function App() {

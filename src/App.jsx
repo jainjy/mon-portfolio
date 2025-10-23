@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaArrowUp } from "react-icons/fa";
+import './styles//font.css'
 // Importation de React Router
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 

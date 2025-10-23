@@ -67,7 +67,7 @@ export const Contact = ({ mousePosition }) => {
             data-aos-delay="200"
             className="text-center mb-16"
           >
-            <h2 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-500 via-purple-600 to-pink-600 dark:from-yellow-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
+            <h2 className="redhawk text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-500 via-purple-600 to-pink-600 dark:from-yellow-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
               {t.contact.title}
             </h2>
             <div className="w-32 h-1 bg-gradient-to-r from-purple-400 via-yellow-400 to-purple-500 dark:from-purple-300 dark:via-yellow-300 dark:to-purple-400 mx-auto mb-8 rounded-full"></div>

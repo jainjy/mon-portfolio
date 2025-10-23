@@ -53,7 +53,7 @@ export const Projects = () => {
           data-aos-delay="200"
           className="text-center mb-16"
         >
-          <h2 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-500 via-purple-600 to-pink-600 dark:from-yellow-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
+          <h2 className="redhawk text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-500 via-purple-600 to-pink-600 dark:from-yellow-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
             {t.projects.title}
           </h2>
           <div className="w-32 h-1 bg-gradient-to-r from-yellow-500 via-purple-600 to-pink-600 mx-auto mb-8 rounded-full"></div>

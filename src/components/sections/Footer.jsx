@@ -27,7 +27,7 @@ export default function Footer() {
             <h3
               data-aos="fade-up"
               data-aos-delay="100"
-              className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-4"
+              className="azonix text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-4"
             >
               RAMAMONJISOA Hoelatiana Andrianina
             </h3>

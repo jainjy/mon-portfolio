@@ -72,7 +72,7 @@ export const Hero = ({ mousePosition }) => {
 
               <AnimatedText
                 text="Andrianina"
-                className="text-6xl md:text-8xl font-black mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent"
+                className=" redhawk text-6xl md:text-8xl font-black mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent"
                 delay={0.5}
               />
 

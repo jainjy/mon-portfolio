@@ -32,7 +32,7 @@ const FormationXp = () => {
                 key={index}
                 data-aos="fade-right"
                 data-aos-delay={index * 100 + 200}
-                className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-xl shadow-2xl border-l-4 border-purple-500 dark:border-purple-400 transition-all duration-300 hover:shadow-2xl hover:bg-white/90 dark:hover:bg-gray-800/90"
+                className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm p-6 rounded-xl shadow-2xl border-l-4 border-purple-500 dark:border-purple-400 transition-all duration-300 hover:shadow-2xl hover:bg-white/90 dark:hover:bg-gray-900/90"
               >
                 <div className="flex items-start gap-4">
                   <div className="bg-purple-100 dark:bg-purple-900/50 p-3 rounded-full">
@@ -84,7 +84,7 @@ export const About = () => {
         className="min-h-screen flex items-center justify-center  px-0 relative overflow-hidden"
       >
         <div
-          className="w-full relative z-10 bg-white/50 dark:bg-gray-900/70 px-4 py-10"
+          className="w-full relative z-10 bg-white/50 dark:bg-gray-900/80 px-4 py-10"
           style={{
             backgroundImage: "url('/images/bg6.jpg')",
             backgroundSize: "cover",
@@ -131,7 +131,7 @@ export const About = () => {
                 data-aos={index === 0 ? "fade-right" : "fade-left"}
                 data-aos-delay={index * 100 + 200}
                 data-aos-duration="600"
-                className={`bg-gradient-to-br ${item.bg} dark:from-purple-900/80 dark:to-pink-900/80 backdrop-blur-sm p-8 rounded-3xl shadow-2xl  transition-transform duration-300 hover:scale-105`}
+                className={`bg-gradient-to-br ${item.bg} dark:from-purple-900/80 dark:to-gray-900/80 backdrop-blur-sm p-8 rounded-3xl shadow-2xl  transition-transform duration-300 hover:scale-105`}
               >
                 <div className="flex items-center mb-6">
                   <div
@@ -171,7 +171,7 @@ export const About = () => {
                     key={index}
                     data-aos="fade-right"
                     data-aos-delay={index * 100 + 200}
-                    className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:bg-white/90 dark:hover:bg-gray-800/90"
+                    className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:bg-white/90 dark:hover:bg-gray-900/90"
                   >
                     <div className="flex justify-between items-center">
                       <span className="text-lg font-medium text-gray-800 dark:text-gray-100">
@@ -216,7 +216,7 @@ export const About = () => {
                     key={index}
                     data-aos="zoom-in"
                     data-aos-delay={index * 100 + 300}
-                    className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 flex flex-col items-center justify-center text-center transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-white/90 dark:hover:bg-gray-800/90"
+                    className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 flex flex-col items-center justify-center text-center transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-white/90 dark:hover:bg-gray-900/90"
                   >
                     <interest.icon className="text-4xl mb-3 text-yellow-400/80 dark:text-purple-400" />
                     <span className="text-lg font-medium text-gray-800 dark:text-gray-100">

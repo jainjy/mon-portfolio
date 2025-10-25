@@ -31,13 +31,7 @@ export default function Footer() {
             >
               RAMAMONJISOA Hoelatiana Andrianina
             </h3>
-            <p 
-              data-aos="fade-up"
-              data-aos-delay="200"
-              className="text-gray-700 dark:text-gray-300 max-w-2xl mx-auto"
-            >
-              {t.footer.description}
-            </p>
+ 
           </div>
 
           <nav 

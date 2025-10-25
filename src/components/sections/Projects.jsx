@@ -99,13 +99,6 @@ export const Projects = () => {
                       </div>
                     </div>
                   )}
-
-                  <div className="absolute bottom-4 left-4">
-                    <div className="w-16 h-16 bg-yellow-500/20 backdrop-blur-sm rounded-2xl flex items-center justify-center text-yellow-100 text-2xl border border-yellow-400/30">
-                      <FaCode />
-                    </div>
-                  </div>
-
                   <div className="absolute inset-0 bg-gradient-to-t from-yellow-600/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
                 </div>
 

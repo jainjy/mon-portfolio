@@ -30,6 +30,7 @@ import {
   SiDotnet,
   SiC,
   SiSupabase,
+  SiExpress,
 } from "react-icons/si";
 
   // Compétences organisées par catégorie
@@ -65,6 +66,7 @@ import {
         { name: "Laravel", icon: FaLaravel, color: "text-red-400" },
         { name: "ASP.NET", icon: SiDotnet, color: "text-blue-600" },
         { name: "Node.js", icon: FaNodeJs, color: "text-green-600" },
+        { name: "Express", icon: SiExpress, color: "text-gray-400" },
         
       ],
     },

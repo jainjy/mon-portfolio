@@ -59,7 +59,7 @@ const ProfileImage = () => {
               <img
                 src={images[0]}
                 alt="Face Andrianina"
-                className="w-44 h-44 sm:w-52 sm:h-52 rounded-full object-cover border-4"
+                className="w-44 h-44 sm:w-52 sm:h-52 rounded-full object-cover"
               />
             </div>
 
@@ -71,7 +71,7 @@ const ProfileImage = () => {
               <img
                 src={images[1]}
                 alt="Dos Andrianina"
-                className="w-44 h-44 sm:w-52 sm:h-52 rounded-full object-cover border-4"
+                className="w-44 h-44 sm:w-52 sm:h-52 rounded-full object-cover"
               />
             </div>
           </motion.div>

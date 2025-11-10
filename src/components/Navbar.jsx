@@ -142,9 +142,9 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.7, ease: "easeOut" }}
-      className={`fixed w-full z-[99] transition-all duration-700 ${
+      className={`mt-20 fixed m-auto rounded-t-xl rounded-b-3xl z-[99] transition-all duration-700 ${
         scrolled
-          ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl shadow-2xl border-b border-purple-100/50 dark:border-purple-900/50"
+          ? "bg-white/50 dark:bg-gray-900/50 backdrop-blur-xl shadow-2xl border-b border-purple-100/50 dark:border-purple-900/50"
           : "bg-transparent"
       }`}
     >
@@ -152,7 +152,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6 flex justify-between items-center h-16">
         {/* Logo avec taille réduite sur mobile */}
         <motion.div
-          className="mongule text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-700 via-purple-500 to-pink-500/80 bg-clip-text text-transparent"
+          className="mongule text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-700 via-purple-500 to-pink-500/80 bg-clip-text text-transparent tracking-widest ml-4 mr-12"
           animate={{ scale: [1, 1.05, 1] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
@@ -230,7 +230,7 @@ const Navbar = () => {
         </ul>
 
         {/* Ajuster l'espacement des boutons */}
-        <div className="flex items-center gap-2 sm:gap-4">
+        <div className="flex items-center gap-2 sm:gap-4 mr-4 ml-10">
           <div className="relative" ref={langRef}>
             {/* Réduire la taille du bouton de langue sur mobile */}
             <motion.button

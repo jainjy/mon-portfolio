@@ -86,7 +86,7 @@ export const Skills = () => {
                       data-aos="zoom-in"
                       data-aos-delay={skillIndex * 50 + catIndex * 100 + 400}
                       data-aos-duration="600"
-                      className="group bg-gradient-to-br from-white to-gray-50 dark:from-gray-900/90 dark:to-gray-700/90 p-6 rounded-t-3xl rounded-b-xl shadow-md border border-gray-200 dark:border-gray-600 relative overflow-hidden text-center transition-transform duration-300 hover:scale-105"
+                      className="group bg-gradient-to-br from-white to-yellow-50 dark:from-gray-900/70 dark:to-gray-700/90 p-6 rounded-t-3xl rounded-b-xl shadow-md  relative overflow-hidden text-center transition-transform duration-300 hover:scale-105"
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-purple-400/10 to-pink-400/10 scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></div>
 

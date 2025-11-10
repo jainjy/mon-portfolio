@@ -22,7 +22,10 @@ import "aos/dist/aos.css";
 // Composant qui regroupe toutes les sections de la page d'accueil
 const HomePage = ({ mousePosition }) => (
   <div className="railway">
-    <Navbar />
+    <div className="flex items-center justify-center justify-items-center">
+      <Navbar />
+    </div>
+
     <Hero mousePosition={mousePosition} />
     <About />
     <Skills />
@@ -197,7 +200,7 @@ function App() {
             {/* Barre de progression modifiée */}
             <div className="fixed top-0 left-0 w-full h-1 bg-transparent z-[100]">
               <motion.div
-                className="h-full bg-gradient-to-r from-purple-600 via-blue-500 to-yellow-600 backdrop-blur-sm"
+                className="h-full bg-gradient-to-r from-purple-600 via-blue-500 to-yellow-600 backdrop-blur-sm rounded-r-full"
                 style={{
                   width: `${scrollProgress}%`,
                   boxShadow: "0 0 10px rgba(168, 85, 247, 0.5)",

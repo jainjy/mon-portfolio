@@ -15,6 +15,7 @@ export const Projects = () => {
 
   const [visibleCount, setVisibleCount] = useState(initialCount);
   const [expanded, setExpanded] = useState(null);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const handleExpand = (i) => setExpanded(i);
   const handleClose = () => setExpanded(null);
@@ -66,6 +67,7 @@ export const Projects = () => {
           {projects.slice(0, visibleCount).map((project, index) => {
             const isImage = project.image && project.image.startsWith("/");
             const isExpanded = expanded === index;
+            const isHovered = hoveredIndex === index;
 
             return (
               <div
@@ -73,12 +75,15 @@ export const Projects = () => {
                 data-aos="fade-up"
                 data-aos-delay={index * 100 + 300}
                 className={`relative group bg-gradient-to-br from-yellow-200/80 via-white to-purple-200/90 dark:from-yellow-900/30 dark:via-gray-800/80 dark:to-purple-900/30 backdrop-blur-sm rounded-xl shadow-2xl overflow-hidden h-full flex flex-col ring-1 ring-yellow-200/30 dark:ring-yellow-600/10 hover:-translate-y-2 transition-all duration-300`}
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
               >
-                {/* Image */}
+                {/* Image Container avec overlay animé */}
                 <div
-                  className={`h-56 relative overflow-hidden ${
+                  className={`h-56 relative overflow-hidden cursor-pointer ${
                     !isImage ? "bg-gradient-to-br " + project.gradient : ""
                   }`}
+                  onClick={() => handleExpand(index)}
                 >
                   {isImage && (
                     <div
@@ -92,20 +97,50 @@ export const Projects = () => {
                     </div>
                   )}
 
-                  {/* Overlay bouton au survol */}
-                  {!isExpanded && (
-                    <div className="absolute inset-0 dark:bg-black/40 bg-purple-100/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                      <button
-                        onClick={() => handleExpand(index)}
-                        className="w-full h-full flex items-center justify-center text-lg font-semibold text-purple-100 bg-purple-950/60 dark:text-yellow-100/90 dark:bg-black/60 transition-all duration-300"
+                  {/* Overlay avec animation de balayage */}
+                  <div className="absolute inset-0">
+                    {/* Fond sombre */}
+                    <div
+                      className={`absolute inset-0 bg-black/60 transition-all duration-500 ${
+                        isHovered ? "opacity-100" : "opacity-0"
+                      }`}
+                    />
+
+                    {/* Bouton avec animation de balayage */}
+                    <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+                      <div
+                        className={`w-full h-full flex items-center justify-center transform transition-all duration-500 ease-out ${
+                          isHovered
+                            ? "translate-x-0 opacity-100"
+                            : "-translate-x-full opacity-0"
+                        }`}
+                        style={{
+                          transitionDelay: isHovered ? "100ms" : "0ms",
+                          background:
+                            "linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.3), transparent)",
+                        }}
                       >
-                        <FaEye className="mx-2" />
-                        {language === "fr"
-                          ? "Voir les détails"
-                          : "View details"}
-                      </button>
+                        <button className="flex items-center gap-3 px-6 py-3 rounded-xl text-lg font-semibold  text-white dark:bg-purple-800/90 dark:hover:bg-purple-900/90 bg-yellow-500/90 hover:bg-yellow-600/90 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg border border-purple-400/50">
+                          <FaEye className="text-xl" />
+                          {language === "fr"
+                            ? "Voir les détails"
+                            : "View details"}
+                        </button>
+                      </div>
                     </div>
-                  )}
+
+                    {/* Ligne de balayage */}
+                    <div
+                      className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 via-purple-500 to-pink-500 transform transition-all duration-700 ease-out ${
+                        isHovered
+                          ? "translate-x-0 opacity-100"
+                          : "-translate-x-full opacity-0"
+                      }`}
+                      style={{
+                        transitionDelay: isHovered ? "200ms" : "0ms",
+                      }}
+                    />
+                  </div>
                 </div>
 
                 {/* Contenu principal (titre + badges + liens) */}
@@ -151,7 +186,7 @@ export const Projects = () => {
 
                 {/* Description plein écran */}
                 {isExpanded && (
-                  <div className="absolute inset-0 bg-yellow-100/80 text-gray-800 dark:bg-black/90 dark:text-white flex flex-col items-center justify-center px-8 py-6 text-justify transition-all duration-500">
+                  <div className="absolute inset-0 bg-yellow-100/80 text-gray-800 dark:bg-black/90 dark:text-white flex flex-col items-center justify-center px-8 py-6 text-justify transition-all duration-500 z-50">
                     <h3 className="text-3xl font-bold mb-4">{project.title}</h3>
                     <p className="text-lg leading-relaxed mb-8 max-w-md">
                       {project.description}

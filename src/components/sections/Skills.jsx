@@ -59,13 +59,13 @@ export const Skills = () => {
           </div>
 
           {/* Compétences par catégorie */}
-          <div className="space-y-16">
+          <div className="space-y-4">
             {skillsCategories.map((category, catIndex) => (
               <div
                 key={category.title}
                 data-aos="fade-up"
                 data-aos-delay={catIndex * 100 + 300}
-                className="bg-gradient-to-br from-purple-400 via-white to-yellow-200/50 dark:bg-gradient-to-br dark:from-purple-900/20 dark:via-gray-800/20 dark:to-yellow-900/20 backdrop-blur-sm p-8 rounded-3xl shadow-2xl border border-gray-100 dark:border-gray-700"
+                className="bg-gradient-to-br from-purple-400 via-white to-yellow-200/50 dark:bg-gradient-to-br dark:from-purple-900/20 dark:via-gray-800/20 dark:to-yellow-900/20 backdrop-blur-sm p-8 rounded-3xl shadow-2xl "
               >
                 <h3 className="text-3xl font-bold mb-8 text-gray-800 dark:text-gray-100 flex items-center gap-3">
                   <span className="bg-gradient-to-bl via-purple-600 from-yellow-400/80 to-pink-600 text-white p-3 rounded-xl">
@@ -79,7 +79,7 @@ export const Skills = () => {
                   {t.skills.categories[category.key]}
                 </h3>
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
                   {category.items.map((skill, skillIndex) => (
                     <div
                       key={skill.name}

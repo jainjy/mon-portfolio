@@ -31,9 +31,9 @@ export const Contact = ({ mousePosition }) => {
         id="contact"
         data-aos="fade-up"
         data-aos-delay="100"
-        className="min-h-screen flex items-center justify-center bg-white/10 dark:bg-purple-900/20  px-4 py-10 relative overflow-hidden"
+        className="min-h-screen flex items-center justify-center bg-white/10 dark:bg-purple-900/10  px-4 py-10 relative overflow-hidden"
         style={{
-          backgroundImage: "url('/images/bg3.jpg')",
+          backgroundImage: "url('/images/bg.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundBlendMode: "overlay",

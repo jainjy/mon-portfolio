@@ -145,28 +145,28 @@ function App() {
     }
   }, [isLoading]);
 
-  const cursorVariants = {
-    default: {
-      x: mousePosition.x - 10,
-      y: mousePosition.y - 10,
-      width: 20,
-      height: 20,
-      backgroundColor: "rgba(168, 85, 247, 0.3)",
-      mixBlendMode: "normal",
-      transition: {
-        type: "spring",
-        mass: 0.6,
-      },
+const cursorVariants = {
+  default: {
+    x: mousePosition.x - 10,
+    y: mousePosition.y - 10,
+    width: 20,
+    height: 20,
+    backgroundColor: "rgba(168, 85, 247, 0.4)",
+    mixBlendMode: "normal",
+    transition: {
+      type: "spring",
+      mass: 0.6,
     },
-    hover: {
-      x: mousePosition.x - 15,
-      y: mousePosition.y - 15,
-      width: 30,
-      height: 30,
-      backgroundColor: "rgba(168, 85, 247, 0.5)",
-      mixBlendMode: "normal",
-    },
-  };
+  },
+  hover: {
+    x: mousePosition.x - 15,
+    y: mousePosition.y - 15,
+    width: 30,
+    height: 30,
+    backgroundColor: "rgba(168, 85, 247, 0.6)",
+    mixBlendMode: "normal",
+  },
+};
 
   const scrollToTop = () => {
     window.scrollTo({

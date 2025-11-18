@@ -309,7 +309,7 @@ const Navbar = () => {
             onClick={() => setIsDark(!isDark)}
             className="p-2 rounded-full bg-purple-100 dark:bg-yellow-900 text-purple-600 dark:text-yellow-400 border-2 border-purple-300 dark:border-yellow-400 transition-all duration-300"
           >
-            {isDark ? <FaSun size={20} /> : <FaMoon size={20} />}
+            {isDark ? <FaSun size={24} /> : <FaMoon size={24} />}
           </motion.button>
 
           {/* Modifier le breakpoint du menu burger */}

@@ -101,7 +101,7 @@ const ProfileImage = () => {
         animate="animate"
       />
 
-      <div className="relative w-56 h-56 sm:w-64 sm:h-64 flex items-center justify-center">
+      <div className="relative w-60 h-60 sm:w-72 sm:h-72 flex items-center justify-center">
         {/* Cercle rotatif - animation simplifiée */}
         <motion.div
           className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-400 to-indigo-500 rounded-full opacity-80"
@@ -135,7 +135,7 @@ const ProfileImage = () => {
               <img
                 src={images[0]}
                 alt="Face Andrianina"
-                className="w-44 h-44 sm:w-52 sm:h-52 rounded-full object-cover"
+                className="w-60 h-60 sm:w-72 sm:h-72 rounded-full object-cover"
                 loading="lazy"
                 decoding="async"
               />
@@ -149,7 +149,7 @@ const ProfileImage = () => {
               <img
                 src={images[1]}
                 alt="Dos Andrianina"
-                className="w-44 h-44 sm:w-52 sm:h-52 rounded-full object-cover"
+                className="w-60 h-60 sm:w-72 sm:h-72 rounded-full object-cover"
                 loading="lazy"
                 decoding="async"
               />

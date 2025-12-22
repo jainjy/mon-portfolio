@@ -53,19 +53,20 @@ export const Projects = () => {
 
   // Navigation
   const nextSlide = useCallback(() => {
-    // Ne pas avancer si on est en hover
     if (isHoveringRef.current) return;
 
     setCurrentIndex(
-      (prev) => (prev + 1) % Math.max(1, projects.length - itemsPerView + 1)
+      (prev) => (prev + 1) % (Math.max(1, projects.length - itemsPerView + 1))
     );
   }, [projects.length, itemsPerView]);
 
   const prevSlide = useCallback(() => {
     setCurrentIndex(
       (prev) =>
-        (prev - 1 + Math.max(1, projects.length - itemsPerView + 1)) %
-        Math.max(1, projects.length - itemsPerView + 1)
+        (prev -
+          1 +
+          Math.max(1, projects.length - itemsPerView + 1)) %
+        (Math.max(1, projects.length - itemsPerView + 1))
     );
   }, [projects.length, itemsPerView]);
 
@@ -88,16 +89,7 @@ export const Projects = () => {
     setIsPaused(!isPaused);
   };
 
-  // Scroll manuel du carousel
-  const scrollToIndex = (index) => {
-    if (carouselRef.current) {
-      const cardWidth = carouselRef.current.children[0]?.offsetWidth || 0;
-      const gap = 40;
-      carouselRef.current.scrollTo({
-        left: index * (cardWidth + gap),
-        behavior: "smooth",
-      });
-    }
+  const handleDotClick = (index) => {
     setCurrentIndex(index);
   };
 
@@ -133,12 +125,6 @@ export const Projects = () => {
     });
   }, []);
 
-  // Calcul des projets visibles
-  const visibleProjects = projects.slice(
-    currentIndex,
-    currentIndex + itemsPerView
-  );
-
   return (
     <section
       id="projects"
@@ -170,7 +156,7 @@ export const Projects = () => {
         </div>
 
         {/* Contrôles du carousel */}
-        <div className="flex justify-center items-center gap-4 mb-8">
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">
           <button
             onClick={togglePause}
             className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl transition-all"
@@ -196,7 +182,7 @@ export const Projects = () => {
             </span>
           </button>
 
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap justify-center items-center gap-4">
             <button
               onClick={prevSlide}
               className="p-3 rounded-full bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm shadow-xl text-purple-600 dark:text-purple-400 hover:bg-white dark:hover:bg-gray-700 transition-all hover:scale-110"
@@ -212,7 +198,7 @@ export const Projects = () => {
               }).map((_, idx) => (
                 <button
                   key={idx}
-                  onClick={() => scrollToIndex(idx)}
+                  onClick={() => handleDotClick(idx)}
                   className={`w-2 h-2 rounded-full transition-all ${
                     currentIndex === idx
                       ? "bg-purple-600 dark:bg-purple-400 w-4"
@@ -235,36 +221,30 @@ export const Projects = () => {
         </div>
 
         {/* Carousel Container */}
-        <div className="relative">
+        <div className="relative overflow-hidden">
           <div
             ref={carouselRef}
-            className="flex gap-10 overflow-x-hidden scroll-smooth px-4 scroll-container"
+            className="flex transition-transform duration-700 ease-out -mx-5"
             style={{
-              scrollBehavior: "smooth",
-              WebkitOverflowScrolling: "touch", // Pour iOS
+              transform: `translateX(calc(-${currentIndex} * 100% / ${itemsPerView}))`,
             }}
           >
-            {visibleProjects.map((project, index) => {
+            {projects.map((project, index) => {
               const isImage = project.image && project.image.startsWith("/");
-              const isExpanded = expanded === currentIndex + index;
-              const isHovered = hoveredIndex === currentIndex + index;
+              const isExpanded = expanded === index;
+              const isHovered = hoveredIndex === index;
 
               return (
                 <div
                   key={project.title}
-                  className={`flex-shrink-0 w-full ${
-                    itemsPerView === 1
-                      ? "md:w-full"
-                      : itemsPerView === 2
-                      ? "md:w-1/2"
-                      : "lg:w-1/3"
-                  } transition-transform duration-300 ease-out`}
+                  className="flex-shrink-0 transition-transform duration-300 ease-out px-5" // px-5 on each side = 2.5rem gap (like gap-10)
+                  style={{ flexBasis: `calc(100% / ${itemsPerView})` }}
                 >
                   <div
                     className={`relative group bg-gradient-to-br from-yellow-200/80 via-white to-purple-200/90 dark:from-yellow-900/30 dark:via-gray-800/80 dark:to-purple-900/30 backdrop-blur-sm rounded-xl shadow-2xl overflow-hidden h-full flex flex-col ring-1 ring-yellow-200/30 dark:ring-yellow-600/10 hover:-translate-y-2 transition-all duration-300`}
-                    onMouseEnter={() => handleMouseEnter(currentIndex + index)}
+                    onMouseEnter={() => handleMouseEnter(index)}
                     onMouseLeave={handleMouseLeave}
-                    onTouchStart={() => handleMouseEnter(currentIndex + index)}
+                    onTouchStart={() => handleMouseEnter(index)}
                     onTouchEnd={handleMouseLeave}
                   >
                     {/* Image Container avec overlay animé */}
@@ -272,7 +252,7 @@ export const Projects = () => {
                       className={`h-56 relative overflow-hidden cursor-pointer ${
                         !isImage ? "bg-gradient-to-br " + project.gradient : ""
                       }`}
-                      onClick={() => handleExpand(currentIndex + index)}
+                      onClick={() => handleExpand(index)}
                     >
                       {isImage && (
                         <div

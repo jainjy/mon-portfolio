@@ -29,6 +29,7 @@ export const Projects = () => {
   const [itemsPerView, setItemsPerView] = useState(3);
   const carouselRef = useRef(null);
   const autoScrollRef = useRef(null);
+  const isHoveringRef = useRef(false); // Nouveau ref pour suivre l'état de hover
 
   const handleExpand = (i) => setExpanded(i);
   const handleClose = () => setExpanded(null);
@@ -52,6 +53,9 @@ export const Projects = () => {
 
   // Navigation
   const nextSlide = useCallback(() => {
+    // Ne pas avancer si on est en hover
+    if (isHoveringRef.current) return;
+
     setCurrentIndex(
       (prev) => (prev + 1) % Math.max(1, projects.length - itemsPerView + 1)
     );
@@ -65,7 +69,7 @@ export const Projects = () => {
     );
   }, [projects.length, itemsPerView]);
 
-  // Auto-scroll
+  // Auto-scroll avec gestion du hover
   useEffect(() => {
     if (isPaused || projects.length <= itemsPerView) return;
 
@@ -88,7 +92,7 @@ export const Projects = () => {
   const scrollToIndex = (index) => {
     if (carouselRef.current) {
       const cardWidth = carouselRef.current.children[0]?.offsetWidth || 0;
-      const gap = 40; // gap-10 = 2.5rem = 40px
+      const gap = 40;
       carouselRef.current.scrollTo({
         left: index * (cardWidth + gap),
         behavior: "smooth",
@@ -96,6 +100,30 @@ export const Projects = () => {
     }
     setCurrentIndex(index);
   };
+
+  // Gestionnaires pour le hover
+  const handleMouseEnter = useCallback((index) => {
+    setHoveredIndex(index);
+    isHoveringRef.current = true;
+
+    // Arrêter temporairement l'auto-scroll
+    if (autoScrollRef.current) {
+      clearInterval(autoScrollRef.current);
+      autoScrollRef.current = null;
+    }
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setHoveredIndex(null);
+    isHoveringRef.current = false;
+
+    // Redémarrer l'auto-scroll si pas en pause
+    if (!isPaused && projects.length > itemsPerView) {
+      autoScrollRef.current = setInterval(() => {
+        nextSlide();
+      }, 3000);
+    }
+  }, [isPaused, projects.length, itemsPerView, nextSlide]);
 
   useEffect(() => {
     AOS.init({
@@ -210,9 +238,10 @@ export const Projects = () => {
         <div className="relative">
           <div
             ref={carouselRef}
-            className="flex gap-10 overflow-x-hidden scroll-smooth px-4"
+            className="flex gap-10 overflow-x-hidden scroll-smooth px-4 scroll-container"
             style={{
               scrollBehavior: "smooth",
+              WebkitOverflowScrolling: "touch", // Pour iOS
             }}
           >
             {visibleProjects.map((project, index) => {
@@ -223,19 +252,20 @@ export const Projects = () => {
               return (
                 <div
                   key={project.title}
-
                   className={`flex-shrink-0 w-full ${
                     itemsPerView === 1
                       ? "md:w-full"
                       : itemsPerView === 2
                       ? "md:w-1/2"
                       : "lg:w-1/3"
-                  }`}
+                  } transition-transform duration-300 ease-out`}
                 >
                   <div
                     className={`relative group bg-gradient-to-br from-yellow-200/80 via-white to-purple-200/90 dark:from-yellow-900/30 dark:via-gray-800/80 dark:to-purple-900/30 backdrop-blur-sm rounded-xl shadow-2xl overflow-hidden h-full flex flex-col ring-1 ring-yellow-200/30 dark:ring-yellow-600/10 hover:-translate-y-2 transition-all duration-300`}
-                    onMouseEnter={() => setHoveredIndex(currentIndex + index)}
-                    onMouseLeave={() => setHoveredIndex(null)}
+                    onMouseEnter={() => handleMouseEnter(currentIndex + index)}
+                    onMouseLeave={handleMouseLeave}
+                    onTouchStart={() => handleMouseEnter(currentIndex + index)}
+                    onTouchEnd={handleMouseLeave}
                   >
                     {/* Image Container avec overlay animé */}
                     <div
@@ -374,19 +404,12 @@ export const Projects = () => {
               {Math.max(1, projects.length - itemsPerView + 1)}
             </span>
             <div
-              className={`w-3 h-3 rounded-full ${
-                !isPaused ? "bg-green-500" : "bg-red-500"
+              className={`w-3 h-3 rounded-full animate-pulse ${
+                !isPaused && !isHoveringRef.current
+                  ? "bg-green-500"
+                  : "bg-red-500"
               }`}
             />
-            <span className="text-sm text-gray-600 dark:text-gray-300">
-              {!isPaused
-                ? language === "fr"
-                  ? "Défilement automatique"
-                  : "Auto-scroll"
-                : language === "fr"
-                ? "En pause"
-                : "Paused"}
-            </span>
           </div>
         </div>
       </div>

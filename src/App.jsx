@@ -188,6 +188,7 @@ const cursorVariants = {
         <BrowserRouter>
           {" "}
           <AnimatePresence>{isLoading && <Loader />}</AnimatePresence>
+          
           <div className="scroll-smooth font-sans text-gray-800 dark:text-gray-200 overflow-x-hidden bg-white dark:bg-gray-900 transition-colors duration-300">
             {/* Curseur personnalisé */}
             <motion.div

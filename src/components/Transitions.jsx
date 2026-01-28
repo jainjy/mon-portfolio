@@ -1,46 +1,58 @@
 import { motion } from "framer-motion";
-
+import { useTheme } from "../context/ThemeContext";
 // Courbes de bézier modernes
 const transitionEase = [0.22, 1, 0.36, 1]; // Calme et fluide
 const springEase = [0.34, 1.56, 0.64, 1]; // Rebond léger
 
 // --- 1. SLICE ---
-export default function SliceTransition({ children }) {
+// Dans votre fichier de transitions
+export default function SliceTransition() {
   const SLICE_COUNT = 8;
+
   return (
-    <div className="relative min-h-screen overflow-hidden bg-slate-950">
-      <div className="fixed inset-0 z-[100] pointer-events-none flex flex-col">
-        {[...Array(SLICE_COUNT)].map((_, i) => (
+    <div className="fixed inset-0 z-[999] pointer-events-none flex flex-col overflow-hidden">
+      {[...Array(SLICE_COUNT)].map((_, i) => (
+        <motion.div
+          key={i}
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: [0, 1, 1, 0] }}
+          transition={{
+            duration: 1.2,
+            times: [0, 0.3, 0.7, 1],
+            delay: i * 0.02,
+            ease: [0.4, 0, 0.2, 1],
+          }}
+          style={{
+            flex: 1,
+            width: "100%",
+            background:
+              i % 2 === 0
+                ? "linear-gradient(90deg, #f59e0b 0%, #8b5cf6 50%, #ec4899 100%)"
+                : "linear-gradient(90deg, #ec4899 0%, #8b5cf6 50%, #f59e0b 100%)",
+            transformOrigin: i % 2 === 0 ? "left" : "right",
+            opacity: 0.95,
+          }}
+          className="relative overflow-hidden"
+        >
+          {/* Effet de brillance */}
           <motion.div
-            key={i}
-            initial={{ scaleX: 1 }}
-            animate={{ scaleX: 0 }}
-            exit={{ scaleX: 1 }}
+            initial={{ x: "-100%" }}
+            animate={{ x: "100%" }}
             transition={{
-              duration: 0.6,
-              delay: i * 0.04,
-              ease: transitionEase,
+              duration: 0.8,
+              delay: i * 0.02 + 0.1,
+              ease: "easeInOut",
             }}
-            style={{
-              flex: 1,
-              width: "100%",
-              background: "#6366f1",
-              transformOrigin: i % 2 === 0 ? "left" : "right",
-            }}
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
           />
-        ))}
-      </div>
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.4, duration: 0.5 }}
-      >
-        {children}
-      </motion.div>
+
+          {/* Effet de texture subtile */}
+          <div className="absolute inset-0 opacity-10 bg-gradient-to-b from-white/20 via-transparent to-black/20" />
+        </motion.div>
+      ))}
     </div>
   );
 }
-
 // --- 2. PIXEL ---
 export function PixelTransition({ children }) {
   const ROWS = 6;

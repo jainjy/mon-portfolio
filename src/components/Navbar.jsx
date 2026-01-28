@@ -68,7 +68,7 @@ const Navbar = () => {
   const navRef = useRef(null);
   const langRef = useRef(null);
   const [langOpen, setLangOpen] = useState(false);
-  const { isDark, setIsDark } = useTheme();
+  const { isDark, toggleTheme } = useTheme();
   const { language, setLanguage } = useLanguage();
   const t = translations[language];
 
@@ -251,7 +251,7 @@ const Navbar = () => {
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            onClick={() => setIsDark(!isDark)}
+            onClick={() => toggleTheme(!isDark)}
             className="p-2 rounded-full bg-purple-100 dark:bg-yellow-900 text-purple-600 dark:text-yellow-400 border-2 border-purple-300 dark:border-yellow-400"
           >
             {isDark ? <FaSun size={20} /> : <FaMoon size={20} />}

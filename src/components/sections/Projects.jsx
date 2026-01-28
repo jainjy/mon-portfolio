@@ -16,8 +16,10 @@ import {
 import { useLanguage } from "../../context/LanguageContext";
 import { translations } from "../../data/translations";
 import ParticleBackground from "../ParticleBackground";
+import { useLazyBackgroundImage } from "../../hooks/useLazyBackgroundImage";
 
 export const Projects = () => {
+  const bgImageLoaded = useLazyBackgroundImage("/images/bg6.jpg");
   const { language } = useLanguage();
   const t = translations[language];
   const projects = data.projects[language];
@@ -258,6 +260,7 @@ export const Projects = () => {
                         <div
                           className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
                           style={{ backgroundImage: `url(${project.image})` }}
+                          loading="lazy"
                         />
                       )}
                       {!isImage && (

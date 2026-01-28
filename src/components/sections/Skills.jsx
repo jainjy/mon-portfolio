@@ -7,8 +7,10 @@ import { FaGear, FaGears } from "react-icons/fa6";
 import { useLanguage } from "../../context/LanguageContext";
 import { translations } from "../../data/translations";
 import ParticleBackground from "../ParticleBackground";
+import { useLazyBackgroundImage } from "../../hooks/useLazyBackgroundImage";
 
 export const Skills = () => {
+  const bgImageLoaded = useLazyBackgroundImage("/images/bg1.jpg");
   const { language } = useLanguage();
   const t = translations[language];
 

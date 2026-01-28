@@ -14,8 +14,10 @@ import {
   FaArrowRight,
 } from "react-icons/fa";
 import { FaUserTie } from "react-icons/fa6";
+import { useLazyBackgroundImage } from "../../hooks/useLazyBackgroundImage";
 
 export const Experience = () => {
+  const bgImageLoaded = useLazyBackgroundImage("/images/bg6.jpg");
   const { language } = useLanguage();
   const t = translations[language];
   const experiences = data.experiences[language];

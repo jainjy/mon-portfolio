@@ -12,6 +12,7 @@ import {
 import { useLanguage } from "../../context/LanguageContext";
 import { translations } from "../../data/translations";
 import { FaLanguage } from "react-icons/fa6";
+import { useLazyBackgroundImage } from "../../hooks/useLazyBackgroundImage";
 
 const FormationXp = () => {
   const { language } = useLanguage();

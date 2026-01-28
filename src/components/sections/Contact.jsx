@@ -11,8 +11,10 @@ import {
 } from "react-icons/hi";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import ContactForm from "../ContactForm";
+import { useLazyBackgroundImage } from "../../hooks/useLazyBackgroundImage";
 
 export const Contact = ({ mousePosition }) => {
+  const bgImageLoaded = useLazyBackgroundImage("/images/bg.jpg");
   const { language } = useLanguage();
   const t = translations[language];
 

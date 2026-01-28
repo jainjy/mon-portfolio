@@ -24,6 +24,8 @@ export default function NotFound() {
             src="/images/404.gif"
             alt="Page non trouvée"
             className="mx-auto mb-6 rounded-2xl"
+            loading="lazy"
+            decoding="async"
           />
 
           {/* Texte avec meilleure typographie */}

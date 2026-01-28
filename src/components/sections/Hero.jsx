@@ -1,23 +1,20 @@
 import React, { useEffect, useRef } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import gsap from "gsap";
-import { SplitText } from "gsap/SplitText";
 import ParticleBackground from "../ParticleBackground";
 import ProfileImage from "../ProfileImage";
 import AnimatedText from "../AnimatedText";
 import { FaRocket, FaDownload } from "react-icons/fa";
 import { useLanguage } from "../../context/LanguageContext";
 import { translations } from "../../data/translations";
-
-// Enregistrer le plugin SplitText
-gsap.registerPlugin(SplitText);
+import { useLazyBackgroundImage } from "../../hooks/useLazyBackgroundImage";
 
 export const Hero = ({ mousePosition }) => {
   const { language } = useLanguage();
   const t = translations[language];
   const heroRef = useRef(null);
   const contentRef = useRef(null);
+  const bgImageLoaded = useLazyBackgroundImage("/images/bg.jpg");
 
   useEffect(() => {
     AOS.init({
@@ -25,161 +22,6 @@ export const Hero = ({ mousePosition }) => {
       once: true,
       offset: 100,
     });
-  }, []);
-
-  useEffect(() => {
-    // Animation GSAP pour l'apparition du hero
-    const heroElement = heroRef.current;
-    const contentElement = contentRef.current;
-
-    if (!heroElement || !contentElement) return;
-
-    // Cacher le contenu initialement
-    gsap.set(contentElement, { autoAlpha: 0 });
-
-    // Créer une timeline pour l'animation
-    const tl = gsap.timeline({
-      defaults: { ease: "power3.out" },
-      onStart: () => {
-        // Cacher les autres animations au début
-        gsap.set(contentElement, { autoAlpha: 1 });
-      },
-    });
-
-    // Animation de l'overlay de fond
-    tl.fromTo(
-      heroElement.querySelector(".absolute.inset-0.bg-black"),
-      { scaleY: 0, transformOrigin: "top" },
-      { scaleY: 1, duration: 1.2, ease: "power3.inOut" }
-    );
-
-    // Animation des éléments de décoration
-    const decorElements = heroElement.querySelectorAll(
-      ".absolute.top-20, .absolute.top-40, .absolute.bottom-40"
-    );
-    tl.fromTo(
-      decorElements,
-      { scale: 0, opacity: 0, rotation: 45 },
-      { scale: 1, opacity: 0.3, rotation: 0, duration: 0.8, stagger: 0.2 },
-      "-=0.8"
-    );
-
-    // Animation du cercle de particules lumineux
-    const lightCircle = heroElement.querySelector(".absolute.w-96.h-96");
-    tl.fromTo(
-      lightCircle,
-      { scale: 0, opacity: 0 },
-      { scale: 1, opacity: 0.4, duration: 1 },
-      "-=0.5"
-    );
-
-    // Animation du contenu principal avec effet de découpe et coulissement
-    const mainContent = contentElement.querySelector(".relative.z-10");
-
-    // Séparer le contenu en plusieurs sections
-    const contentSections = [
-      mainContent.querySelector(".flex.flex-col"), // Section avec image et texte
-      mainContent.querySelector(".flex.flex-wrap"), // Section des boutons
-      mainContent.querySelector(".flex.justify-center"), // Section scroll indicator
-    ];
-
-    // Animation de chaque section avec effet de coupe et coulissement
-    contentSections.forEach((section, index) => {
-      if (!section) return;
-
-      // Créer un masque pour l'effet de coupe
-      const maskId = `hero-mask-${index}`;
-
-      // Ajouter un SVG masque
-      const svgNS = "http://www.w3.org/2000/svg";
-      const mask = document.createElementNS(svgNS, "mask");
-      mask.setAttribute("id", maskId);
-
-      // Rectangle de base (caché)
-      const rect = document.createElementNS(svgNS, "rect");
-      rect.setAttribute("width", "100%");
-      rect.setAttribute("height", "100%");
-      rect.setAttribute("fill", "white");
-
-      // Ajouter plusieurs rectangles pour l'effet de coupe
-      const rects = [];
-      for (let i = 0; i < 5; i++) {
-        const sliceRect = document.createElementNS(svgNS, "rect");
-        sliceRect.setAttribute("width", "100%");
-        sliceRect.setAttribute("height", "20%");
-        sliceRect.setAttribute("y", `${i * 20}%`);
-        sliceRect.setAttribute("fill", "black");
-        rects.push(sliceRect);
-      }
-
-      mask.appendChild(rect);
-      rects.forEach((r) => mask.appendChild(r));
-
-      // Ajouter le masque au SVG
-      const svg = document.createElementNS(svgNS, "svg");
-      svg.setAttribute("width", "0");
-      svg.setAttribute("height", "0");
-      svg.appendChild(mask);
-      document.body.appendChild(svg);
-
-      // Appliquer le masque initial
-      gsap.set(section, {
-        clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
-        opacity: 0,
-        y: 50,
-      });
-
-      // Animation de chaque section avec effet de coulissement
-      tl.to(
-        section,
-        {
-          clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-          opacity: 1,
-          y: 0,
-          duration: 1.2,
-          ease: "power3.inOut",
-        },
-        index === 0 ? "-=0.5" : `+=${0.3 + index * 0.2}`
-      );
-
-      // Animation des rectangles de coupe
-      rects.forEach((rect, rectIndex) => {
-        tl.fromTo(
-          rect,
-          { attr: { height: "20%", y: `${rectIndex * 20}%` } },
-          {
-            attr: { height: "0%", y: `${rectIndex * 20 + 10}%` },
-            duration: 0.6,
-            ease: "power2.inOut",
-          },
-          `-=${0.4 + rectIndex * 0.1}`
-        );
-      });
-
-      // Cleanup
-      tl.call(() => {
-        gsap.set(section, { clearProps: "clipPath,opacity,y" });
-        if (svg.parentNode) {
-          svg.parentNode.removeChild(svg);
-        }
-      });
-    });
-
-    // Animation des éléments enfants avec effet de cascade
-    const animatedElements = contentElement.querySelectorAll(
-      "[data-aos], .profile-image, .animated-text"
-    );
-    tl.fromTo(
-      animatedElements,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.8, stagger: 0.1 },
-      "-=0.5"
-    );
-
-    return () => {
-      // Nettoyage
-      tl.kill();
-    };
   }, []);
 
   return (
@@ -216,7 +58,7 @@ export const Hero = ({ mousePosition }) => {
           <div className="absolute bottom-40 left-20 w-12 h-12 bg-blue-500/20 transform rotate-45 animate-pulse"></div>
         </div>
 
-        <div ref={contentRef} className="opacity-0">
+        <div ref={contentRef} className="animate-fade-in">
           <div className="relative z-10 max-w-7xl mx-auto mt-16">
             {/* Container flex pour desktop */}
             <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-8 lg:gap-16">

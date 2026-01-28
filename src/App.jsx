@@ -14,6 +14,7 @@ import { Projects } from "./components/sections/Projects";
 import { Skills } from "./components/sections/Skills";
 import { Hero } from "./components/sections/Hero";
 import { About } from "./components/sections/About";
+import { Experience } from "./components/sections/Experience";
 import { ThemeProvider } from "./context/ThemeContext";
 import { LanguageProvider } from "./context/LanguageContext";
 import AOS from "aos";
@@ -29,6 +30,7 @@ const HomePage = ({ mousePosition }) => (
     <Hero mousePosition={mousePosition} />
     <About />
     <Skills />
+    <Experience />
     <Projects />
     <Contact mousePosition={mousePosition} />
     <Footer />

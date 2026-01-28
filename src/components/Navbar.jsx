@@ -10,9 +10,10 @@ import {
   BiHome,
   BiLogoGmail,
   BiUser,
+  BiBriefcase, // Import de l'icône pour expériences
 } from "react-icons/bi";
 
-// Inline SVG flag icons to avoid emoji rendering issues on some platforms
+// Inline SVG flag icons
 const FlagFR = ({ className = "w-5 h-5" }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +60,6 @@ const FlagGB = ({ className = "w-5 h-5" }) => (
   </svg>
 );
 
-// Composant Navbar amélioré avec animations Framer Motion
 const Navbar = () => {
   const [navOpen, setNavOpen] = useState(false);
   const [active, setActive] = useState("#home");
@@ -72,7 +72,15 @@ const Navbar = () => {
   const { language, setLanguage } = useLanguage();
   const t = translations[language];
 
-  const sections = ["#home", "#about", "#skills", "#projects", "#contact"];
+  // Ajout de #experience dans les sections surveillées
+  const sections = [
+    "#home",
+    "#about",
+    "#skills",
+    "#experience",
+    "#projects",
+    "#contact",
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -118,10 +126,12 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Ajout de l'objet Experience dans les liens
   const links = [
     { name: t.nav.home, href: "#home", icon: BiHome },
     { name: t.nav.about, href: "#about", icon: BiUser },
     { name: t.nav.skills, href: "#skills", icon: BiCode },
+    { name: t.nav.experience, href: "#experience", icon: BiBriefcase },
     { name: t.nav.projects, href: "#projects", icon: BiFolderOpen },
     { name: t.nav.contact, href: "#contact", icon: BiLogoGmail },
   ];
@@ -129,7 +139,6 @@ const Navbar = () => {
   const handleClick = (href) => {
     setActive(href);
     setNavOpen(false);
-
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
@@ -142,25 +151,22 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.7, ease: "easeOut" }}
-      className={`mt-20 fixed m-auto rounded-t-xl rounded-b-3xl z-[99] transition-all duration-700 ${
+      className={`fixed top-0 left-0 right-0 m-auto z-[99] transition-all duration-700 ${
         scrolled
           ? "bg-white/50 dark:bg-gray-900/50 backdrop-blur-xl shadow-2xl border-b border-purple-100/50 dark:border-purple-900/50"
           : "bg-transparent"
       }`}
     >
-      {/* Ajuster le padding et la largeur max */}
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6 flex justify-between items-center h-16">
-        {/* Logo avec taille réduite sur mobile */}
         <motion.div
-          className="mongule text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-700 via-purple-500 to-pink-500/80 bg-clip-text text-transparent tracking-widest ml-4 mr-12"
+          className="mongule text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-700 via-purple-500 to-pink-500/80 bg-clip-text text-transparent tracking-widest ml-4"
           animate={{ scale: [1, 1.05, 1] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
           Andrianina
         </motion.div>
 
-        {/* Modifier le breakpoint de md: à lg: et ajuster l'espacement */}
-        <ul className="hidden lg:flex space-x-4 xl:space-x-8">
+        <ul className="hidden lg:flex space-x-2 xl:space-x-4">
           {links.map((link, index) => {
             const IconComponent = link.icon;
             return (
@@ -173,86 +179,45 @@ const Navbar = () => {
               >
                 <motion.a
                   href={link.href}
-                  onClick={() => handleClick(link.href)}
-                  className={`relative px-3 sm:px-4 py-2 rounded transition-all duration-300 text-sm sm:text-base flex items-center gap-2 ${
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleClick(link.href);
+                  }}
+                  className={`relative px-3 py-2 rounded-xl transition-all duration-300 text-sm flex items-center gap-2 ${
                     active === link.href
                       ? "text-white font-semibold"
                       : !scrolled && isHome
-                      ? "text-white hover:text-purple-200"
-                      : "text-gray-700 dark:text-white hover:text-purple-600 dark:hover:text-purple-400"
+                        ? "text-white hover:text-purple-200"
+                        : "text-gray-700 dark:text-white hover:text-purple-600 dark:hover:text-purple-400"
                   }`}
                   animate={{
                     background:
                       active === link.href
-                        ? "linear-gradient(135deg, rgba(147, 51, 234, 0.8), rgba(236, 72, 153, 0.8),rgba(255,255,0,0.7))"
+                        ? "linear-gradient(135deg, rgba(147, 51, 234, 0.8), rgba(236, 72, 153, 0.8))"
                         : "transparent",
                   }}
-                  whileHover={{
-                    background:
-                      active === link.href
-                        ? "linear-gradient(135deg, rgba(147, 51, 234, 0.9), rgba(236, 72, 153, 0.9))"
-                        : "rgba(147, 51, 234, 0.1)",
-                  }}
-                  transition={{ duration: 0.3 }}
                 >
-                  <IconComponent
-                    size={18}
-                    className={active === link.href ? "text-white" : ""}
-                  />
+                  <IconComponent size={18} />
                   {link.name}
-                  <motion.span
-                    className={`absolute -bottom-1.5 left-0 w-full h-0.5 rounded-full bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500`}
-                    initial={{ scaleX: 0, opacity: 0 }}
-                    animate={{
-                      scaleX: active === link.href ? 1 : 0,
-                      opacity: active === link.href ? 1 : 0,
-                    }}
-                    whileHover={{
-                      scaleX: 1,
-                      opacity: 1,
-                      boxShadow: "0 0 8px rgba(168, 85, 247, 0.5)",
-                    }}
-                    transition={{
-                      duration: 0.5,
-                      ease: "easeInOut",
-                    }}
-                    style={{
-                      filter:
-                        active === link.href
-                          ? "drop-shadow(0 0 2px rgba(168, 85, 247, 0.5))"
-                          : "none",
-                    }}
-                  ></motion.span>
                 </motion.a>
               </motion.li>
             );
           })}
         </ul>
 
-        {/* Ajuster l'espacement des boutons */}
-        <div className="flex items-center gap-2 sm:gap-4 mr-4 ml-10">
+        <div className="flex items-center gap-2 sm:gap-4 mr-4">
           <div className="relative" ref={langRef}>
-            {/* Réduire la taille du bouton de langue sur mobile */}
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setLangOpen(!langOpen)}
-              aria-haspopup="listbox"
-              aria-expanded={langOpen}
-              className="inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 rounded-full border border-purple-200 dark:border-purple-800 bg-white/70 dark:bg-gray-900/70 text-purple-700 dark:text-purple-300 backdrop-blur text-sm sm:text-base"
+              className="inline-flex items-center gap-1 sm:gap-2 px-2 py-1.5 rounded-full border border-purple-200 dark:border-purple-800 bg-white/70 dark:bg-gray-900/70 text-purple-700 dark:text-purple-300 backdrop-blur text-sm"
             >
-              {language === "fr" ? (
-                <FlagFR className="w-5 h-5 rounded-[2px]" />
-              ) : (
-                <FlagGB className="w-5 h-5 rounded-[2px]" />
-              )}
+              {language === "fr" ? <FlagFR /> : <FlagGB />}
               <span className="hidden sm:inline font-semibold">
                 {language.toUpperCase()}
               </span>
-              <motion.span
-                animate={{ rotate: langOpen ? 180 : 0 }}
-                className="ml-1 text-xs"
-              >
+              <motion.span animate={{ rotate: langOpen ? 180 : 0 }}>
                 ▾
               </motion.span>
             </motion.button>
@@ -263,41 +228,21 @@ const Navbar = () => {
                   initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.15 }}
                   className="absolute right-0 mt-2 w-36 rounded-xl border border-purple-100 dark:border-purple-800 shadow-2xl bg-white dark:bg-gray-900 z-[100] overflow-hidden"
                 >
-                  <button
-                    onClick={() => {
-                      setLanguage("fr");
-                      setLangOpen(false);
-                    }}
-                    className={`w-full flex items-center gap-2 px-3 py-2 text-sm text-left hover:bg-purple-50 dark:hover:bg-purple-900/30 ${
-                      language === "fr"
-                        ? "bg-purple-50 dark:bg-purple-900/30 font-semibold"
-                        : ""
-                    }`}
-                    role="option"
-                    aria-selected={language === "fr"}
-                  >
-                    <FlagFR className="w-5 h-5 rounded-[2px]" />
-                    <span>Français</span>
-                  </button>
-                  <button
-                    onClick={() => {
-                      setLanguage("en");
-                      setLangOpen(false);
-                    }}
-                    className={`w-full flex items-center gap-2 px-3 py-2 text-sm text-left hover:bg-purple-50 dark:hover:bg-purple-900/30 ${
-                      language === "en"
-                        ? "bg-purple-50 dark:bg-purple-900/30 font-semibold"
-                        : ""
-                    }`}
-                    role="option"
-                    aria-selected={language === "en"}
-                  >
-                    <FlagGB className="w-5 h-5 rounded-[2px]" />
-                    <span>English</span>
-                  </button>
+                  {["fr", "en"].map((lang) => (
+                    <button
+                      key={lang}
+                      onClick={() => {
+                        setLanguage(lang);
+                        setLangOpen(false);
+                      }}
+                      className={`w-full flex items-center gap-2 px-3 py-2 text-sm text-left hover:bg-purple-50 dark:hover:bg-purple-900/30 ${language === lang ? "bg-purple-50 dark:bg-purple-900/30 font-bold" : ""}`}
+                    >
+                      {lang === "fr" ? <FlagFR /> : <FlagGB />}
+                      <span>{lang === "fr" ? "Français" : "English"}</span>
+                    </button>
+                  ))}
                 </motion.div>
               )}
             </AnimatePresence>
@@ -307,74 +252,47 @@ const Navbar = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsDark(!isDark)}
-            className="p-2 rounded-full bg-purple-100 dark:bg-yellow-900 text-purple-600 dark:text-yellow-400 border-2 border-purple-300 dark:border-yellow-400 transition-all duration-300"
+            className="p-2 rounded-full bg-purple-100 dark:bg-yellow-900 text-purple-600 dark:text-yellow-400 border-2 border-purple-300 dark:border-yellow-400"
           >
-            {isDark ? <FaSun size={24} /> : <FaMoon size={24} />}
+            {isDark ? <FaSun size={20} /> : <FaMoon size={20} />}
           </motion.button>
 
-          {/* Modifier le breakpoint du menu burger */}
           <div className="lg:hidden">
             <button
               onClick={() => setNavOpen(!navOpen)}
-              className={`focus:outline-none p-2 rounded-lg transition-all duration-300 ${
-                !scrolled && isHome
-                  ? "text-white hover:bg-white/20"
-                  : "text-gray-700 dark:text-white hover:bg-purple-50 dark:hover:bg-purple-900/20"
-              }`}
+              className="p-2 text-gray-700 dark:text-white"
             >
-              <motion.div
-                animate={{ rotate: navOpen ? 180 : 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                {navOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
-              </motion.div>
+              {navOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Modifier le breakpoint du menu mobile */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {navOpen && (
           <motion.div
-            initial={{ y: "-100%", opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: "-100%", opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className="lg:hidden fixed top-16 left-0 w-full bg-white/90 dark:bg-gray-900/95 backdrop-blur-xl shadow-2xl rounded-b-2xl"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="lg:hidden bg-white dark:bg-gray-900 border-t dark:border-gray-800"
           >
-            <ul className="flex flex-col items-center py-6 space-y-4">
-              {links.map((link, index) => {
-                const IconComponent = link.icon;
-                return (
-                  <motion.li
-                    key={link.name}
-                    initial={{ x: -100, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: index * 0.1 }}
+            <ul className="flex flex-col p-4 space-y-2">
+              {links.map((link) => (
+                <li key={link.name}>
+                  <a
+                    href={link.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleClick(link.href);
+                    }}
+                    className={`flex items-center gap-3 p-3 rounded-xl ${active === link.href ? "bg-purple-100 dark:bg-purple-900 text-purple-600" : "dark:text-white"}`}
                   >
-                    <a
-                      href={link.href}
-                      onClick={() => handleClick(link.href)}
-                      className={`text-gray-700 dark:text-white px-6 py-3 rounded-full transition-all duration-300 flex items-center gap-3 ${
-                        active === link.href
-                          ? "bg-gradient-to-r from-purple-300 to-yellow-200 dark:from-purple-900 dark:to-pink-900 text-purple-600 dark:text-purple-400 font-semibold"
-                          : "hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 dark:hover:from-purple-900/50 dark:hover:to-pink-900/50 hover:text-purple-600 dark:hover:text-purple-400"
-                      }`}
-                    >
-                      <IconComponent
-                        size={20}
-                        className={
-                          active === link.href
-                            ? "text-purple-600 dark:text-purple-400"
-                            : ""
-                        }
-                      />
-                      {link.name}
-                    </a>
-                  </motion.li>
-                );
-              })}
+                    <link.icon size={20} />
+                    {link.name}
+                  </a>
+                </li>
+              ))}
             </ul>
           </motion.div>
         )}
@@ -382,4 +300,5 @@ const Navbar = () => {
     </motion.nav>
   );
 };
+
 export default Navbar;

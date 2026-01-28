@@ -347,5 +347,85 @@ import {
       { name: "Malagasy", level: "Native" },
     ]
   };
+const experiences = {
+  fr: [
+    {
+      id: 1,
+      title: "Développeur Full Stack",
+      company: "ARIA COMMUNICATION",
+      location: "Antsirabe, Madagascar",
+      duration: "Août 2025 - Présent",
+      status: "current",
+      workMode: "hybrid",
+      shortDescription:
+        "Développement d'applications web complètes avec React, Node.js et Laravel",
+      fullDescription: [
+        "Développement d'applications web complètes avec React, Node.js et Laravel",
+        "Conception et implémentation d'APIs RESTful robustes et sécurisées",
+        "Optimisation des performances des applications frontend et backend",
+        "Collaboration en équipe avec méthodologie agile (Scrum)",
+        "Maintenance et amélioration de systèmes existants",
+        "Intégration de services tiers et APIs externes",
+      ],
+      technologies: [
+        "React",
+        "Node.js",
+        "Laravel",
+        "PostgreSQL",
+        "REST API",
+        "Git",
+        "Docker",
+      ],
+      icon: "💼",
+      gradient: "from-blue-600 to-purple-600",
+      bgColor:
+        "bg-gradient-to-br from-blue-100/60 to-purple-100/60 dark:from-blue-900/20 dark:to-purple-900/20",
+    },
 
-  export default {skillsCategories,projects,education,interests,languages}
+  ],
+  en: [
+    {
+      id: 1,
+      title: "Full Stack Developer",
+      company: "ARIA COMMUNICATION",
+      location: "Antsirabe, Madagascar",
+      duration: "August 2025 - Present",
+      status: "current",
+      workMode: "hybrid",
+      shortDescription:
+        "Development of complete web applications with React, Node.js, and Laravel",
+      fullDescription: [
+        "Development of complete web applications with React, Node.js, and Laravel",
+        "Design and implementation of robust and secure RESTful APIs",
+        "Optimization of frontend and backend application performance",
+        "Team collaboration using agile methodology (Scrum)",
+        "Maintenance and improvement of existing systems",
+        "Integration of third-party services and external APIs",
+      ],
+      technologies: [
+        "React",
+        "Node.js",
+        "Laravel",
+        "PostgreSQL",
+        "REST API",
+        "Git",
+
+      ],
+      icon: "💼",
+      gradient: "from-blue-600 to-purple-600",
+      bgColor:
+        "bg-gradient-to-br from-blue-100/60 to-purple-100/60 dark:from-blue-900/20 dark:to-purple-900/20",
+    },
+  
+  ],
+};
+
+
+  export default {
+    skillsCategories,
+    projects,
+    education,
+    interests,
+    languages,
+    experiences,
+  };

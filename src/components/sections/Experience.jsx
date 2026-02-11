@@ -157,7 +157,7 @@ export const Experience = () => {
       )}
 
       {/* SECTION PRINCIPALE */}
-      <section id="experience" className="min-h-screen relative py-20">
+      <section id="experience" className="min-h-screen relative">
         <div
           className="w-full relative z-10 px-4 py-10 dark:bg-gray-900/70 bg-white/50"
           style={{

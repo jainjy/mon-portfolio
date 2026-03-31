@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaArrowUp } from "react-icons/fa";
 import "./styles//font.css";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 // Importation de React Router
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Loader from "./components/Loader";
@@ -20,21 +22,113 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { PixelTransition } from "./components/Transitions";
 
+gsap.registerPlugin(ScrollTrigger);
+
 // Composant qui regroupe toutes les sections de la page d'accueil
-const HomePage = ({ mousePosition }) => (
-  <div className="railway">
-    <div className="flex items-center justify-center justify-items-center">
-      <Navbar />
+const HomePage = ({ mousePosition }) => {
+  const mainContainerRef = useRef(null);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia("(max-width: 1024px)").matches;
+  });
+
+  useEffect(() => {
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const mobileQuery = window.matchMedia("(max-width: 1024px)");
+
+    const handleMotionChange = (e) => setPrefersReducedMotion(e.matches);
+    const handleMobileChange = (e) => setIsMobile(e.matches);
+
+    setPrefersReducedMotion(motionQuery.matches);
+    motionQuery.addEventListener("change", handleMotionChange);
+    mobileQuery.addEventListener("change", handleMobileChange);
+
+    return () => {
+      motionQuery.removeEventListener("change", handleMotionChange);
+      mobileQuery.removeEventListener("change", handleMobileChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (prefersReducedMotion || isMobile || !mainContainerRef.current) return;
+
+    const sections = gsap.utils.toArray(
+      ".stack-section",
+      mainContainerRef.current,
+    );
+    const triggers = [];
+    const animations = [];
+
+    sections.forEach((section, i) => {
+      if (i === sections.length - 1) return;
+
+      gsap.set(section, { marginBottom: "100vh" });
+
+      const pinTrigger = ScrollTrigger.create({
+        trigger: section,
+        start: "top top",
+        end: () => `+=${section.offsetHeight + window.innerHeight * 1.5}`,
+        pin: true,
+        pinSpacing: false,
+        scrub: 1,
+      });
+      triggers.push(pinTrigger);
+
+      const exitAnimation = gsap.to(section, {
+        opacity: 0,
+        scale: 0.9,
+        filter: "blur(12px)",
+        scrollTrigger: {
+          trigger: sections[i + 1],
+          start: "top bottom",
+          end: "top top",
+          scrub: true,
+        },
+      });
+      animations.push(exitAnimation);
+    });
+
+    ScrollTrigger.refresh();
+
+    return () => {
+      animations.forEach((animation) => animation.kill());
+      triggers.forEach((trigger) => trigger.kill());
+      sections.forEach((section) =>
+        gsap.set(section, { clearProps: "marginBottom,opacity,scale,filter" }),
+      );
+    };
+  }, [prefersReducedMotion, isMobile]);
+
+  return (
+    <div ref={mainContainerRef} className="railway">
+      <div className="flex items-center justify-center justify-items-center">
+        <Navbar />
+      </div>
+      <section className="stack-section">
+        <Hero mousePosition={mousePosition} />
+      </section>
+      <section className="stack-section">
+        <About />
+      </section>
+      <section className="stack-section">
+        <Skills />
+      </section>
+      <section className="stack-section">
+        <Experience />
+      </section>
+      <section className="stack-section">
+        <Projects />
+      </section>
+      <section className="stack-section">
+        <Contact mousePosition={mousePosition} />
+      </section>
+      <section className="stack-section">
+        <Footer />
+      </section>
     </div>
-    <Hero mousePosition={mousePosition} />
-    <About />
-    <Skills />
-    <Experience />
-    <Projects />
-    <Contact mousePosition={mousePosition} />
-    <Footer />
-  </div>
-);
+  );
+};
 
 function App() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });

@@ -220,7 +220,7 @@ function App() {
                       exit={{ opacity: 0, scale: 0.5 }}
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
-                      className="fixed bottom-8 right-8 p-4 rounded-full bg-gradient-to-br from-purple-600 via-yellow-400 to-white text-gray-800 shadow-2xl cursor-pointer z-50 hover:from-purple-700 hover:via-yellow-500 hover:to-white transition-all duration-300 group"
+                      className="fixed bottom-8  right-8 p-4 rounded-full bg-gradient-to-br from-purple-600 via-yellow-400 to-white text-gray-800 shadow-2xl cursor-pointer z-50 hover:from-purple-700 hover:via-yellow-500 hover:to-white transition-all duration-300 group"
                     >
                       {/* Icône */}
                       <FaArrowUp className="text-xl group-hover:scale-110 transition-transform duration-300" />

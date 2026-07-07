@@ -29,9 +29,12 @@ export const Projects = () => {
   const [isPaused, setIsPaused] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(3);
+  const [dragOffset, setDragOffset] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
   const carouselRef = useRef(null);
   const autoScrollRef = useRef(null);
-  const isHoveringRef = useRef(false); // Nouveau ref pour suivre l'état de hover
+  const isHoveringRef = useRef(false);
+  const dragStartXRef = useRef(null);
 
   const handleExpand = (i) => setExpanded(i);
   const handleClose = () => setExpanded(null);
@@ -58,19 +61,69 @@ export const Projects = () => {
     if (isHoveringRef.current) return;
 
     setCurrentIndex(
-      (prev) => (prev + 1) % (Math.max(1, projects.length - itemsPerView + 1))
+      (prev) => (prev + 1) % Math.max(1, projects.length - itemsPerView + 1),
     );
   }, [projects.length, itemsPerView]);
 
   const prevSlide = useCallback(() => {
     setCurrentIndex(
       (prev) =>
-        (prev -
-          1 +
-          Math.max(1, projects.length - itemsPerView + 1)) %
-        (Math.max(1, projects.length - itemsPerView + 1))
+        (prev - 1 + Math.max(1, projects.length - itemsPerView + 1)) %
+        Math.max(1, projects.length - itemsPerView + 1),
     );
   }, [projects.length, itemsPerView]);
+
+  const handleDragStart = useCallback(
+    (event) => {
+      if (projects.length <= itemsPerView) return;
+
+      const interactiveElement = event.target.closest(
+        "button, a, input, textarea, select, [role='button']",
+      );
+      if (interactiveElement) return;
+
+      dragStartXRef.current = event.clientX;
+      setIsDragging(true);
+      setDragOffset(0);
+
+      if (carouselRef.current?.setPointerCapture) {
+        carouselRef.current.setPointerCapture(event.pointerId);
+      }
+    },
+    [itemsPerView, projects.length],
+  );
+
+  const handleDragMove = useCallback(
+    (event) => {
+      if (!isDragging || dragStartXRef.current === null) return;
+      setDragOffset(event.clientX - dragStartXRef.current);
+    },
+    [isDragging],
+  );
+
+  const handleDragEnd = useCallback(
+    (event) => {
+      if (!isDragging || dragStartXRef.current === null) return;
+
+      const delta = event.clientX - dragStartXRef.current;
+      const threshold = 80;
+
+      if (delta > threshold) {
+        prevSlide();
+      } else if (delta < -threshold) {
+        nextSlide();
+      }
+
+      setIsDragging(false);
+      setDragOffset(0);
+      dragStartXRef.current = null;
+
+      if (carouselRef.current?.releasePointerCapture) {
+        carouselRef.current.releasePointerCapture(event.pointerId);
+      }
+    },
+    [isDragging, nextSlide, prevSlide],
+  );
 
   // Auto-scroll avec gestion du hover
   useEffect(() => {
@@ -168,8 +221,8 @@ export const Projects = () => {
                   ? "Reprendre"
                   : "Resume"
                 : language === "fr"
-                ? "Pause"
-                : "Pause"
+                  ? "Pause"
+                  : "Pause"
             }
           >
             {isPaused ? <FaPlay size={16} /> : <FaPause size={16} />}
@@ -179,8 +232,8 @@ export const Projects = () => {
                   ? "Reprendre"
                   : "Resume"
                 : language === "fr"
-                ? "Pause"
-                : "Pause"}
+                  ? "Pause"
+                  : "Pause"}
             </span>
           </button>
 
@@ -226,10 +279,18 @@ export const Projects = () => {
         <div className="relative overflow-hidden">
           <div
             ref={carouselRef}
-            className="flex transition-transform duration-700 ease-out -mx-5"
+            className={`flex ${isDragging ? "transition-none" : "transition-transform duration-700 ease-out"} -mx-5"`}
             style={{
-              transform: `translateX(calc(-${currentIndex} * 100% / ${itemsPerView}))`,
+              transform: isDragging
+                ? `translateX(calc(-${currentIndex} * ${100 / itemsPerView}% + ${dragOffset}px))`
+                : `translateX(calc(-${currentIndex} * ${100 / itemsPerView}%))`,
+              touchAction: "pan-y",
             }}
+            onPointerDown={handleDragStart}
+            onPointerMove={handleDragMove}
+            onPointerUp={handleDragEnd}
+            onPointerLeave={handleDragEnd}
+            onPointerCancel={handleDragEnd}
           >
             {projects.map((project, index) => {
               const isImage = project.image && project.image.startsWith("/");

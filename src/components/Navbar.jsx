@@ -68,6 +68,8 @@ const Navbar = () => {
   const [isHome, setIsHome] = useState(true);
   const navRef = useRef(null);
   const langRef = useRef(null);
+  const navScrollLockRef = useRef(false);
+  const navScrollTimeoutRef = useRef(null);
   const [langOpen, setLangOpen] = useState(false);
   const { isDark, toggleTheme } = useTheme();
   const { language, setLanguage } = useLanguage();
@@ -94,8 +96,9 @@ const Navbar = () => {
         setIsHome(window.scrollY < homeRect.height - 100);
       }
 
-      const scrollPosition = window.scrollY + 100;
+      if (navScrollLockRef.current) return;
 
+      const scrollPosition = window.scrollY + 100;
       for (const sectionId of sections) {
         const section = document.querySelector(sectionId);
         if (section) {
@@ -114,7 +117,12 @@ const Navbar = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (navScrollTimeoutRef.current) {
+        clearTimeout(navScrollTimeoutRef.current);
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -140,12 +148,22 @@ const Navbar = () => {
   const handleClick = (href) => {
     setActive(href);
     setNavOpen(false);
+    navScrollLockRef.current = true;
+
+    if (navScrollTimeoutRef.current) {
+      clearTimeout(navScrollTimeoutRef.current);
+    }
 
     setTimeout(() => {
       const element = document.querySelector(href);
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
       }
+
+      navScrollTimeoutRef.current = setTimeout(() => {
+        navScrollLockRef.current = false;
+        setActive(href);
+      }, 900);
     }, 100);
   };
 

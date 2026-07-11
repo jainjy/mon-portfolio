@@ -88,15 +88,15 @@ const GooeyNav = ({
     textRef.current.innerText = element.innerText;
   };
   const handleClick = (e, index) => {
-    const liEl = e.currentTarget;
-    if (activeIndex === index) return;
+    const liEl = e.currentTarget.closest("li");
+
+    items[index]?.onClick?.();
+    onItemClick?.(items[index], index);
+
+    if (activeIndex === index || !liEl) return;
+
     setActiveIndex(index);
     updateEffectPosition(liEl);
-
-    // Call the onClick callback if provided
-    if (onItemClick && items[index]?.onClick) {
-      items[index].onClick();
-    }
 
     if (filterRef.current) {
       const particles = filterRef.current.querySelectorAll(".particle");
@@ -109,15 +109,6 @@ const GooeyNav = ({
     }
     if (filterRef.current) {
       makeParticles(filterRef.current);
-    }
-  };
-  const handleKeyDown = (e, index) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      const liEl = e.currentTarget.parentElement;
-      if (liEl) {
-        handleClick({ currentTarget: liEl }, index);
-      }
     }
   };
   useEffect(() => {
@@ -320,7 +311,6 @@ const GooeyNav = ({
               >
                 <button
                   onClick={(e) => handleClick(e, index)}
-                  onKeyDown={(e) => handleKeyDown(e, index)}
                   className="outline-none flex items-center gap-2 cursor-pointer bg-transparent border-0 p-0 text-inherit"
                 >
                   {item.icon && <item.icon size={18} />}

@@ -9,6 +9,7 @@ import { translations } from "../../data/translations";
 import ParticleBackground from "../ParticleBackground";
 import { useLazyBackgroundImage } from "../../hooks/useLazyBackgroundImage";
 import ShinyText from "../ShinyText";
+import LogoLoop from "../LogoLoop";
 
 export const Skills = () => {
   const bgImageLoaded = useLazyBackgroundImage("/images/bg1.jpg");
@@ -87,30 +88,35 @@ export const Skills = () => {
                   {t.skills.categories[category.key]}
                 </h3>
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-                  {category.items.map((skill, skillIndex) => (
-                    <div
-                      key={skill.name}
-                      data-aos="zoom-in"
-                      data-aos-delay={skillIndex * 50 + catIndex * 100 + 400}
-                      data-aos-duration="600"
-                      className="group bg-gradient-to-br from-white to-yellow-50 dark:from-gray-900/70 dark:to-gray-700/90 p-6 rounded-t-3xl rounded-b-xl shadow-md  relative overflow-hidden text-center transition-transform duration-300 hover:scale-105"
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-r from-purple-400/10 to-pink-400/10 scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></div>
-
-                      <div className="relative mb-4">
-                        <skill.icon
-                          size={48}
-                          className={`${skill.color} mx-auto transition-all duration-300`}
-                        />
-                        <div className="absolute -inset-2 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-lg opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
-                      </div>
-
-                      <h4 className="text-lg font-bold text-gray-800 dark:text-gray-100 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-300 relative z-10">
-                        {skill.name}
-                      </h4>
-                    </div>
-                  ))}
+                <div className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-2xl">
+                  <LogoLoop
+                    logos={category.items.map((skill) => ({
+                      node: (
+                        <div className="relative group/skill flex h-28 min-w-24 items-center justify-center pb-7">
+                          <skill.icon
+                            size={48}
+                            className={`${skill.color} transition-all duration-300 group-hover/skill:drop-shadow-xl`}
+                          />
+                          <div className="absolute bottom-0 left-1/2 z-50 -translate-x-1/2 translate-y-2 opacity-0 transition-all duration-200 group-hover/skill:translate-y-0 group-hover/skill:opacity-100 pointer-events-none">
+                            <div className="bg-gray-800 dark:bg-white text-white dark:text-gray-800 px-3 py-1 rounded-lg whitespace-nowrap text-sm font-semibold shadow-lg">
+                              {skill.name}
+                            </div>
+                          </div>
+                        </div>
+                      ),
+                      title: skill.name,
+                      ariaLabel: skill.name,
+                    }))}
+                    speed={80}
+                    direction="left"
+                    logoHeight={48}
+                    gap={32}
+                    pauseOnHover={true}
+                    scaleOnHover={true}
+                    fadeOut={true}
+                    fadeOutColor="#ffffff"
+                    className="py-10"
+                  />
                 </div>
               </div>
             ))}

@@ -119,15 +119,6 @@ export const Hero = ({ mousePosition }) => {
                 {t.hero.download}
               </a>
             </div>
-
-            <div className="flex justify-center mt-10 mb-10">
-              <div className="animate-bounce relative">
-                <div className="w-8 h-12 border-4 border-purple-400/70 rounded-full flex justify-center relative overflow-hidden">
-                  <div className="w-1 h-3 bg-gradient-to-b from-purple-500 via-purple-800 to-white rounded-full mt-2 animate-ping-slow" />
-                </div>
-                <div className="absolute inset-0 bg-purple-500/20 rounded-full blur-md animate-pulse"></div>
-              </div>
-            </div>
           </div>
         </div>
       </section>

@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import data from "../../data/data";
 import { FaCode, FaLaptopCode, FaDatabase, FaServer } from "react-icons/fa";
-import { FaGear, FaGears } from "react-icons/fa6";
+import { FaGear } from "react-icons/fa6";
 import { useLanguage } from "../../context/LanguageContext";
 import { translations } from "../../data/translations";
 import ParticleBackground from "../ParticleBackground";
@@ -11,8 +11,34 @@ import { useLazyBackgroundImage } from "../../hooks/useLazyBackgroundImage";
 import ShinyText from "../ShinyText";
 import LogoLoop from "../LogoLoop";
 
+const LOOP_THRESHOLD = 5;
+
+const SkillLogo = ({ skill, showTitle = false }) => (
+  <div
+    className={`relative group/skill flex min-w-24 items-center justify-center ${
+      showTitle ? "h-28 flex-col gap-3" : "h-28 pb-7"
+    }`}
+  >
+    <skill.icon
+      size={48}
+      className={`${skill.color} transition-all duration-300 group-hover/skill:drop-shadow-xl`}
+    />
+    {showTitle ? (
+      <span className="text-sm font-semibold text-gray-800 dark:text-gray-100 text-center">
+        {skill.name}
+      </span>
+    ) : (
+      <div className="absolute bottom-0 left-1/2 z-50 -translate-x-1/2 translate-y-2 opacity-0 transition-all duration-200 group-hover/skill:translate-y-0 group-hover/skill:opacity-100 pointer-events-none">
+        <div className="bg-gray-800 dark:bg-white text-white dark:text-gray-800 px-3 py-1 rounded-lg whitespace-nowrap text-sm font-semibold shadow-lg">
+          {skill.name}
+        </div>
+      </div>
+    )}
+  </div>
+);
+
 export const Skills = () => {
-  const bgImageLoaded = useLazyBackgroundImage("/images/bg1.jpg");
+  useLazyBackgroundImage("/images/bg1.jpg");
   const { language } = useLanguage();
   const t = translations[language];
 
@@ -69,57 +95,60 @@ export const Skills = () => {
 
           {/* Compétences par catégorie */}
           <div className="space-y-4">
-            {skillsCategories.map((category, catIndex) => (
-              <div
-                key={category.title}
-                data-aos="fade-up"
-                data-aos-delay={catIndex * 100 + 300}
-                className="bg-gradient-to-br from-purple-400 via-white to-yellow-200/50 dark:bg-gradient-to-br dark:from-purple-900/20 dark:via-gray-800/20 dark:to-yellow-900/20 backdrop-blur-sm p-8 rounded-3xl shadow-2xl "
-              >
-                <h3 className="text-3xl font-bold mb-8 text-gray-800 dark:text-gray-100 flex items-center gap-3">
-                  <span className="bg-gradient-to-bl via-purple-600 from-yellow-400/80 to-pink-600 text-white p-3 rounded-xl">
-                    {category.title.includes("Langages") && <FaCode />}
-                    {category.title.includes("Frontend") && <FaLaptopCode />}
-                    {category.title.includes("Backend") && <FaServer />}
-                    {category.title.includes("API") && <FaServer />}
-                    {category.title.includes("Bases") && <FaDatabase />}
-                    {category.title.includes("Outils") && <FaGear />}
-                  </span>
-                  {t.skills.categories[category.key]}
-                </h3>
+            {skillsCategories.map((category, catIndex) => {
+              const shouldLoop = category.items.length > LOOP_THRESHOLD;
 
-                <div className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-2xl">
-                  <LogoLoop
-                    logos={category.items.map((skill) => ({
-                      node: (
-                        <div className="relative group/skill flex h-28 min-w-24 items-center justify-center pb-7">
-                          <skill.icon
-                            size={48}
-                            className={`${skill.color} transition-all duration-300 group-hover/skill:drop-shadow-xl`}
+              return (
+                <div
+                  key={category.title}
+                  data-aos="fade-up"
+                  data-aos-delay={catIndex * 100 + 300}
+                  className="bg-gradient-to-br from-purple-400 via-white to-yellow-200/50 dark:bg-gradient-to-br dark:from-purple-900/20 dark:via-gray-800/20 dark:to-yellow-900/20 backdrop-blur-sm p-8 rounded-3xl shadow-2xl "
+                >
+                  <h3 className="text-3xl font-bold mb-8 text-gray-800 dark:text-gray-100 flex items-center gap-3">
+                    <span className="bg-gradient-to-bl via-purple-600 from-yellow-400/80 to-pink-600 text-white p-3 rounded-xl">
+                      {category.title.includes("Langages") && <FaCode />}
+                      {category.title.includes("Frontend") && <FaLaptopCode />}
+                      {category.title.includes("Backend") && <FaServer />}
+                      {category.title.includes("API") && <FaServer />}
+                      {category.title.includes("Bases") && <FaDatabase />}
+                      {category.title.includes("Outils") && <FaGear />}
+                    </span>
+                    {t.skills.categories[category.key]}
+                  </h3>
+
+                  <div className="rounded-2xl">
+                    {shouldLoop ? (
+                      <LogoLoop
+                        logos={category.items.map((skill) => ({
+                          node: <SkillLogo skill={skill} />,
+                          title: skill.name,
+                          ariaLabel: skill.name,
+                        }))}
+                        speed={80}
+                        direction="left"
+                        logoHeight={48}
+                        gap={32}
+                        pauseOnHover={true}
+                        scaleOnHover={true}
+                        fadeOut={false}
+                        className="py-10"
+                      />
+                    ) : (
+                      <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 py-6">
+                        {category.items.map((skill) => (
+                          <SkillLogo
+                            key={skill.name}
+                            skill={skill}
+                            showTitle={true}
                           />
-                          <div className="absolute bottom-0 left-1/2 z-50 -translate-x-1/2 translate-y-2 opacity-0 transition-all duration-200 group-hover/skill:translate-y-0 group-hover/skill:opacity-100 pointer-events-none">
-                            <div className="bg-gray-800 dark:bg-white text-white dark:text-gray-800 px-3 py-1 rounded-lg whitespace-nowrap text-sm font-semibold shadow-lg">
-                              {skill.name}
-                            </div>
-                          </div>
-                        </div>
-                      ),
-                      title: skill.name,
-                      ariaLabel: skill.name,
-                    }))}
-                    speed={80}
-                    direction="left"
-                    logoHeight={48}
-                    gap={32}
-                    pauseOnHover={true}
-                    scaleOnHover={true}
-                    fadeOut={true}
-                    fadeOutColor="#ffffff"
-                    className="py-10"
-                  />
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

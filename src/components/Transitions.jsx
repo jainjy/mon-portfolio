@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { useTheme } from "../context/ThemeContext";
 // Courbes de bézier modernes
 
@@ -55,14 +56,39 @@ export default function SliceTransition() {
 
 export function PixelTransition({ children }) {
   const { isDark } = useTheme();
-  const ROWS = 6;
-  const COLS = 10;
+  const [gridSize, setGridSize] = useState({ rows: 6, cols: 10 });
+  const { rows: ROWS, cols: COLS } = gridSize;
+
+  useEffect(() => {
+    const updateGridSize = () => {
+      const width = window.innerWidth;
+
+      if (width < 640) {
+        setGridSize({ rows: 8, cols: 5 });
+      } else if (width < 1024) {
+        setGridSize({ rows: 7, cols: 7 });
+      } else {
+        setGridSize({ rows: 6, cols: 10 });
+      }
+    };
+
+    updateGridSize();
+    window.addEventListener("resize", updateGridSize);
+
+    return () => window.removeEventListener("resize", updateGridSize);
+  }, []);
 
   return (
     <div
       className={`relative min-h-screen ${isDark ? "bg-gray-900" : "bg-gradient-to-br from-gray-50 to-purple-50"}`}
     >
-      <div className="fixed inset-0 z-[100] pointer-events-none grid grid-cols-10 grid-rows-6">
+      <div
+        className="fixed inset-0 z-[100] pointer-events-none grid gap-[2px] sm:gap-[3px] bg-gray-950/10"
+        style={{
+          gridTemplateColumns: `repeat(${COLS}, minmax(0, 1fr))`,
+          gridTemplateRows: `repeat(${ROWS}, minmax(0, 1fr))`,
+        }}
+      >
         {[...Array(ROWS * COLS)].map((_, i) => {
           const row = Math.floor(i / COLS);
           const col = i % COLS;

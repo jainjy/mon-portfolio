@@ -1,18 +1,11 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import data from "../../data/data";
-import {
-  FaCode,
-  FaHeart,
-  FaGraduationCap,
-  FaPlay,
-  FaTasks,
-} from "react-icons/fa";
+import { FaCode, FaHeart, FaGraduationCap, FaTasks } from "react-icons/fa";
 import { useLanguage } from "../../context/LanguageContext";
 import { translations } from "../../data/translations";
 import { FaLanguage } from "react-icons/fa6";
-import { useLazyBackgroundImage } from "../../hooks/useLazyBackgroundImage";
 import MagicBento from "../MagicBento";
 import ShinyText from "../ShinyText";
 
@@ -22,43 +15,50 @@ const FormationXp = () => {
   const education = data.education[language];
 
   return (
-    <>
-      <div className="mt-20 grid md:grid-cols-1 gap-8">
-        <div data-aos="fade-up" data-aos-delay="100">
-          <h3 className="text-3xl font-bold mb-8 text-gray-800 dark:text-gray-100 flex items-center gap-3">
-            <FaGraduationCap className="text-purple-600 dark:text-purple-400" />
-            {t.about.education.title}
-          </h3>
-          <div className="space-y-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-            {education.map((edu, index) => (
+    <div className="mt-20" data-aos="fade-up" data-aos-delay="100">
+      <h3 className="text-3xl font-bold mb-8 text-gray-800 dark:text-gray-100 flex items-center gap-3">
+        <FaGraduationCap className="text-purple-600 dark:text-purple-400" />
+        {t.about.education.title}
+      </h3>
+
+      <div data-aos="fade-up" data-aos-delay="180">
+        <MagicBento
+          items={education.map((edu, index) => ({
+            color: "rgba(18, 15, 23, 0.6)",
+            content: (
               <div
-                key={index}
-                data-aos="fade-right"
-                data-aos-delay={index * 100 + 200}
-                className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm p-6 rounded-xl shadow-2xl border-l-4 border-purple-500 dark:border-purple-400 transition-all duration-300 hover:shadow-2xl hover:bg-white/90 dark:hover:bg-gray-900/90"
+                className="flex h-full items-start gap-4"
+                data-aos="zoom-in"
+                data-aos-delay={index * 100 + 250}
               >
-                <div className="flex items-start gap-4">
-                  <div className="bg-purple-100 dark:bg-purple-900/50 p-3 rounded-full">
-                    <edu.icon className="text-purple-600 dark:text-purple-400 text-xl" />
-                  </div>
-                  <div>
-                    <h4 className="text-xl font-bold text-gray-800 dark:text-gray-100">
-                      {edu.title}
-                    </h4>
-                    <p className="text-purple-600 dark:text-purple-400 font-medium">
-                      {edu.institution} • {edu.period}
-                    </p>
-                    <p className="text-gray-600 dark:text-gray-300 mt-2">
-                      {edu.description}
-                    </p>
-                  </div>
+                <div className="flex h-14 w-14 flex-none items-center justify-center rounded-full bg-purple-900/50">
+                  <edu.icon className="text-2xl text-yellow-400/80 dark:text-purple-400" />
+                </div>
+                <div>
+                  <h4 className="text-xl font-bold text-gray-100">
+                    {edu.title}
+                  </h4>
+                  <p className="mt-2 font-medium text-purple-300">
+                    {edu.institution} • {edu.period}
+                  </p>
+                  <p className="mt-3 text-gray-300 leading-relaxed">
+                    {edu.description}
+                  </p>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
+            ),
+          }))}
+          enableSpotlight={true}
+          enableStars={true}
+          enableTilt={false}
+          clickEffect={true}
+          enableMagnetism={true}
+          spotlightRadius={250}
+          glowColor="132, 0, 255"
+          gridClassName="grid-cols-1 md:grid-cols-2 gap-4"
+        />
       </div>
-    </>
+    </div>
   );
 };
 
@@ -115,47 +115,51 @@ export const About = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            {[
-              {
-                title: t.about.passion.title,
-                description: t.about.passion.description,
-                icon: FaCode,
-                gradient: "from-purple-600 to-yellow-600/80",
-                bg: "from-purple-100/80 to-yellow-100/80",
-                border: "border-purple-100",
-              },
-              {
-                title: t.about.innovation.title,
-                description: t.about.innovation.description,
-                icon: FaHeart,
-                gradient: "from-yellow-600/60 to-purple-600",
-                bg: "from-yellow-100/80 to-purple-100/80",
-                border: "border-blue-100",
-              },
-            ].map((item, index) => (
-              <div
-                key={index}
-                data-aos={index === 0 ? "fade-right" : "fade-left"}
-                data-aos-delay={index * 100 + 200}
-                data-aos-duration="600"
-                className={`bg-gradient-to-br ${item.bg} dark:from-purple-900/80 dark:to-gray-900/80 backdrop-blur-sm p-8 rounded-3xl shadow-2xl  transition-transform duration-300 hover:scale-105`}
-              >
-                <div className="flex items-center mb-6">
+          <div data-aos="fade-up" data-aos-delay="180">
+            <MagicBento
+              items={[
+                {
+                  title: t.about.passion.title,
+                  description: t.about.passion.description,
+                  icon: FaCode,
+                },
+                {
+                  title: t.about.innovation.title,
+                  description: t.about.innovation.description,
+                  icon: FaHeart,
+                },
+              ].map((item, index) => ({
+                color: "rgba(18, 15, 23, 0.6)",
+                content: (
                   <div
-                    className={`w-14 h-14 bg-gradient-to-r ${item.gradient} rounded-full flex items-center justify-center mr-4`}
+                    className="flex h-full flex-col gap-5"
+                    data-aos={index === 0 ? "fade-right" : "fade-left"}
+                    data-aos-delay={index * 100 + 220}
+                    data-aos-duration="600"
                   >
-                    <item.icon className="text-white text-2xl" />
+                    <div className="flex items-center gap-4">
+                      <div className="flex h-14 w-14 flex-none items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-yellow-500/80">
+                        <item.icon className="text-2xl text-white" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-gray-100">
+                        {item.title}
+                      </h3>
+                    </div>
+                    <p className="text-lg leading-relaxed text-gray-300">
+                      {item.description}
+                    </p>
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
-                    {item.title}
-                  </h3>
-                </div>
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
-                  {item.description}
-                </p>
-              </div>
-            ))}
+                ),
+              }))}
+              enableSpotlight={true}
+              enableStars={true}
+              enableTilt={false}
+              clickEffect={true}
+              enableMagnetism={true}
+              spotlightRadius={250}
+              glowColor="132, 0, 255"
+              gridClassName="grid-cols-1 md:grid-cols-2 gap-4"
+            />
           </div>
 
           <FormationXp />
@@ -181,10 +185,14 @@ export const About = () => {
                 </h4>
               </div>
               <MagicBento
-                items={languages.map((lang) => ({
+                items={languages.map((lang, index) => ({
                   color: "rgba(18, 15, 23, 0.6)",
                   content: (
-                    <div className="flex flex-col gap-3">
+                    <div
+                      className="flex flex-col gap-3"
+                      data-aos="zoom-in"
+                      data-aos-delay={index * 80 + 260}
+                    >
                       <div className="flex justify-between items-center">
                         <span className="text-lg font-medium text-gray-100">
                           {lang.name}
@@ -233,10 +241,14 @@ export const About = () => {
                 </h4>
               </div>
               <MagicBento
-                items={interests.map((interest) => ({
+                items={interests.map((interest, index) => ({
                   color: "rgba(18, 15, 23, 0.6)",
                   content: (
-                    <div className="flex flex-col items-center justify-center text-center gap-3 h-full">
+                    <div
+                      className="flex flex-col items-center justify-center text-center gap-3 h-full"
+                      data-aos="zoom-in"
+                      data-aos-delay={index * 80 + 340}
+                    >
                       <interest.icon className="text-4xl text-yellow-400/80 dark:text-purple-400" />
                       <span className="text-lg font-medium text-gray-100">
                         {interest.name}

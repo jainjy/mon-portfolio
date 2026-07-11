@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import data from "../../data/data";
 import {
   FaGithub,
   FaCode,
-  FaArrowDown,
   FaTimes,
   FaEye,
   FaChevronLeft,
@@ -16,11 +15,10 @@ import {
 import { useLanguage } from "../../context/LanguageContext";
 import { translations } from "../../data/translations";
 import ParticleBackground from "../ParticleBackground";
-import { useLazyBackgroundImage } from "../../hooks/useLazyBackgroundImage";
+
 import ShinyText from "../ShinyText";
 
 export const Projects = () => {
-  const bgImageLoaded = useLazyBackgroundImage("/images/bg6.jpg");
   const { language } = useLanguage();
   const t = translations[language];
   const projects = data.projects[language];
@@ -33,9 +31,17 @@ export const Projects = () => {
   const [dragOffset, setDragOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const carouselRef = useRef(null);
-  const autoScrollRef = useRef(null);
-  const isHoveringRef = useRef(false);
   const dragStartXRef = useRef(null);
+  const autoDirectionRef = useRef(1);
+
+  const maxIndex = useMemo(
+    () => Math.max(0, projects.length - itemsPerView),
+    [projects.length, itemsPerView],
+  );
+  const slideCount = maxIndex + 1;
+  const hasOverflow = maxIndex > 0;
+  const isInteracting = hoveredIndex !== null || isDragging || expanded !== null;
+  const translatePercent = currentIndex * (100 / itemsPerView);
 
   const handleExpand = (i) => setExpanded(i);
   const handleClose = () => setExpanded(null);
@@ -58,25 +64,47 @@ export const Projects = () => {
   }, []);
 
   // Navigation
-  const nextSlide = useCallback(() => {
-    if (isHoveringRef.current) return;
+  const goToSlide = useCallback(
+    (index) => {
+      setCurrentIndex((prev) => {
+        const next = Math.min(Math.max(index, 0), maxIndex);
+        if (next !== prev) {
+          autoDirectionRef.current = next > prev ? 1 : -1;
+        }
+        return next;
+      });
+    },
+    [maxIndex],
+  );
 
-    setCurrentIndex(
-      (prev) => (prev + 1) % Math.max(1, projects.length - itemsPerView + 1),
-    );
-  }, [projects.length, itemsPerView]);
+  const nextSlide = useCallback(() => {
+    goToSlide(currentIndex + 1);
+  }, [currentIndex, goToSlide]);
 
   const prevSlide = useCallback(() => {
-    setCurrentIndex(
-      (prev) =>
-        (prev - 1 + Math.max(1, projects.length - itemsPerView + 1)) %
-        Math.max(1, projects.length - itemsPerView + 1),
-    );
-  }, [projects.length, itemsPerView]);
+    goToSlide(currentIndex - 1);
+  }, [currentIndex, goToSlide]);
+
+  const advanceAutoScroll = useCallback(() => {
+    setCurrentIndex((prev) => {
+      if (maxIndex === 0) return 0;
+
+      let direction = autoDirectionRef.current;
+      if (prev >= maxIndex) direction = -1;
+      if (prev <= 0) direction = 1;
+
+      autoDirectionRef.current = direction;
+      return Math.min(Math.max(prev + direction, 0), maxIndex);
+    });
+  }, [maxIndex]);
+
+  useEffect(() => {
+    setCurrentIndex((prev) => Math.min(prev, maxIndex));
+  }, [maxIndex]);
 
   const handleDragStart = useCallback(
     (event) => {
-      if (projects.length <= itemsPerView) return;
+      if (!hasOverflow) return;
 
       const interactiveElement = event.target.closest(
         "button, a, input, textarea, select, [role='button']",
@@ -91,7 +119,7 @@ export const Projects = () => {
         carouselRef.current.setPointerCapture(event.pointerId);
       }
     },
-    [itemsPerView, projects.length],
+    [hasOverflow],
   );
 
   const handleDragMove = useCallback(
@@ -107,7 +135,9 @@ export const Projects = () => {
       if (!isDragging || dragStartXRef.current === null) return;
 
       const delta = event.clientX - dragStartXRef.current;
-      const threshold = 80;
+      const slideWidth =
+        (carouselRef.current?.clientWidth ?? 0) / Math.max(itemsPerView, 1);
+      const threshold = Math.min(Math.max(slideWidth * 0.18, 50), 120);
 
       if (delta > threshold) {
         prevSlide();
@@ -123,55 +153,35 @@ export const Projects = () => {
         carouselRef.current.releasePointerCapture(event.pointerId);
       }
     },
-    [isDragging, nextSlide, prevSlide],
+    [isDragging, itemsPerView, nextSlide, prevSlide],
   );
 
-  // Auto-scroll avec gestion du hover
+  // Auto-scroll naturel : un seul timer, pause pendant les interactions, trajet aller-retour.
   useEffect(() => {
-    if (isPaused || projects.length <= itemsPerView) return;
+    if (isPaused || isInteracting || !hasOverflow) return;
 
-    autoScrollRef.current = setInterval(() => {
-      nextSlide();
-    }, 3000);
-
+    const autoScrollTimer = window.setTimeout(advanceAutoScroll, 4200);
     return () => {
-      if (autoScrollRef.current) {
-        clearInterval(autoScrollRef.current);
-      }
+      window.clearTimeout(autoScrollTimer);
     };
-  }, [isPaused, nextSlide, projects.length, itemsPerView]);
+  }, [advanceAutoScroll, hasOverflow, isInteracting, isPaused, currentIndex]);
 
   const togglePause = () => {
-    setIsPaused(!isPaused);
+    setIsPaused((prev) => !prev);
   };
 
   const handleDotClick = (index) => {
-    setCurrentIndex(index);
+    goToSlide(index);
   };
 
   // Gestionnaires pour le hover
   const handleMouseEnter = useCallback((index) => {
     setHoveredIndex(index);
-    isHoveringRef.current = true;
-
-    // Arrêter temporairement l'auto-scroll
-    if (autoScrollRef.current) {
-      clearInterval(autoScrollRef.current);
-      autoScrollRef.current = null;
-    }
   }, []);
 
   const handleMouseLeave = useCallback(() => {
     setHoveredIndex(null);
-    isHoveringRef.current = false;
-
-    // Redémarrer l'auto-scroll si pas en pause
-    if (!isPaused && projects.length > itemsPerView) {
-      autoScrollRef.current = setInterval(() => {
-        nextSlide();
-      }, 3000);
-    }
-  }, [isPaused, projects.length, itemsPerView, nextSlide]);
+  }, []);
 
   useEffect(() => {
     AOS.init({
@@ -248,14 +258,14 @@ export const Projects = () => {
               onClick={prevSlide}
               className="p-3 rounded-full bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm shadow-xl text-purple-600 dark:text-purple-400 hover:bg-white dark:hover:bg-gray-700 transition-all hover:scale-110"
               aria-label={language === "fr" ? "Précédent" : "Previous"}
-              disabled={currentIndex === 0}
+              disabled={!hasOverflow || currentIndex === 0}
             >
               <FaChevronLeft size={20} />
             </button>
 
             <div className="flex items-center gap-2">
               {Array.from({
-                length: Math.max(1, projects.length - itemsPerView + 1),
+                length: slideCount,
               }).map((_, idx) => (
                 <button
                   key={idx}
@@ -274,7 +284,7 @@ export const Projects = () => {
               onClick={nextSlide}
               className="p-3 rounded-full bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm shadow-xl text-purple-600 dark:text-purple-400 hover:bg-white dark:hover:bg-gray-700 transition-all hover:scale-110"
               aria-label={language === "fr" ? "Suivant" : "Next"}
-              disabled={currentIndex >= projects.length - itemsPerView}
+              disabled={!hasOverflow || currentIndex >= maxIndex}
             >
               <FaChevronRight size={20} />
             </button>
@@ -285,11 +295,11 @@ export const Projects = () => {
         <div className="relative overflow-hidden">
           <div
             ref={carouselRef}
-            className={`flex ${isDragging ? "transition-none" : "transition-transform duration-700 ease-out"} -mx-5"`}
+            className={`flex ${isDragging ? "transition-none" : "transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"} -mx-5`}
             style={{
               transform: isDragging
-                ? `translateX(calc(-${currentIndex} * ${100 / itemsPerView}% + ${dragOffset}px))`
-                : `translateX(calc(-${currentIndex} * ${100 / itemsPerView}%))`,
+                ? `translate3d(calc(-${translatePercent}% + ${dragOffset}px), 0, 0)`
+                : `translate3d(-${translatePercent}%, 0, 0)`,
               touchAction: "pan-y",
             }}
             onPointerDown={handleDragStart}
@@ -451,15 +461,8 @@ export const Projects = () => {
           <div className="flex justify-center items-center mt-8 gap-4">
             <span className="text-sm text-gray-600 dark:text-gray-300">
               {currentIndex + 1} /{" "}
-              {Math.max(1, projects.length - itemsPerView + 1)}
+              {slideCount}
             </span>
-            <div
-              className={`w-3 h-3 rounded-full animate-pulse ${
-                !isPaused && !isHoveringRef.current
-                  ? "bg-green-500"
-                  : "bg-red-500"
-              }`}
-            />
           </div>
         </div>
       </div>

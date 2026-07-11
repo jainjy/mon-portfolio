@@ -15,6 +15,7 @@ import {
 } from "react-icons/fa";
 import { FaUserTie } from "react-icons/fa6";
 import { useLazyBackgroundImage } from "../../hooks/useLazyBackgroundImage";
+import ShinyText from "../ShinyText";
 
 export const Experience = () => {
   const bgImageLoaded = useLazyBackgroundImage("/images/bg6.jpg");
@@ -169,8 +170,13 @@ export const Experience = () => {
           }}
         >
           <div data-aos="fade-up" className="text-center mb-20">
-            <h2 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-500 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              {t.experience.title}
+            <h2 className="text-5xl md:text-7xl font-bold mb-6">
+              <ShinyText
+                text={t.experience.title}
+                color="#9333ea"
+                shineColor="#eab308"
+                speed={3}
+              />
             </h2>
             <div className="w-32 h-1 bg-gradient-to-r from-purple-600 to-pink-600 mx-auto mb-8 rounded-full"></div>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">

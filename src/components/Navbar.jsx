@@ -10,8 +10,9 @@ import {
   BiHome,
   BiLogoGmail,
   BiUser,
-  BiBriefcase, // Import de l'icône pour expériences
+  BiBriefcase,
 } from "react-icons/bi";
+import GooeyNav from "./GooeyNav";
 
 // Inline SVG flag icons
 const FlagFR = ({ className = "w-5 h-5" }) => (
@@ -139,10 +140,13 @@ const Navbar = () => {
   const handleClick = (href) => {
     setActive(href);
     setNavOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+
+    setTimeout(() => {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100);
   };
 
   return (
@@ -166,44 +170,20 @@ const Navbar = () => {
           Andrianina
         </motion.div>
 
-        <ul className="hidden lg:flex space-x-2 xl:space-x-4">
-          {links.map((link, index) => {
-            const IconComponent = link.icon;
-            return (
-              <motion.li
-                key={link.name}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="whitespace-nowrap"
-              >
-                <motion.a
-                  href={link.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleClick(link.href);
-                  }}
-                  className={`relative px-3 py-2 rounded-xl transition-all duration-300 text-sm flex items-center gap-2 ${
-                    active === link.href
-                      ? "text-white font-semibold"
-                      : !scrolled && isHome
-                        ? "text-white hover:text-purple-200"
-                        : "text-gray-700 dark:text-white hover:text-purple-600 dark:hover:text-purple-400"
-                  }`}
-                  animate={{
-                    background:
-                      active === link.href
-                        ? "linear-gradient(135deg, rgba(147, 51, 234, 0.8), rgba(236, 72, 153, 0.8))"
-                        : "transparent",
-                  }}
-                >
-                  <IconComponent size={18} />
-                  {link.name}
-                </motion.a>
-              </motion.li>
-            );
-          })}
-        </ul>
+        <div className="hidden lg:block">
+          <GooeyNav
+            items={links.map((link) => ({
+              label: link.name,
+              href: link.href,
+              icon: link.icon,
+              onClick: () => handleClick(link.href),
+            }))}
+            animationTime={600}
+            particleCount={12}
+            initialActiveIndex={links.findIndex((link) => link.href === active)}
+            isDark={isDark}
+          />
+        </div>
 
         <div className="flex items-center gap-2 sm:gap-4 mr-4">
           <div className="relative" ref={langRef}>
@@ -279,18 +259,20 @@ const Navbar = () => {
           >
             <ul className="flex flex-col p-4 space-y-2">
               {links.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => {
-                      e.preventDefault();
+                <li key={link.name} className="w-full">
+                  <button
+                    onClick={() => {
                       handleClick(link.href);
                     }}
-                    className={`flex items-center gap-3 p-3 rounded-xl ${active === link.href ? "bg-purple-100 dark:bg-purple-900 text-purple-600" : "dark:text-white"}`}
+                    className={`w-full flex items-center gap-3 p-4 rounded-xl transition-all duration-200 cursor-pointer touch-auto text-left ${
+                      active === link.href
+                        ? "bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-300 font-bold"
+                        : "dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800"
+                    }`}
                   >
                     <link.icon size={20} />
-                    {link.name}
-                  </a>
+                    <span className="text-base">{link.name}</span>
+                  </button>
                 </li>
               ))}
             </ul>

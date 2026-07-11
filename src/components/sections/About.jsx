@@ -13,6 +13,8 @@ import { useLanguage } from "../../context/LanguageContext";
 import { translations } from "../../data/translations";
 import { FaLanguage } from "react-icons/fa6";
 import { useLazyBackgroundImage } from "../../hooks/useLazyBackgroundImage";
+import MagicBento from "../MagicBento";
+import ShinyText from "../ShinyText";
 
 const FormationXp = () => {
   const { language } = useLanguage();
@@ -99,8 +101,13 @@ export const About = () => {
             data-aos-delay="100"
             className="text-center mb-16"
           >
-            <h2 className="redhawk text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-500 via-purple-600 to-pink-600 dark:from-yellow-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
-              {t.about.title}
+            <h2 className="redhawk text-5xl md:text-7xl font-bold mb-6">
+              <ShinyText
+                text={t.about.title}
+                color="#9333ea"
+                shineColor="#eab308"
+                speed={3}
+              />
             </h2>
             <div className="w-32 h-1 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 mx-auto mb-8 rounded-full"></div>
             <p className="text-xl text-gray-700 dark:text-gray-300">
@@ -154,78 +161,98 @@ export const About = () => {
           <FormationXp />
 
           {/* Langues et Centres d'intérêt */}
-          <div className="mt-20 grid md:grid-cols-2 gap-8">
-            <div data-aos="fade-up" data-aos-delay="100">
+          <div className="mt-20">
+            <div data-aos="fade-up" data-aos-delay="100" className="mb-12">
+              <h3 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-8">
+                {t.about.languages} & {t.about.interests}
+              </h3>
+            </div>
+
+            {/* Languages Section */}
+            <div data-aos="fade-up" data-aos-delay="200" className="mb-16">
               <div className="flex items-center mb-8">
                 <div
                   className={`w-14 bg-gradient-to-r  rounded-full flex items-center justify-center`}
                 >
                   <FaLanguage className="text-purple-700 dark:text-purple-400 text-3xl" />
                 </div>
-                <h3 className="text-3xl font-bold text-gray-800 dark:text-gray-100">
+                <h4 className="text-2xl font-bold text-gray-800 dark:text-gray-100 ml-4">
                   {t.about.languages}
-                </h3>
+                </h4>
               </div>
-              <div className="space-y-4">
-                {languages.map((lang, index) => (
-                  <div
-                    key={index}
-                    data-aos="fade-right"
-                    data-aos-delay={index * 100 + 200}
-                    className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:bg-white/90 dark:hover:bg-gray-900/90"
-                  >
-                    <div className="flex justify-between items-center">
-                      <span className="text-lg font-medium text-gray-800 dark:text-gray-100">
-                        {lang.name}
-                      </span>
-                      <span className="px-3 py-1 bg-yellow-400/40 dark:bg-purple-900/50 text-purple-700 dark:text-purple-400 rounded-full text-sm font-medium">
-                        {lang.level}
-                      </span>
+              <MagicBento
+                items={languages.map((lang) => ({
+                  color: "rgba(18, 15, 23, 0.6)",
+                  content: (
+                    <div className="flex flex-col gap-3">
+                      <div className="flex justify-between items-center">
+                        <span className="text-lg font-medium text-gray-100">
+                          {lang.name}
+                        </span>
+                        <span className="px-3 py-1 bg-yellow-400/40 dark:bg-purple-900/50 text-purple-700 dark:text-purple-400 rounded-full text-sm font-medium">
+                          {lang.level}
+                        </span>
+                      </div>
+                      <div className="mt-2 bg-gray-700 rounded-full h-2 overflow-hidden">
+                        <div
+                          className="bg-gradient-to-r from-purple-500/90 to-yellow-400/90 h-full rounded-full transition-all duration-1000 ease-out"
+                          style={{
+                            width:
+                              lang.level === "Courant"
+                                ? "90%"
+                                : lang.level === "Débutant"
+                                  ? "40%"
+                                  : "100%",
+                          }}
+                        ></div>
+                      </div>
                     </div>
-                    <div className="mt-2 bg-gray-200 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
-                      <div
-                        className="bg-gradient-to-r from-purple-500/90 to-yellow-400/90 h-full rounded-full transition-all duration-1000 ease-out"
-                        style={{
-                          width:
-                            lang.level === "Courant"
-                              ? "90%"
-                              : lang.level === "Débutant"
-                              ? "40%"
-                              : "100%",
-                        }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+                  ),
+                }))}
+                enableSpotlight={true}
+                enableStars={true}
+                enableTilt={false}
+                clickEffect={true}
+                enableMagnetism={true}
+                spotlightRadius={250}
+                glowColor="132, 0, 255"
+                gridClassName="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+              />
             </div>
 
-            <div data-aos="fade-up" data-aos-delay="200">
+            {/* Interests Section */}
+            <div data-aos="fade-up" data-aos-delay="300">
               <div className="flex items-center mb-8">
                 <div
                   className={`w-14 bg-gradient-to-r rounded-full flex items-center justify-center`}
                 >
                   <FaTasks className="text-purple-700 dark:text-purple-400 text-3xl" />
                 </div>
-                <h3 className="text-3xl font-bold text-gray-800 dark:text-gray-100">
+                <h4 className="text-2xl font-bold text-gray-800 dark:text-gray-100 ml-4">
                   {t.about.interests}
-                </h3>
+                </h4>
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                {interests.map((interest, index) => (
-                  <div
-                    key={index}
-                    data-aos="zoom-in"
-                    data-aos-delay={index * 100 + 300}
-                    className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 flex flex-col items-center justify-center text-center transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-white/90 dark:hover:bg-gray-900/90"
-                  >
-                    <interest.icon className="text-4xl mb-3 text-yellow-400/80 dark:text-purple-400" />
-                    <span className="text-lg font-medium text-gray-800 dark:text-gray-100">
-                      {interest.name}
-                    </span>
-                  </div>
-                ))}
-              </div>
+              <MagicBento
+                items={interests.map((interest) => ({
+                  color: "rgba(18, 15, 23, 0.6)",
+                  content: (
+                    <div className="flex flex-col items-center justify-center text-center gap-3 h-full">
+                      <interest.icon className="text-4xl text-yellow-400/80 dark:text-purple-400" />
+                      <span className="text-lg font-medium text-gray-100">
+                        {interest.name}
+                      </span>
+                    </div>
+                  ),
+                }))}
+                enableSpotlight={true}
+                enableStars={true}
+                enableTilt={false}
+                clickEffect={true}
+                enableMagnetism={true}
+                spotlightRadius={250}
+                glowColor="132, 0, 255"
+                gridClassName="grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+              />
             </div>
           </div>
         </div>

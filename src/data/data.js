@@ -344,7 +344,7 @@ const education = {
       icon: FaGraduationCap,
       title: "Licence en Génie Logiciel",
       institution: "ESP-Antsirabe",
-      period: "2022-Aujourd'hui",
+      period: "2022-2025",
       description:
         "Formation approfondie en développement logiciel, algorithmique, bases de données et conception d'applications.",
     },
@@ -362,7 +362,7 @@ const education = {
       icon: FaGraduationCap,
       title: "Bachelor's in Software Engineering",
       institution: "ESP-Antsirabe",
-      period: "2022-Present",
+      period: "2022-2025",
       description:
         "Comprehensive training in software development, algorithms, databases, and application design.",
     },

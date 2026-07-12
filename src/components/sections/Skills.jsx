@@ -19,10 +19,21 @@ const SkillLogo = ({ skill, showTitle = false }) => (
       showTitle ? "h-28 flex-col gap-3" : "h-28 pb-7"
     }`}
   >
-    <skill.icon
-      size={48}
-      className={`${skill.color} transition-all duration-300 group-hover/skill:drop-shadow-xl`}
-    />
+    {skill.img ? (
+      <>
+        <img
+          src={skill.icon}
+          alt=""
+          className={`w-12 ${skill.color} transition-all duration-300 group-hover/skill:drop-shadow-xl`}
+        />
+      </>
+    ) : (
+      <skill.icon
+        size={48}
+        className={`${skill.color} transition-all duration-300 group-hover/skill:drop-shadow-xl`}
+      />
+    )}
+
     {showTitle ? (
       <span className="text-sm font-semibold text-gray-800 dark:text-gray-100 text-center">
         {skill.name}

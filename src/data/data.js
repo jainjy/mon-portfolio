@@ -31,6 +31,7 @@ import {
   SiC,
   SiSupabase,
   SiExpress,
+  SiSharp,
 } from "react-icons/si";
 
 // Compétences organisées par catégorie
@@ -44,7 +45,12 @@ const skillsCategories = [
       { name: "Go", icon: FaGolang, color: "text-cyan-500" },
       { name: "JavaScript", icon: FaJsSquare, color: "text-yellow-500" },
       { name: "HTML/CSS", icon: FaHtml5, color: "text-orange-500" },
-      { name: "C#", icon: SiC, color: "text-purple-500" },
+      {
+        name: "C#",
+        icon: "/images/C_sharp.svg",
+        color: "text-purple-500",
+        img: true,
+      },
       { name: "PHP", icon: SiPhp, color: "text-blue-600" },
     ],
   },

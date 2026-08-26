@@ -417,8 +417,8 @@ const experiences = {
       title: "Développeur Full Stack",
       company: "ARIA COMMUNICATION",
       location: "Antsirabe, Madagascar",
-      duration: "Août 2025 - Présent",
-      status: "current",
+      duration: "Août 2025 - Avril 2026",
+      status: "actuel",
       workMode: "hybrid",
       shortDescription:
         "Développement d'applications web complètes avec React, Node.js et Laravel",
@@ -451,7 +451,7 @@ const experiences = {
       title: "Full Stack Developer",
       company: "ARIA COMMUNICATION",
       location: "Antsirabe, Madagascar",
-      duration: "August 2025 - Present",
+      duration: "August 2025 - April 2026",
       status: "current",
       workMode: "hybrid",
       shortDescription:
